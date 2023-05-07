@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+  webapp:
+    build: .
+    networks:
+      - db-bridge
+    volumes:
+      - .:/source
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://localhost
+
+  mysql_db:
+    container_name: controle_contatos-db
+    image: mysql:8
+    ports:
+      - '3306:3306'
+    networks:
+      - db-bridge
+    volumes:
+      - mysql-data:/var/lib/mysql
+    env_file:
+      - mysql.env
+
+  myAdmin:
+    container_name: controle_contatos-php_my_admin
+    image: phpmyadmin:5.2.1
+    ports:
+      - 8081:80
+    networks:
+      - db-bridge
+    links:
+      - mysql_db
+    environment:
+      PMA_HOST: 'mysql_db'
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+
+    depends_on:
+      - mysql_db
+
+#To use volumes instead folder inside the project root
+volumes:
+  mysql-data:
+
+
+networks:
+  db-bridge:
+    driver: bridge
