@@ -1,4 +1,9 @@
+## Controle de Contatos
+A versão do .NET usada é __3.1__
+___
 ## Executando em Desenvolvimento
+Usando a extensão __Dev Containers__ do vscode, um container já configurado para desenvolvimento será criado.
+
 Antes de executar, é preciso instalar a ferramenta __dotnet-ef__ para criar as tabelas no banco de dados
 
 ```bash

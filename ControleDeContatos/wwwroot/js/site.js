@@ -2,3 +2,8 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+//Quando o evento acontecer, do close-alert receber um click, oculta a mensagem
+$('.close-alert').click(function (){
+    $('.alert').hide('hide');
+});
