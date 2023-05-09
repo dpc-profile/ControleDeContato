@@ -4,6 +4,14 @@ ___
 ## Executando em Desenvolvimento
 Usando a extensão __Dev Containers__ do vscode, um container já configurado para desenvolvimento será criado.
 
+### Configurando o banco de dados:
+- Mudar o nome do arquivo __mysql_template.env__ para __mysql.env__ e preencer os espaços vazios.
+
+- Copiar essas mesmas configurações e preencher o arquivo  __ControleDeContatos/appsettings.json__, na chave DbConnection (por enquanto configurações nesse arquivo são hard coded)
+
+### Criando as tabelas
+Ao ter um banco de dados rodando, vai ser preciso criar as tabelas.
+
 ```bash
 #Entra na pasta do projeto
 $ cd ControleDeContatos
@@ -11,7 +19,7 @@ $ cd ControleDeContatos
 #Aplica a migration no database
 $ dotnet-ef database update
 ```
-## Executando o Projeto
+### Executando o Projeto
 ```bash
 #Na mesma pasta do .csproj
 $ dotnet watch run
