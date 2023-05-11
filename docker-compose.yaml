@@ -4,7 +4,7 @@ services:
   webapp:
     build: .
     networks:
-      - db-bridge
+      - webapp-bridge
     volumes:
       - .:/source
     environment:
@@ -17,9 +17,10 @@ services:
     ports:
       - '3306:3306'
     networks:
-      - db-bridge
+      - webapp-bridge
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./init-db_teste:/docker-entrypoint-initdb.d
     env_file:
       - mysql.env
 
@@ -29,7 +30,7 @@ services:
     ports:
       - 8081:80
     networks:
-      - db-bridge
+      - webapp-bridge
     links:
       - mysql_db
     environment:
@@ -43,8 +44,8 @@ services:
 #To use volumes instead folder inside the project root
 volumes:
   mysql-data:
-
+  mysql_test-data:
 
 networks:
-  db-bridge:
+  webapp-bridge:
     driver: bridge

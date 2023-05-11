@@ -32,7 +32,23 @@ Aqui ficam listados os comando úteis apenas durante o desenvolvimento
 # Cria as migrations
 $ dotnet-ef migrations add MyMigration
 
-#Aplica a migration no database
+# Aplica a migration no database
 $ dotnet-ef database update
-```
 
+# Gerar cobertura de teste
+$ dotnet test ControleDeContatos.Tests \
+/p:CollectCoverage=true \
+/p:CoverletOutputFormat=opencover \
+/p:CoverletOutput="./results/" 
+
+#Gerar relatório para HTML
+$ reportgenerator \
+-reports:"ControleDeContatos.Tests/results/coverage.opencover.xml" \
+-targetdir:"coveragereport" \
+-reporttypes:Html
+
+#Arquivo index.html estará em 'coveragereport'
+
+#Adiciona todos os csproj a solução ControleDeContatos.sln
+dotnet sln ControleDeContatos.sln add **/*.csproj --in-root
+```

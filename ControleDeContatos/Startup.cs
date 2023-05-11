@@ -29,12 +29,14 @@ namespace ControleDeContatos
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<BancoContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("DbConnection"), 
-                ServerVersion.AutoDetect(Configuration.GetConnectionString("DbConnection"))));
+
+            // string connectionString = Configuration.GetConnectionString("DbConnection");
+            // services.AddDbContext<BancoContext>(options =>
+            //     options.UseMySql(connectionString, 
+            //     ServerVersion.AutoDetect(connectionString)));
+
             services.AddScoped<IContatoRepository, ContatoRepository>();
                
-                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,9 +10,9 @@ namespace ControleDeContatos.Repository
     public class ContatoRepository : IContatoRepository
     {
         private readonly BancoContext _bancoContext;
-        public ContatoRepository(BancoContext bancoContext)
+        public ContatoRepository()
         {
-            _bancoContext = bancoContext;
+            _bancoContext = new BancoContext();
         }
 
         public ContatoModel Adicionar(ContatoModel contato)
