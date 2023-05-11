@@ -1,5 +1,6 @@
 {
     "dotnet-test-explorer.testProjectPath": "**/*Tests.@(csproj|vbproj|fsproj)",
+    "peacock.remoteColor": "#7455dd",
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#9780e5",
         "activityBar.background": "#9780e5",
@@ -18,6 +19,5 @@
         "titleBar.activeForeground": "#e7e7e7",
         "titleBar.inactiveBackground": "#7455dd99",
         "titleBar.inactiveForeground": "#e7e7e799"
-    },
-    "peacock.remoteColor": "#7455dd"
+    }
 }
