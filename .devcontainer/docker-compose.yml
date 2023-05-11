@@ -14,3 +14,45 @@ services:
     volumes:
       # Update this to wherever you want VS Code to mount the folder of your project
       - .:/source:cached
+
+  sonarqube:
+    image: sonarqube:9.9.0-community
+    depends_on:
+      - db
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://db:5432/sonar
+      SONAR_JDBC_USERNAME: sonar
+      SONAR_JDBC_PASSWORD: sonar
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_temp:/opt/sonarqube/temp
+    networks:
+      - sonarqube
+      - db-bridge
+    ports:
+      - "9000:9000"
+
+  db:
+    image: postgres:12.14
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+    networks:
+      - sonarqube
+      - db-bridge
+
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  sonarqube_temp:
+  postgresql:
+  postgresql_data:
+
+networks:
+  sonarqube:

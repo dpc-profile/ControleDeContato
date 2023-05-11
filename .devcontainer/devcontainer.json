@@ -32,7 +32,10 @@
 			"extensions": [
 				"ms-dotnettools.csharp",
 				"humao.rest-client",
-                "editorconfig.editorconfi"
+				"formulahendry.dotnet-test-explorer",
+				"EditorConfig.EditorConfig",
+				"kevin-chatham.aspnetcorerazor-html-css-class-completion",
+				"adrianwilczynski.add-reference"
 			]
 		}
 	}
