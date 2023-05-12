@@ -35,7 +35,8 @@
 				"formulahendry.dotnet-test-explorer",
 				"EditorConfig.EditorConfig",
 				"kevin-chatham.aspnetcorerazor-html-css-class-completion",
-				"adrianwilczynski.add-reference"
+				"adrianwilczynski.add-reference",
+				"redhat.vscode-xml"
 			]
 		}
 	}

@@ -39,11 +39,17 @@ $ dotnet-ef database update
 $ dotnet test ControleDeContatos.Tests \
 /p:CollectCoverage=true \
 /p:CoverletOutputFormat=opencover \
-/p:CoverletOutput="./results/" 
+/p:CoverletOutput="./results/" \
+/p:Exclude="[*]*.Migrations.*"
 
-#Gerar relatório para HTML
+# ou 
+
+$ dotnet test ControleDeContatos.Tests \
+--settings ControleDeContatos.Tests/coverlet.runsettings.xml
+
+# Gerar relatório para HTML
 $ reportgenerator \
--reports:"ControleDeContatos.Tests/results/coverage.opencover.xml" \
+-reports:"ControleDeContatos.Tests/TestResults/**/coverage.opencover.xml" \
 -targetdir:"coveragereport" \
 -reporttypes:Html
 
