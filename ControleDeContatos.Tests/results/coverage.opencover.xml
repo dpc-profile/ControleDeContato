@@ -2,9 +2,9 @@
 <CoverageSession>
   <Summary numSequencePoints="276" visitedSequencePoints="41" numBranchPoints="82" visitedBranchPoints="2" sequenceCoverage="14.85" branchCoverage="2.43" maxCyclomaticComplexity="70" minCyclomaticComplexity="44" visitedClasses="3" numClasses="24" visitedMethods="12" numMethods="48" />
   <Modules>
-    <Module hash="8BF330B7-907B-4B28-A10D-4FA4423D0E69">
+    <Module hash="DC41EAC8-FF0F-4826-BDB8-D3A9122D21C7">
       <ModulePath>ControleDeContatos.dll</ModulePath>
-      <ModuleTime>2023-05-11T09:04:05</ModuleTime>
+      <ModuleTime>2023-05-12T01:33:06</ModuleTime>
       <ModuleName>ControleDeContatos</ModuleName>
       <Files>
         <File uid="1" fullPath="/source/ControleDeContatos/Program.cs" />
@@ -683,9 +683,9 @@
         </Class>
       </Classes>
     </Module>
-    <Module hash="790B9C0B-766D-4C6A-B0DB-AAA9CBB6DFC9">
+    <Module hash="850D5A2F-5C43-4506-98EE-4E050242E719">
       <ModulePath>ControleDeContatos.Views.dll</ModulePath>
-      <ModuleTime>2023-05-11T09:04:05</ModuleTime>
+      <ModuleTime>2023-05-12T01:33:06</ModuleTime>
       <ModuleName>ControleDeContatos.Views</ModuleName>
       <Files>
         <File uid="12" fullPath="/source/ControleDeContatos/Views/Contato/ApagarConfirmacao.cshtml" />

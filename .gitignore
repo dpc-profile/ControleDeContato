@@ -51,6 +51,10 @@ Generated\ Files/
 *.VisualState.xml
 TestResult.xml
 
+#Test Report
+coveragereport/
+.sonarqube/
+
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/
