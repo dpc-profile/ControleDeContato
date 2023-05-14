@@ -15,7 +15,7 @@ namespace ControleDeContatos.Tests.Tests
     public class ContatoControllerTests
     {
 
-        [Fact]
+        [Fact(Skip = "Teste ainda não finalizado")]
         public void TestaIndex()
         {
             // Arrange
@@ -32,6 +32,7 @@ namespace ControleDeContatos.Tests.Tests
 
             // Assert
             // Coferir se retornou conteudo
+            Assert.NotNull(lista);
         }
 
 

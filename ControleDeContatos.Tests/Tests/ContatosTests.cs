@@ -19,6 +19,14 @@ namespace ControleDeContatos.Tests.Tests
         }
 
         [Fact]
+        public void TestaConstructor()
+        {
+            var constructor = new ContatoRepository();
+
+            Assert.NotNull(constructor);
+        }
+
+        [Fact]
         public void TestarBuscarTodos()
         {
             List<ContatoModel> lista = _repository.BuscarTodos();

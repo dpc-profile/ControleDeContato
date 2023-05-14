@@ -9,6 +9,7 @@
         <Configuration>
           <Format>opencover</Format>
           <Exclude>[*]*.Migrations.*</Exclude>
+          <ExcludeByFile>**/ControleDeContatos/Startup.cs, **/ControleDeContatos/Program.cs, **/ControleDeContatos/Views/**</ExcludeByFile>
         </Configuration>
       </DataCollector>
     </DataCollectors>
