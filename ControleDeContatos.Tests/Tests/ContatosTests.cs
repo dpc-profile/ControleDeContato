@@ -13,7 +13,6 @@ namespace ControleDeContatos.Tests.Tests
     public class ContatosTests
     {
         private IContatoRepository _repository;
-
         public ContatosTests()
         {
             _repository = new ContatoRepository();
@@ -53,42 +52,40 @@ namespace ControleDeContatos.Tests.Tests
         [InlineData(3, "Carlos Tester3", "carlos3@teste.com")]
         public void TestartAtualizar(int id, string nome, string email)
         {
+            // Arrange
             ContatoModel contatoNovasInfos = new ContatoModel();
             contatoNovasInfos.Id = id;
             contatoNovasInfos.Nome = nome;
             contatoNovasInfos.Email = email;
             contatoNovasInfos.Celular = "11 94325-1234";
 
+            // Act
             ContatoModel resposta = _repository.Atualizar(contatoNovasInfos);
+            
+            // Assert
             Assert.NotNull(resposta);
         }
-        
+
         [Theory]
-        [InlineData("Carlos TesterNew", "carlosNew@teste.com")]
-        public void TestartAdicionar(string nome, string email)
+        [InlineData("Carlos MustBeDelete", "carl@teste.com")]
+        public void TestarAdicionarEApagar(string nome, string email)
         {
+            // Arrange
             ContatoModel contatoNovo = new ContatoModel();
             contatoNovo.Nome = nome;
             contatoNovo.Email = email;
             contatoNovo.Celular = "11 94325-1234";
 
-            ContatoModel resposta = _repository.Adicionar(contatoNovo);
-            
-            Assert.NotNull(resposta);
-        }
-
-        [Fact]
-        public void TestarApagar()
-        {
-            ContatoModel contatoNovo = new ContatoModel();
-            contatoNovo.Nome = "Carlos MustBeDelete";
-            contatoNovo.Email = "carl@teste.com";
-            contatoNovo.Celular = "11 94325-1234";
-
+            // Act
             ContatoModel respostaAdicionar = _repository.Adicionar(contatoNovo);
 
+            // Assert Adicionar
+            Assert.NotNull(respostaAdicionar);
+
+            // Act
             bool respostaApagar = _repository.Apagar(respostaAdicionar.Id);
 
+            // Assert Apagar
             Assert.True(respostaApagar);
         }
     }

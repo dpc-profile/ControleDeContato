@@ -10,6 +10,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://localhost
+    env_file:
+      - mysql.env
+    depends_on:
+      - mysql_db
 
   mysql_db:
     container_name: controle_contatos-db
@@ -23,6 +27,7 @@ services:
       - ./init-db_teste:/docker-entrypoint-initdb.d
     env_file:
       - mysql.env
+    restart: on-failure:5
 
   myAdmin:
     container_name: controle_contatos-php_my_admin

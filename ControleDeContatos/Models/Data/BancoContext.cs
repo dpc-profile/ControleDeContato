@@ -14,18 +14,27 @@ namespace ControleDeContatos.Data
         public DbSet<ContatoModel> Contatos { get; set; }
 
         // Detecta se está rodando pelo comando dotnet test
-        public static readonly bool IsRunningFromNUnit = AppDomain
+        public static readonly bool IsRunningFromXUnit = AppDomain
                 .CurrentDomain.GetAssemblies()
                 .Any(a => a.FullName.ToLowerInvariant().StartsWith("xunit"));
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string stringconexao = "server=mysql_db;database=db;user=user;password=passUser";
+            string stringconexao;
+            string user = Environment.GetEnvironmentVariable("MYSQL_USER");
+            string pass = Environment.GetEnvironmentVariable("MYSQL_PASSWORD");
             
-            if (IsRunningFromNUnit)
+            if (IsRunningFromXUnit)
             {
-                stringconexao = "server=mysql_db;database=db_teste;user=user;password=passUser";
+                string db_teste = Environment.GetEnvironmentVariable("MYSQL_TESTE_DATABASE");
+                string v = $"server=mysql_db;database={db_teste};user={user};password={pass}";
+                stringconexao = v;
 
+            } else {
+                string db = Environment.GetEnvironmentVariable("MYSQL_DATABASE");
+                string v = $"server=mysql_db;database={db};user={user};password={pass}";
+                stringconexao = v;
+                
             }
             
             optionsBuilder.UseMySql(stringconexao, ServerVersion.AutoDetect(stringconexao));
