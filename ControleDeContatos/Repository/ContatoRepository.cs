@@ -26,7 +26,7 @@ namespace ControleDeContatos.Repository
         {
             ContatoModel contatoDb = ListarPorId(id);
 
-            if (contatoDb == null) throw new System.Exception("Houve um erro na remoção do contato");
+            if (contatoDb == null) return false;
 
             _bancoContext.Contatos.Remove(contatoDb);
             _bancoContext.SaveChanges();
@@ -38,7 +38,7 @@ namespace ControleDeContatos.Repository
         {
             ContatoModel contatoDb = ListarPorId(contato.Id);
 
-            if (contatoDb == null) throw new System.Exception("Houve um erro na atualização do contato");
+            if (contatoDb == null) return null;
 
             contatoDb.Nome = contato.Nome;
             contatoDb.Email = contato.Email;
