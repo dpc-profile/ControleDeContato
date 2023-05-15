@@ -9,12 +9,14 @@ using ControleDeContatos.Repository;
 using ControleDeContatos.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using ControleDeContatos.Models;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Http;
 
 namespace ControleDeContatos.Tests.Tests
 {
     public class ContatoControllerTests
     {
-
+        
         [Fact]
         public void TestaIndex()
         {
@@ -30,7 +32,7 @@ namespace ControleDeContatos.Tests.Tests
             // Act
             // Faz a chamada do index
             var result = controller.Index();
-            
+
             // Assert
             // Confere o se o tipo é viewResult
             // Confere o viewResul se está com o model
@@ -40,7 +42,34 @@ namespace ControleDeContatos.Tests.Tests
                 viewResult.ViewData.Model);
             Assert.Equal(2, model.Count());
         }
+        
+        [Fact]
+        public void TestaCriarValidStateSucesso()
+        {
+            // Arrange
+            // Prepara e cria o tempData
+            // Instancia o mock do repository
+            // Instanciar o controller com o obj mockRepo e o tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
+            var mockRepo = new Mock<IContatoRepository>();
+            var controller = new ContatoController(mockRepo.Object){TempData = tempData};
+
+            // Act
+            // com o controller, criar os contatos do CriarUmContato()
+            var result = controller.Criar(CriarUmContato());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            // Verifica o retorno RedirectToAction
+            // Verifica se foi redirecionado para Index
+            Assert.True(controller.TempData.ContainsKey("MensagemSucesso"));
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Null(redirectToActionResult.ControllerName);
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+
+        }
 
         private List<ContatoModel> CriaTestContatos()
         {
@@ -53,7 +82,7 @@ namespace ControleDeContatos.Tests.Tests
                 Email = "amilton@teste.com",
                 Celular = "11 98765-1234"
             });
-            
+
             contatos.Add(new ContatoModel()
             {
                 Id = 2,
@@ -62,7 +91,19 @@ namespace ControleDeContatos.Tests.Tests
                 Celular = "11 98765-1234"
             });
 
-            return contatos;            
+            return contatos;
+        }
+
+        private ContatoModel CriarUmContato()
+        {
+            var contatos = new ContatoModel();
+
+            contatos.Id = 3;
+            contatos.Nome = "Arlindo Tester";
+            contatos.Email = "arlindo@teste.com";
+            contatos.Celular = "11 94325-1234";
+
+            return contatos;
         }
     }
 }
