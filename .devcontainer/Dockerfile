@@ -6,8 +6,12 @@ WORKDIR /source
 # Adiciona o tools para poder usar o comando dotnet-ef
 ENV PATH=$PATH:/root/.dotnet/tools
 
-#Instala reportgenerator, dotnet-ef e faz o contaienr ficar vivo
-CMD dotnet tool install --global dotnet-sonarscanner \ 
-&& dotnet tool install -g dotnet-reportgenerator-globaltool \ 
-&& dotnet tool install --global dotnet-ef --version 5.0.17 \
-&& tail -f /dev/null
+# Nesse ponto, como os arquivos ainda não estão no container,
+# é preciso copiar para dentro
+COPY .devcontainer/dotnet_tools.sh /tmp/dotnet_tools-install.sh 
+
+# Instala as ferramentas do dotnet
+RUN /tmp/dotnet_tools-install.sh
+
+# Faz o contaienr ficar vivo
+CMD ["tail", "-f", "/dev/null"]
