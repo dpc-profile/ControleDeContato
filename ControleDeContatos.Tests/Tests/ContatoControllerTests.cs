@@ -71,6 +71,40 @@ namespace ControleDeContatos.Tests.Tests
 
         }
 
+        [Fact]
+        public void TestaCriarNotValidState()
+        {
+            // Arrange
+            // Cria o TempData
+            // Cria o mockRepo e o controller
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            var mockRepo = new Mock<IContatoRepository>();
+            var controller = new ContatoController(mockRepo.Object){TempData = tempData};
+
+            // Act
+            // Força o ModelState não ser valido
+            // Chama o criar
+            controller.ModelState.AddModelError("fakeError", "fakeError");
+            var result = controller.Criar();
+
+            // Assert
+            // Confere se o tempData retornou vazio
+            // Confere se retornou view
+            // Confere se o state é invalido
+            Assert.Empty(controller.TempData);
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.Equal("Invalid", viewResult.ViewData.ModelState.ValidationState.ToString());
+            
+        }
+
+        [Fact]
+        public void TestaCriarException()
+        {
+            throw new NotImplementedException();
+        }
+
         private List<ContatoModel> CriaTestContatos()
         {
             var contatos = new List<ContatoModel>();
@@ -105,5 +139,6 @@ namespace ControleDeContatos.Tests.Tests
 
             return contatos;
         }
+        
     }
 }
