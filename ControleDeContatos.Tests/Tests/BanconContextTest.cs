@@ -10,10 +10,10 @@ using Xunit;
 
 namespace ControleDeContatos.Tests.Tests
 {
-    public class ContatosTests
+    public class BanconContextTest
     {
         private IContatoRepository _repository;
-        public ContatosTests()
+        public BanconContextTest()
         {
             _repository = new ContatoRepository();
         }
