@@ -22,11 +22,11 @@ namespace ControleDeContatos.Tests.Tests
         {
             // Arrange
             // Instancia o mock do repository
-            // Popula o mock com o CriaTestContatos()
+            // Popula o mock com o CriarVariosContatos()
             // Instanciar o controller usando o obj do mockRepo
             var mockRepo = new Mock<IContatoRepository>();
             mockRepo.Setup(repo => repo.BuscarTodos())
-                .Returns(CriaTestContatos());
+                .Returns(CriarVariosContatos());
             var controller = new ContatoController(mockRepo.Object);
 
             // Act
@@ -35,7 +35,7 @@ namespace ControleDeContatos.Tests.Tests
 
             // Assert
             // Confere o se o tipo é viewResult
-            // Confere o viewResul se está com o model
+            // Confere se o viewResult é uma lista de ContatoModels
             // Comfere se a model está com os 2 contatos adicionados
             var viewResult = Assert.IsType<ViewResult>(result);
             var model = Assert.IsAssignableFrom<IEnumerable<ContatoModel>>(
@@ -100,12 +100,55 @@ namespace ControleDeContatos.Tests.Tests
         }
 
         [Fact]
-        public void TestaCriarException()
+        public void TestarEditar()
+        {
+            // Arrange
+            var mockRepo = new Mock<IContatoRepository>();
+            mockRepo.Setup(repo => repo.ListarPorId(1))
+                .Returns(CriarUmContato());
+            var controller = new ContatoController(mockRepo.Object);
+
+            // Act
+            // Faz a chamada do index
+            var result = controller.Editar(1);
+
+            // Assert
+            // Confere o se o tipo é viewResult
+            // Confere se o viewResul é um ContatoModel
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.IsAssignableFrom<ContatoModel>(viewResult.ViewData.Model);
+        }
+
+        [Fact]
+        public void TestarApagarConfirmacao()
+        {
+            // Arrange
+            // Instancia o mock do repository
+            // Popula o mock com o CriarVariosContatos()
+            // Instanciar o controller usando o obj do mockRepo
+            var mockRepo = new Mock<IContatoRepository>();
+            mockRepo.Setup(repo => repo.ListarPorId(1))
+                .Returns(CriarUmContato());
+            var controller = new ContatoController(mockRepo.Object);
+
+            // Act
+            // Faz a chamada do index
+            var result = controller.ApagarConfirmacao(1);
+
+            // Assert
+            // Confere o se o tipo é viewResult
+            // Confere se o viewResul é um ContatoModel
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.IsAssignableFrom<ContatoModel>(viewResult.ViewData.Model);
+        }
+
+        [Fact(Skip = "Teste ainda não implementado")]
+        public void TestarApagar()
         {
             throw new NotImplementedException();
         }
 
-        private List<ContatoModel> CriaTestContatos()
+        private List<ContatoModel> CriarVariosContatos()
         {
             var contatos = new List<ContatoModel>();
 
@@ -140,5 +183,16 @@ namespace ControleDeContatos.Tests.Tests
             return contatos;
         }
         
+        private ContatoModel CriarUmContatoInvalido()
+        {
+            var contatos = new ContatoModel();
+
+            contatos.Id = 1;
+            contatos.Email = null;
+            contatos.Celular = "11 94325-1234";
+
+            return contatos;
+        }
+
     }
 }
