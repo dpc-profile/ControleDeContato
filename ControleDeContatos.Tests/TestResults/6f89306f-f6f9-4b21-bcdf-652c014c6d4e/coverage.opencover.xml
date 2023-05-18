@@ -2,9 +2,9 @@
 <CoverageSession>
   <Summary numSequencePoints="126" visitedSequencePoints="100" numBranchPoints="18" visitedBranchPoints="11" sequenceCoverage="79.36" branchCoverage="61.11" maxCyclomaticComplexity="37" minCyclomaticComplexity="0" visitedClasses="4" numClasses="6" visitedMethods="20" numMethods="26" />
   <Modules>
-    <Module hash="DA145A29-1F07-4293-B843-9045913FBB8D">
+    <Module hash="B1C91009-5E93-4C36-843F-0D4C49FB6E8B">
       <ModulePath>ControleDeContatos.dll</ModulePath>
-      <ModuleTime>2023-05-18T07:03:34</ModuleTime>
+      <ModuleTime>2023-05-18T09:35:08</ModuleTime>
       <ModuleName>ControleDeContatos</ModuleName>
       <Files>
         <File uid="1" fullPath="/source/ControleDeContatos/Repository/ContatoRepository.cs" />
@@ -464,9 +464,9 @@
         </Class>
       </Classes>
     </Module>
-    <Module hash="A063BBC4-3975-4DF2-9AEA-FE929E4E4D7A">
+    <Module hash="37D7E953-9644-4F2C-B495-C2F59FF88953">
       <ModulePath>ControleDeContatos.Views.dll</ModulePath>
-      <ModuleTime>2023-05-18T07:03:34</ModuleTime>
+      <ModuleTime>2023-05-18T09:35:08</ModuleTime>
       <ModuleName>ControleDeContatos.Views</ModuleName>
       <Files />
       <Classes />

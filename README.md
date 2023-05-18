@@ -44,12 +44,12 @@ $ dotnet test ControleDeContatos.Tests \
 
 # ou 
 
-$ dotnet test ControleDeContatos.Tests \
+$ dotnet test --logger trx ControleDeContatos.Tests \
 --settings ControleDeContatos.Tests/coverlet.runsettings.xml
 
 # Gerar relatório para HTML
 $ reportgenerator \
--reports:"ControleDeContatos.Tests/TestResults/coverage.opencover.xml" \
+-reports:"ControleDeContatos.Tests/TestResults/**/coverage.opencover.xml" \
 -targetdir:"coveragereport" \
 -reporttypes:Html
 

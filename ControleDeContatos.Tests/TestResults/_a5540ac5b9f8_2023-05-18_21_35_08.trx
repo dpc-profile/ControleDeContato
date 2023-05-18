@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="5c1111c9-3cf2-4491-9465-7b830af5ca79" name="@a5540ac5b9f8 2023-05-18 21:35:08" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2023-05-18T21:35:08.0833532+00:00" queuing="2023-05-18T21:35:08.0833532+00:00" start="2023-05-18T21:35:06.4986217+00:00" finish="2023-05-18T21:35:08.9074354+00:00" />
+  <TestSettings name="default" id="86b26dc1-2c11-4bd4-b7ed-53331f48736c">
+    <Deployment runDeploymentRoot="_a5540ac5b9f8_2023-05-18_21_35_08" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="f47f1584-5499-4cd3-be36-4c5fea189aa9" testId="8b506da1-6cac-bd93-87c4-54f6a1fe15f1" testName="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestarInvalidoListarPorId" computerName="a5540ac5b9f8" duration="00:00:00.0006637" startTime="2023-05-18T21:35:08.7879273+00:00" endTime="2023-05-18T21:35:08.7879274+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f47f1584-5499-4cd3-be36-4c5fea189aa9" />
+    <UnitTestResult executionId="6033f4d1-872b-465d-b776-007a8fc0912f" testId="6f68a995-6856-8b65-415c-65345d50c4bf" testName="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestarListarPorId(id: 1)" computerName="a5540ac5b9f8" duration="00:00:00.0007624" startTime="2023-05-18T21:35:08.7917987+00:00" endTime="2023-05-18T21:35:08.7917989+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6033f4d1-872b-465d-b776-007a8fc0912f" />
+    <UnitTestResult executionId="2ccecc2d-9f23-45fe-9602-c2628a3a8fdb" testId="b16b2c02-bac1-4062-2a15-f68d2635eacb" testName="ControleDeContatos.Tests.Tests.HomeControllerTests.TestaError" computerName="a5540ac5b9f8" duration="00:00:00.0010000" startTime="2023-05-18T21:35:07.9677389+00:00" endTime="2023-05-18T21:35:07.9677890+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2ccecc2d-9f23-45fe-9602-c2628a3a8fdb">
+      <Output>
+        <StdOut>Teste ainda não implementado</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="652e03db-583c-4e46-95cd-015650bef1ae" testId="2a707cfc-efbd-f160-9592-6a243bfde083" testName="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarApagarConfirmacao" computerName="a5540ac5b9f8" duration="00:00:00.0006986" startTime="2023-05-18T21:35:08.0640802+00:00" endTime="2023-05-18T21:35:08.0640803+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="652e03db-583c-4e46-95cd-015650bef1ae" />
+    <UnitTestResult executionId="e7471010-872d-411e-a26a-95958dc23f4b" testId="d0d6534f-03f9-89d2-1bec-c978ae6fd298" testName="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestartAtualizar(id: 1, nome: &quot;Carlos Tester1&quot;, email: &quot;carlos1@teste.com&quot;)" computerName="a5540ac5b9f8" duration="00:00:00.0011885" startTime="2023-05-18T21:35:08.7872269+00:00" endTime="2023-05-18T21:35:08.7872271+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e7471010-872d-411e-a26a-95958dc23f4b" />
+    <UnitTestResult executionId="d7a13bc3-191c-46cb-9a74-269985a3744f" testId="fbe4b4f9-cad6-21ee-8f5e-4aa2dcd9a20e" testName="ControleDeContatos.Tests.Tests.HomeControllerTests.TestaPrivacy" computerName="a5540ac5b9f8" duration="00:00:00.0010000" startTime="2023-05-18T21:35:07.9802595+00:00" endTime="2023-05-18T21:35:07.9802601+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d7a13bc3-191c-46cb-9a74-269985a3744f">
+      <Output>
+        <StdOut>Teste ainda não implementado</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="03e2b1f6-3289-47da-99d7-a38d91d78df0" testId="1a52a680-95b8-851d-1c4a-cd2ed4f717f0" testName="ControleDeContatos.Tests.Tests.HomeControllerTests.TestaIndex" computerName="a5540ac5b9f8" duration="00:00:00.0010000" startTime="2023-05-18T21:35:07.9805968+00:00" endTime="2023-05-18T21:35:07.9805970+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="03e2b1f6-3289-47da-99d7-a38d91d78df0">
+      <Output>
+        <StdOut>Teste ainda não implementado</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4b1765ca-5e51-4c11-b2cd-a704ba21f980" testId="ea57d26e-41b6-71e5-0179-ec805cc04e0b" testName="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarAlterarValidModelNull" computerName="a5540ac5b9f8" duration="00:00:00.0002520" startTime="2023-05-18T21:35:08.0638809+00:00" endTime="2023-05-18T21:35:08.0638810+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4b1765ca-5e51-4c11-b2cd-a704ba21f980" />
+    <UnitTestResult executionId="298590d7-74ed-41df-ac58-eb61995bf22a" testId="5e69c175-ed13-33f1-7051-ecd4f0411d28" testName="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestartAtualizar(id: 3, nome: &quot;Carlos Tester3&quot;, email: &quot;carlos3@teste.com&quot;)" computerName="a5540ac5b9f8" duration="00:00:00.0055700" startTime="2023-05-18T21:35:08.7860101+00:00" endTime="2023-05-18T21:35:08.7860103+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="298590d7-74ed-41df-ac58-eb61995bf22a" />
+    <UnitTestResult executionId="027eb698-e0fc-4c38-8152-850486acf8b3" testId="97e25d17-d718-3a20-1b6f-8c7ef6b3f92c" testName="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarApagarTrue" computerName="a5540ac5b9f8" duration="00:00:00.0006682" startTime="2023-05-18T21:35:08.0427205+00:00" endTime="2023-05-18T21:35:08.0427207+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="027eb698-e0fc-4c38-8152-850486acf8b3" />
+    <UnitTestResult executionId="8928d541-33fc-4de3-92a5-35f4c6fdf176" testId="9823d2c3-10e8-f42c-498a-a732889fc0d7" testName="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarAlterarNotValidModel" computerName="a5540ac5b9f8" duration="00:00:00.0001562" startTime="2023-05-18T21:35:08.0635035+00:00" endTime="2023-05-18T21:35:08.0635036+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8928d541-33fc-4de3-92a5-35f4c6fdf176" />
+    <UnitTestResult executionId="ebab3e87-dce7-4edb-afd6-eeaea7980ea2" testId="9efd02b7-f9d5-e7d9-8efa-00783baae40c" testName="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestartAtualizar(id: 2, nome: &quot;Carlos Tester2&quot;, email: &quot;carlos2@teste.com&quot;)" computerName="a5540ac5b9f8" duration="00:00:00.0206333" startTime="2023-05-18T21:35:08.7804060+00:00" endTime="2023-05-18T21:35:08.7804062+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ebab3e87-dce7-4edb-afd6-eeaea7980ea2" />
+    <UnitTestResult executionId="66de0db3-6aad-462a-820b-eee856229459" testId="fed7b952-414b-14ae-b5aa-33707ab8ba68" testName="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarEditar" computerName="a5540ac5b9f8" duration="00:00:00.0011595" startTime="2023-05-18T21:35:08.0630207+00:00" endTime="2023-05-18T21:35:08.0630213+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="66de0db3-6aad-462a-820b-eee856229459" />
+    <UnitTestResult executionId="1d5b4f6b-186f-4155-9472-cb2008fa2630" testId="0d508194-220c-771d-9613-a7643e108599" testName="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestarAdicionarEApagar(nome: &quot;Carlos MustBeDelete&quot;, email: &quot;carl@teste.com&quot;)" computerName="a5540ac5b9f8" duration="00:00:00.7409555" startTime="2023-05-18T21:35:08.7596997+00:00" endTime="2023-05-18T21:35:08.7597000+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1d5b4f6b-186f-4155-9472-cb2008fa2630" />
+    <UnitTestResult executionId="5fc3df17-3f16-4025-9ecc-a405e77470d9" testId="0fcbd7cc-29b5-56e4-d9f8-0f1d1bddd687" testName="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestaIndex" computerName="a5540ac5b9f8" duration="00:00:00.0021132" startTime="2023-05-18T21:35:08.0636915+00:00" endTime="2023-05-18T21:35:08.0636916+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5fc3df17-3f16-4025-9ecc-a405e77470d9" />
+    <UnitTestResult executionId="27c028e5-6c53-4125-b74d-9eac92f1297b" testId="a458554d-2d86-880d-fac3-bf16bd07cf0d" testName="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestaCriarNotValidState" computerName="a5540ac5b9f8" duration="00:00:00.0044074" startTime="2023-05-18T21:35:08.0281122+00:00" endTime="2023-05-18T21:35:08.0281124+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="27c028e5-6c53-4125-b74d-9eac92f1297b" />
+    <UnitTestResult executionId="70efebca-24c8-4e4f-bfab-55ecf9b7800f" testId="9a9b4b41-cddf-9fe8-f7df-512cd35f202b" testName="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestaCriarValidStateSucesso" computerName="a5540ac5b9f8" duration="00:00:00.0598361" startTime="2023-05-18T21:35:08.0236680+00:00" endTime="2023-05-18T21:35:08.0236686+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="70efebca-24c8-4e4f-bfab-55ecf9b7800f" />
+    <UnitTestResult executionId="0a34b0ee-c6fc-4ba3-b7ce-43aa4294758d" testId="1ad27c27-68b4-d540-239a-cb5481d2909a" testName="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestarBuscarTodos" computerName="a5540ac5b9f8" duration="00:00:00.0030361" startTime="2023-05-18T21:35:08.7910064+00:00" endTime="2023-05-18T21:35:08.7910067+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0a34b0ee-c6fc-4ba3-b7ce-43aa4294758d" />
+    <UnitTestResult executionId="8ffa4c7d-481b-4ce5-a81f-4553240092c0" testId="c8d1e1f8-e46e-ef58-5918-b2b2cad5c039" testName="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarAlterarValidModel" computerName="a5540ac5b9f8" duration="00:00:00.0010727" startTime="2023-05-18T21:35:08.0633035+00:00" endTime="2023-05-18T21:35:08.0633038+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8ffa4c7d-481b-4ce5-a81f-4553240092c0" />
+    <UnitTestResult executionId="714ff3a1-fe02-4414-821f-4a59bb240b9e" testId="f409ac1e-f7be-68c3-ac89-180d434b7c02" testName="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestaConstructor" computerName="a5540ac5b9f8" duration="00:00:00.0557178" startTime="2023-05-18T21:35:08.0190449+00:00" endTime="2023-05-18T21:35:08.0190456+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="714ff3a1-fe02-4414-821f-4a59bb240b9e" />
+    <UnitTestResult executionId="7ca66aa3-9643-4f44-a2cc-7c98cdeed471" testId="1769abbd-fa20-f4c2-af2e-676991d34b8b" testName="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarApagarFalse" computerName="a5540ac5b9f8" duration="00:00:00.0138373" startTime="2023-05-18T21:35:08.0420143+00:00" endTime="2023-05-18T21:35:08.0420151+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7ca66aa3-9643-4f44-a2cc-7c98cdeed471" />
+    <UnitTestResult executionId="181e2db6-cf7a-4a34-90f9-da267f231374" testId="619ee7b6-6dab-fa64-276f-ff937ce00f7a" testName="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestarListarPorId(id: 3)" computerName="a5540ac5b9f8" duration="00:00:00.0006468" startTime="2023-05-18T21:35:08.7924784+00:00" endTime="2023-05-18T21:35:08.7924786+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="181e2db6-cf7a-4a34-90f9-da267f231374" />
+    <UnitTestResult executionId="47f9b3c7-e7e9-4f92-b6e2-395a74331a0b" testId="e351622a-845b-f929-cf97-7fe393835ada" testName="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestarListarPorId(id: 2)" computerName="a5540ac5b9f8" duration="00:00:00.0006427" startTime="2023-05-18T21:35:08.7931470+00:00" endTime="2023-05-18T21:35:08.7931472+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="47f9b3c7-e7e9-4f92-b6e2-395a74331a0b" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestarBuscarTodos" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="1ad27c27-68b4-d540-239a-cb5481d2909a">
+      <Execution id="0a34b0ee-c6fc-4ba3-b7ce-43aa4294758d" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoRepositoryTests" name="TestarBuscarTodos" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestarInvalidoListarPorId" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="8b506da1-6cac-bd93-87c4-54f6a1fe15f1">
+      <Execution id="f47f1584-5499-4cd3-be36-4c5fea189aa9" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoRepositoryTests" name="TestarInvalidoListarPorId" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestartAtualizar(id: 1, nome: &quot;Carlos Tester1&quot;, email: &quot;carlos1@teste.com&quot;)" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="d0d6534f-03f9-89d2-1bec-c978ae6fd298">
+      <Execution id="e7471010-872d-411e-a26a-95958dc23f4b" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoRepositoryTests" name="TestartAtualizar" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestaConstructor" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="f409ac1e-f7be-68c3-ac89-180d434b7c02">
+      <Execution id="714ff3a1-fe02-4414-821f-4a59bb240b9e" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoRepositoryTests" name="TestaConstructor" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestaCriarValidStateSucesso" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="9a9b4b41-cddf-9fe8-f7df-512cd35f202b">
+      <Execution id="70efebca-24c8-4e4f-bfab-55ecf9b7800f" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoControllerTests" name="TestaCriarValidStateSucesso" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarAlterarValidModelNull" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="ea57d26e-41b6-71e5-0179-ec805cc04e0b">
+      <Execution id="4b1765ca-5e51-4c11-b2cd-a704ba21f980" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoControllerTests" name="TestarAlterarValidModelNull" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestaIndex" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="0fcbd7cc-29b5-56e4-d9f8-0f1d1bddd687">
+      <Execution id="5fc3df17-3f16-4025-9ecc-a405e77470d9" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoControllerTests" name="TestaIndex" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarApagarConfirmacao" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="2a707cfc-efbd-f160-9592-6a243bfde083">
+      <Execution id="652e03db-583c-4e46-95cd-015650bef1ae" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoControllerTests" name="TestarApagarConfirmacao" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestarListarPorId(id: 1)" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="6f68a995-6856-8b65-415c-65345d50c4bf">
+      <Execution id="6033f4d1-872b-465d-b776-007a8fc0912f" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoRepositoryTests" name="TestarListarPorId" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarApagarFalse" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="1769abbd-fa20-f4c2-af2e-676991d34b8b">
+      <Execution id="7ca66aa3-9643-4f44-a2cc-7c98cdeed471" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoControllerTests" name="TestarApagarFalse" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarAlterarNotValidModel" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="9823d2c3-10e8-f42c-498a-a732889fc0d7">
+      <Execution id="8928d541-33fc-4de3-92a5-35f4c6fdf176" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoControllerTests" name="TestarAlterarNotValidModel" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarAlterarValidModel" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="c8d1e1f8-e46e-ef58-5918-b2b2cad5c039">
+      <Execution id="8ffa4c7d-481b-4ce5-a81f-4553240092c0" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoControllerTests" name="TestarAlterarValidModel" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestartAtualizar(id: 3, nome: &quot;Carlos Tester3&quot;, email: &quot;carlos3@teste.com&quot;)" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="5e69c175-ed13-33f1-7051-ecd4f0411d28">
+      <Execution id="298590d7-74ed-41df-ac58-eb61995bf22a" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoRepositoryTests" name="TestartAtualizar" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.HomeControllerTests.TestaIndex" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="1a52a680-95b8-851d-1c4a-cd2ed4f717f0">
+      <Execution id="03e2b1f6-3289-47da-99d7-a38d91d78df0" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.HomeControllerTests" name="TestaIndex" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.HomeControllerTests.TestaPrivacy" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="fbe4b4f9-cad6-21ee-8f5e-4aa2dcd9a20e">
+      <Execution id="d7a13bc3-191c-46cb-9a74-269985a3744f" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.HomeControllerTests" name="TestaPrivacy" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarEditar" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="fed7b952-414b-14ae-b5aa-33707ab8ba68">
+      <Execution id="66de0db3-6aad-462a-820b-eee856229459" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoControllerTests" name="TestarEditar" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestaCriarNotValidState" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="a458554d-2d86-880d-fac3-bf16bd07cf0d">
+      <Execution id="27c028e5-6c53-4125-b74d-9eac92f1297b" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoControllerTests" name="TestaCriarNotValidState" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestarListarPorId(id: 2)" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="e351622a-845b-f929-cf97-7fe393835ada">
+      <Execution id="47f9b3c7-e7e9-4f92-b6e2-395a74331a0b" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoRepositoryTests" name="TestarListarPorId" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestarListarPorId(id: 3)" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="619ee7b6-6dab-fa64-276f-ff937ce00f7a">
+      <Execution id="181e2db6-cf7a-4a34-90f9-da267f231374" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoRepositoryTests" name="TestarListarPorId" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestartAtualizar(id: 2, nome: &quot;Carlos Tester2&quot;, email: &quot;carlos2@teste.com&quot;)" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="9efd02b7-f9d5-e7d9-8efa-00783baae40c">
+      <Execution id="ebab3e87-dce7-4edb-afd6-eeaea7980ea2" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoRepositoryTests" name="TestartAtualizar" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoControllerTests.TestarApagarTrue" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="97e25d17-d718-3a20-1b6f-8c7ef6b3f92c">
+      <Execution id="027eb698-e0fc-4c38-8152-850486acf8b3" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoControllerTests" name="TestarApagarTrue" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.ContatoRepositoryTests.TestarAdicionarEApagar(nome: &quot;Carlos MustBeDelete&quot;, email: &quot;carl@teste.com&quot;)" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="0d508194-220c-771d-9613-a7643e108599">
+      <Execution id="1d5b4f6b-186f-4155-9472-cb2008fa2630" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.ContatoRepositoryTests" name="TestarAdicionarEApagar" />
+    </UnitTest>
+    <UnitTest name="ControleDeContatos.Tests.Tests.HomeControllerTests.TestaError" storage="/source/controledecontatos.tests/bin/debug/netcoreapp3.1/controledecontatos.tests.dll" id="b16b2c02-bac1-4062-2a15-f68d2635eacb">
+      <Execution id="2ccecc2d-9f23-45fe-9602-c2628a3a8fdb" />
+      <TestMethod codeBase="/source/ControleDeContatos.Tests/bin/Debug/netcoreapp3.1/ControleDeContatos.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="ControleDeContatos.Tests.Tests.HomeControllerTests" name="TestaError" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="8b506da1-6cac-bd93-87c4-54f6a1fe15f1" executionId="f47f1584-5499-4cd3-be36-4c5fea189aa9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6f68a995-6856-8b65-415c-65345d50c4bf" executionId="6033f4d1-872b-465d-b776-007a8fc0912f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b16b2c02-bac1-4062-2a15-f68d2635eacb" executionId="2ccecc2d-9f23-45fe-9602-c2628a3a8fdb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2a707cfc-efbd-f160-9592-6a243bfde083" executionId="652e03db-583c-4e46-95cd-015650bef1ae" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d0d6534f-03f9-89d2-1bec-c978ae6fd298" executionId="e7471010-872d-411e-a26a-95958dc23f4b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fbe4b4f9-cad6-21ee-8f5e-4aa2dcd9a20e" executionId="d7a13bc3-191c-46cb-9a74-269985a3744f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a52a680-95b8-851d-1c4a-cd2ed4f717f0" executionId="03e2b1f6-3289-47da-99d7-a38d91d78df0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ea57d26e-41b6-71e5-0179-ec805cc04e0b" executionId="4b1765ca-5e51-4c11-b2cd-a704ba21f980" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5e69c175-ed13-33f1-7051-ecd4f0411d28" executionId="298590d7-74ed-41df-ac58-eb61995bf22a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="97e25d17-d718-3a20-1b6f-8c7ef6b3f92c" executionId="027eb698-e0fc-4c38-8152-850486acf8b3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9823d2c3-10e8-f42c-498a-a732889fc0d7" executionId="8928d541-33fc-4de3-92a5-35f4c6fdf176" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9efd02b7-f9d5-e7d9-8efa-00783baae40c" executionId="ebab3e87-dce7-4edb-afd6-eeaea7980ea2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fed7b952-414b-14ae-b5aa-33707ab8ba68" executionId="66de0db3-6aad-462a-820b-eee856229459" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0d508194-220c-771d-9613-a7643e108599" executionId="1d5b4f6b-186f-4155-9472-cb2008fa2630" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0fcbd7cc-29b5-56e4-d9f8-0f1d1bddd687" executionId="5fc3df17-3f16-4025-9ecc-a405e77470d9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a458554d-2d86-880d-fac3-bf16bd07cf0d" executionId="27c028e5-6c53-4125-b74d-9eac92f1297b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9a9b4b41-cddf-9fe8-f7df-512cd35f202b" executionId="70efebca-24c8-4e4f-bfab-55ecf9b7800f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ad27c27-68b4-d540-239a-cb5481d2909a" executionId="0a34b0ee-c6fc-4ba3-b7ce-43aa4294758d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c8d1e1f8-e46e-ef58-5918-b2b2cad5c039" executionId="8ffa4c7d-481b-4ce5-a81f-4553240092c0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f409ac1e-f7be-68c3-ac89-180d434b7c02" executionId="714ff3a1-fe02-4414-821f-4a59bb240b9e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1769abbd-fa20-f4c2-af2e-676991d34b8b" executionId="7ca66aa3-9643-4f44-a2cc-7c98cdeed471" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="619ee7b6-6dab-fa64-276f-ff937ce00f7a" executionId="181e2db6-cf7a-4a34-90f9-da267f231374" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e351622a-845b-f929-cf97-7fe393835ada" executionId="47f9b3c7-e7e9-4f92-b6e2-395a74331a0b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="23" executed="20" passed="20" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.4.0 (64-bit .NET Core 3.1.32)
+[xUnit.net 00:00:00.45]   Discovering: ControleDeContatos.Tests
+[xUnit.net 00:00:00.49]   Discovered:  ControleDeContatos.Tests
+[xUnit.net 00:00:00.49]   Starting:    ControleDeContatos.Tests
+[xUnit.net 00:00:00.53]       Teste ainda não implementado
+[xUnit.net 00:00:00.55]       Teste ainda não implementado
+[xUnit.net 00:00:00.55]       Teste ainda não implementado
+Test 'ControleDeContatos.Tests.Tests.HomeControllerTests.TestaError' was skipped in the test run.
+Test 'ControleDeContatos.Tests.Tests.HomeControllerTests.TestaPrivacy' was skipped in the test run.
+Test 'ControleDeContatos.Tests.Tests.HomeControllerTests.TestaIndex' was skipped in the test run.
+[xUnit.net 00:00:01.36]   Finished:    ControleDeContatos.Tests
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="a5540ac5b9f8" outcome="Warning" timestamp="2023-05-18T21:35:07.9677954+00:00">
+        <Text>[xUnit.net 00:00:00.53]     ControleDeContatos.Tests.Tests.HomeControllerTests.TestaError [SKIP]</Text>
+      </RunInfo>
+      <RunInfo computerName="a5540ac5b9f8" outcome="Warning" timestamp="2023-05-18T21:35:07.9804889+00:00">
+        <Text>[xUnit.net 00:00:00.54]     ControleDeContatos.Tests.Tests.HomeControllerTests.TestaPrivacy [SKIP]</Text>
+      </RunInfo>
+      <RunInfo computerName="a5540ac5b9f8" outcome="Warning" timestamp="2023-05-18T21:35:07.9806635+00:00">
+        <Text>[xUnit.net 00:00:00.55]     ControleDeContatos.Tests.Tests.HomeControllerTests.TestaIndex [SKIP]</Text>
+      </RunInfo>
+    </RunInfos>
+    <CollectorDataEntries>
+      <Collector agentName="a5540ac5b9f8" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="a5540ac5b9f8/coverage.opencover.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>
