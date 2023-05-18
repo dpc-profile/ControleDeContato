@@ -175,6 +175,7 @@ namespace ControleDeContatos.Tests.Tests
         [Fact]
         public void TestarAlterarValidModel()
         {
+            // Arrange
             ContatoModel contato = new ContatoModel()
             {
                 Id = 3,
@@ -183,7 +184,7 @@ namespace ControleDeContatos.Tests.Tests
                 Celular = "11 94325-1234"
 
             };
-            // Arrange
+            
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
@@ -201,6 +202,44 @@ namespace ControleDeContatos.Tests.Tests
             Assert.Null(redirectToActionResult.ControllerName);
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
+        
+        [Fact]
+        public void TestarAlterarValidModelNull()
+        {
+            // Arrange
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            var mockRepo = new Mock<IContatoRepository>();
+            var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
+
+            // Act
+            var result = controller.Alterar(new ContatoModel());
+
+            // Assert
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Null(redirectToActionResult.ControllerName);
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
+        
+        [Fact]
+        public void TestarAlterarNotValidModel()
+        {
+            var mockRepo = new Mock<IContatoRepository>();
+            var controller = new ContatoController(mockRepo.Object);
+
+            // Act
+            controller.ModelState.AddModelError("fakeError", "fakeError");
+            var result = controller.Alterar(new ContatoModel());
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Editar", viewResult.ViewName);
+            
+        }
+
         private List<ContatoModel> CriarVariosContatos()
         {
             var contatos = new List<ContatoModel>();

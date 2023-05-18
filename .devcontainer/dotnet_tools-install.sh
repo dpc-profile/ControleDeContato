@@ -1,10 +1,5 @@
 #!/bin/bash
 
-if ! type dotnet-sonarscanner &> /dev/null;
-then
-    dotnet tool install --global dotnet-sonarscanner
-fi
-
 if ! type reportgenerator &> /dev/null;
 then
     dotnet tool install -g dotnet-reportgenerator-globaltool  

@@ -49,7 +49,7 @@ $ dotnet test ControleDeContatos.Tests \
 
 # Gerar relatório para HTML
 $ reportgenerator \
--reports:"ControleDeContatos.Tests/TestResults/**/coverage.opencover.xml" \
+-reports:"ControleDeContatos.Tests/TestResults/coverage.opencover.xml" \
 -targetdir:"coveragereport" \
 -reporttypes:Html
 
