@@ -143,7 +143,7 @@ namespace ControleDeContatos.Tests.Tests
         }
 
         [Fact]
-        public void TestarApagar()
+        public void TestarApagarTrue()
         {
             // Arrange
             // Instancia o mock do repository
@@ -169,6 +169,37 @@ namespace ControleDeContatos.Tests.Tests
             Assert.True(controller.TempData.ContainsKey("MensagemSucesso"));
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Null(redirectToActionResult.ControllerName);
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
+
+        [Fact]
+        public void TestarApagarFalse()
+        {
+            // Arrange
+            // Id que não existe
+            int testId = 0;
+            // Cria o tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+            // Cria o mock, usando o Apagar e retornando false
+            var mockRepo = new Mock<IContatoRepository>();
+            mockRepo.Setup(repo => repo.Apagar(testId))
+                .Returns(false);
+            // Cria o controller com o obj mockRepo e o tempData
+            var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
+
+            // Act
+            // Faz a chamada do Apagar
+            var result = controller.Apagar(testId);
+
+            // Assert
+            // Verifica se a tempData deu erro
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica o retorno RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica o redirect tem algo
+            Assert.Null(redirectToActionResult.ControllerName);
+            // Vericica se está redirecionando para a Index
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
 
@@ -235,7 +266,6 @@ namespace ControleDeContatos.Tests.Tests
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Editar", viewResult.ViewName);
             
         }
