@@ -16,7 +16,7 @@ namespace ControleDeContatos.Tests.Tests
 {
     public class ContatoControllerTests
     {
-        
+
         [Fact]
         public void TestaIndex()
         {
@@ -42,7 +42,7 @@ namespace ControleDeContatos.Tests.Tests
                 viewResult.ViewData.Model);
             Assert.Equal(2, model.Count());
         }
-        
+
         [Fact]
         public void TestaCriarValidStateSucesso()
         {
@@ -54,7 +54,7 @@ namespace ControleDeContatos.Tests.Tests
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
             var mockRepo = new Mock<IContatoRepository>();
-            var controller = new ContatoController(mockRepo.Object){TempData = tempData};
+            var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
 
             // Act
             // com o controller, criar os contatos do CriarUmContato()
@@ -81,7 +81,7 @@ namespace ControleDeContatos.Tests.Tests
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
             var mockRepo = new Mock<IContatoRepository>();
-            var controller = new ContatoController(mockRepo.Object){TempData = tempData};
+            var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
 
             // Act
             // Força o ModelState não ser valido
@@ -96,7 +96,7 @@ namespace ControleDeContatos.Tests.Tests
             Assert.Empty(controller.TempData);
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.Equal("Invalid", viewResult.ViewData.ModelState.ValidationState.ToString());
-            
+
         }
 
         [Fact]
@@ -142,12 +142,65 @@ namespace ControleDeContatos.Tests.Tests
             Assert.IsAssignableFrom<ContatoModel>(viewResult.ViewData.Model);
         }
 
-        [Fact(Skip = "Teste ainda não implementado")]
+        [Fact]
         public void TestarApagar()
         {
-            throw new NotImplementedException();
+            // Arrange
+            // Instancia o mock do repository
+            // Popula o mock com o CriarVariosContatos()
+            // Instanciar o controller usando o obj do mockRepo
+            int testId = 3;
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            var mockRepo = new Mock<IContatoRepository>();
+            mockRepo.Setup(repo => repo.Apagar(testId))
+                .Returns(true);
+            var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
+
+            // Act
+            // Faz a chamada do Apagar
+            var result = controller.Apagar(testId);
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            // Verifica o retorno RedirectToAction
+            // Verifica se foi redirecionado para Index
+            Assert.True(controller.TempData.ContainsKey("MensagemSucesso"));
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Null(redirectToActionResult.ControllerName);
+            Assert.Equal("Index", redirectToActionResult.ActionName);
         }
 
+        [Fact]
+        public void TestarAlterarValidModel()
+        {
+            ContatoModel contato = new ContatoModel()
+            {
+                Id = 3,
+                Nome = "Arlindo Tester",
+                Email = "arlindo@teste.com",
+                Celular = "11 94325-1234"
+
+            };
+            // Arrange
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            var mockRepo = new Mock<IContatoRepository>();
+            mockRepo.Setup(repo => repo.Atualizar(contato))
+                .Returns(contato);
+            var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
+
+            // Act
+            var result = controller.Alterar(contato);
+
+            // Assert
+            Assert.True(controller.TempData.ContainsKey("MensagemSucesso"));
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Null(redirectToActionResult.ControllerName);
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
         private List<ContatoModel> CriarVariosContatos()
         {
             var contatos = new List<ContatoModel>();
@@ -173,7 +226,7 @@ namespace ControleDeContatos.Tests.Tests
 
         private ContatoModel CriarUmContato()
         {
-            var contatos = new ContatoModel();
+            ContatoModel contatos = new ContatoModel();
 
             contatos.Id = 3;
             contatos.Nome = "Arlindo Tester";
@@ -182,17 +235,5 @@ namespace ControleDeContatos.Tests.Tests
 
             return contatos;
         }
-        
-        private ContatoModel CriarUmContatoInvalido()
-        {
-            var contatos = new ContatoModel();
-
-            contatos.Id = 1;
-            contatos.Email = null;
-            contatos.Celular = "11 94325-1234";
-
-            return contatos;
-        }
-
     }
 }
