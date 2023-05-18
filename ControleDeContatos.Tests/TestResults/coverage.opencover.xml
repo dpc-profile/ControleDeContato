@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CoverageSession>
-  <Summary numSequencePoints="126" visitedSequencePoints="102" numBranchPoints="18" visitedBranchPoints="10" sequenceCoverage="80.95" branchCoverage="55.55" maxCyclomaticComplexity="37" minCyclomaticComplexity="0" visitedClasses="4" numClasses="6" visitedMethods="21" numMethods="26" />
+  <Summary numSequencePoints="126" visitedSequencePoints="100" numBranchPoints="18" visitedBranchPoints="11" sequenceCoverage="79.36" branchCoverage="61.11" maxCyclomaticComplexity="37" minCyclomaticComplexity="0" visitedClasses="4" numClasses="6" visitedMethods="20" numMethods="26" />
   <Modules>
-    <Module hash="E9CE7D8D-4389-410B-BC1F-2FD9BD6A8079">
+    <Module hash="DA145A29-1F07-4293-B843-9045913FBB8D">
       <ModulePath>ControleDeContatos.dll</ModulePath>
-      <ModuleTime>2023-05-18T06:09:03</ModuleTime>
+      <ModuleTime>2023-05-18T07:03:34</ModuleTime>
       <ModuleName>ControleDeContatos</ModuleName>
       <Files>
         <File uid="1" fullPath="/source/ControleDeContatos/Repository/ContatoRepository.cs" />
@@ -187,7 +187,7 @@
               <Name>System.Int32 ControleDeContatos.Models.ContatoModel::get_Id()</Name>
               <FileRef uid="3" />
               <SequencePoints>
-                <SequencePoint vc="16" uspid="8" ordinal="0" sl="8" sc="1" el="8" ec="2" bec="0" bev="0" fileid="3" />
+                <SequencePoint vc="17" uspid="8" ordinal="0" sl="8" sc="1" el="8" ec="2" bec="0" bev="0" fileid="3" />
               </SequencePoints>
               <BranchPoints />
               <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="0" offset="0" sc="0" sl="8" ec="1" el="8" bec="0" bev="0" fileid="3" xmlns:p8="xsi" />
@@ -198,7 +198,7 @@
               <Name>System.String ControleDeContatos.Models.ContatoModel::get_Nome()</Name>
               <FileRef uid="3" />
               <SequencePoints>
-                <SequencePoint vc="16" uspid="11" ordinal="0" sl="11" sc="1" el="11" ec="2" bec="0" bev="0" fileid="3" />
+                <SequencePoint vc="17" uspid="11" ordinal="0" sl="11" sc="1" el="11" ec="2" bec="0" bev="0" fileid="3" />
               </SequencePoints>
               <BranchPoints />
               <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="1" offset="1" sc="0" sl="11" ec="1" el="11" bec="0" bev="0" fileid="3" xmlns:p8="xsi" />
@@ -209,7 +209,7 @@
               <Name>System.String ControleDeContatos.Models.ContatoModel::get_Email()</Name>
               <FileRef uid="3" />
               <SequencePoints>
-                <SequencePoint vc="16" uspid="15" ordinal="0" sl="15" sc="1" el="15" ec="2" bec="0" bev="0" fileid="3" />
+                <SequencePoint vc="17" uspid="15" ordinal="0" sl="15" sc="1" el="15" ec="2" bec="0" bev="0" fileid="3" />
               </SequencePoints>
               <BranchPoints />
               <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="2" offset="2" sc="0" sl="15" ec="1" el="15" bec="0" bev="0" fileid="3" xmlns:p8="xsi" />
@@ -220,7 +220,7 @@
               <Name>System.String ControleDeContatos.Models.ContatoModel::get_Celular()</Name>
               <FileRef uid="3" />
               <SequencePoints>
-                <SequencePoint vc="16" uspid="19" ordinal="0" sl="19" sc="1" el="19" ec="2" bec="0" bev="0" fileid="3" />
+                <SequencePoint vc="17" uspid="19" ordinal="0" sl="19" sc="1" el="19" ec="2" bec="0" bev="0" fileid="3" />
               </SequencePoints>
               <BranchPoints />
               <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="3" offset="3" sc="0" sl="19" ec="1" el="19" bec="0" bev="0" fileid="3" xmlns:p8="xsi" />
@@ -256,7 +256,7 @@
           </Methods>
         </Class>
         <Class>
-          <Summary numSequencePoints="60" visitedSequencePoints="51" numBranchPoints="8" visitedBranchPoints="7" sequenceCoverage="85" branchCoverage="87.5" maxCyclomaticComplexity="4" minCyclomaticComplexity="1" visitedClasses="1" numClasses="1" visitedMethods="8" numMethods="8" />
+          <Summary numSequencePoints="60" visitedSequencePoints="49" numBranchPoints="8" visitedBranchPoints="8" sequenceCoverage="81.66" branchCoverage="100" maxCyclomaticComplexity="4" minCyclomaticComplexity="1" visitedClasses="1" numClasses="1" visitedMethods="7" numMethods="8" />
           <FullName>ControleDeContatos.Controllers.ContatoController</FullName>
           <Methods>
             <Method cyclomaticComplexity="1" nPathComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
@@ -273,18 +273,18 @@
               <BranchPoints />
               <MethodPoint vc="4" uspid="0" p8:type="SequencePoint" ordinal="0" offset="0" sc="0" sl="22" ec="1" el="26" bec="0" bev="0" fileid="5" xmlns:p8="xsi" />
             </Method>
-            <Method cyclomaticComplexity="1" nPathComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
-              <Summary numSequencePoints="3" visitedSequencePoints="3" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+            <Method cyclomaticComplexity="1" nPathComplexity="1" sequenceCoverage="0" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
               <MetadataToken />
               <Name>Microsoft.AspNetCore.Mvc.IActionResult ControleDeContatos.Controllers.ContatoController::Criar()</Name>
               <FileRef uid="5" />
               <SequencePoints>
-                <SequencePoint vc="1" uspid="29" ordinal="0" sl="29" sc="1" el="29" ec="2" bec="0" bev="0" fileid="5" />
-                <SequencePoint vc="1" uspid="30" ordinal="1" sl="30" sc="1" el="30" ec="2" bec="0" bev="0" fileid="5" />
-                <SequencePoint vc="1" uspid="31" ordinal="2" sl="31" sc="1" el="31" ec="2" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="0" uspid="29" ordinal="0" sl="29" sc="1" el="29" ec="2" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="0" uspid="30" ordinal="1" sl="30" sc="1" el="30" ec="2" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="0" uspid="31" ordinal="2" sl="31" sc="1" el="31" ec="2" bec="0" bev="0" fileid="5" />
               </SequencePoints>
               <BranchPoints />
-              <MethodPoint vc="3" uspid="0" p8:type="SequencePoint" ordinal="1" offset="1" sc="0" sl="29" ec="1" el="31" bec="0" bev="0" fileid="5" xmlns:p8="xsi" />
+              <MethodPoint vc="0" uspid="0" p8:type="SequencePoint" ordinal="1" offset="1" sc="0" sl="29" ec="1" el="31" bec="0" bev="0" fileid="5" xmlns:p8="xsi" />
             </Method>
             <Method cyclomaticComplexity="1" nPathComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
               <Summary numSequencePoints="4" visitedSequencePoints="4" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
@@ -343,31 +343,31 @@
               </BranchPoints>
               <MethodPoint vc="12" uspid="0" p8:type="SequencePoint" ordinal="4" offset="4" sc="0" sl="46" ec="1" el="68" bec="0" bev="0" fileid="5" xmlns:p8="xsi" />
             </Method>
-            <Method cyclomaticComplexity="2" nPathComplexity="2" sequenceCoverage="61.53" branchCoverage="50" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
-              <Summary numSequencePoints="13" visitedSequencePoints="8" numBranchPoints="2" visitedBranchPoints="1" sequenceCoverage="61.53" branchCoverage="50" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+            <Method cyclomaticComplexity="2" nPathComplexity="2" sequenceCoverage="69.23" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
+              <Summary numSequencePoints="13" visitedSequencePoints="9" numBranchPoints="2" visitedBranchPoints="2" sequenceCoverage="69.23" branchCoverage="100" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
               <MetadataToken />
               <Name>Microsoft.AspNetCore.Mvc.IActionResult ControleDeContatos.Controllers.ContatoController::Criar(ControleDeContatos.Models.ContatoModel)</Name>
               <FileRef uid="5" />
               <SequencePoints>
-                <SequencePoint vc="1" uspid="72" ordinal="0" sl="72" sc="1" el="72" ec="2" bec="0" bev="0" fileid="5" />
-                <SequencePoint vc="1" uspid="74" ordinal="1" sl="74" sc="1" el="74" ec="2" bec="0" bev="0" fileid="5" />
-                <SequencePoint vc="1" uspid="75" ordinal="2" sl="75" sc="1" el="75" ec="2" bec="2" bev="1" fileid="5" />
+                <SequencePoint vc="2" uspid="72" ordinal="0" sl="72" sc="1" el="72" ec="2" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="2" uspid="74" ordinal="1" sl="74" sc="1" el="74" ec="2" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="2" uspid="75" ordinal="2" sl="75" sc="1" el="75" ec="2" bec="2" bev="2" fileid="5" />
                 <SequencePoint vc="1" uspid="76" ordinal="3" sl="76" sc="1" el="76" ec="2" bec="0" bev="0" fileid="5" />
                 <SequencePoint vc="1" uspid="77" ordinal="4" sl="77" sc="1" el="77" ec="2" bec="0" bev="0" fileid="5" />
                 <SequencePoint vc="1" uspid="80" ordinal="5" sl="80" sc="1" el="80" ec="2" bec="0" bev="0" fileid="5" />
                 <SequencePoint vc="1" uspid="81" ordinal="6" sl="81" sc="1" el="81" ec="2" bec="0" bev="0" fileid="5" />
-                <SequencePoint vc="0" uspid="84" ordinal="7" sl="84" sc="1" el="84" ec="2" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="1" uspid="84" ordinal="7" sl="84" sc="1" el="84" ec="2" bec="0" bev="0" fileid="5" />
                 <SequencePoint vc="0" uspid="86" ordinal="8" sl="86" sc="1" el="86" ec="2" bec="0" bev="0" fileid="5" />
                 <SequencePoint vc="0" uspid="87" ordinal="9" sl="87" sc="1" el="87" ec="2" bec="0" bev="0" fileid="5" />
                 <SequencePoint vc="0" uspid="89" ordinal="10" sl="89" sc="1" el="89" ec="2" bec="0" bev="0" fileid="5" />
                 <SequencePoint vc="0" uspid="90" ordinal="11" sl="90" sc="1" el="90" ec="2" bec="0" bev="0" fileid="5" />
-                <SequencePoint vc="1" uspid="94" ordinal="12" sl="94" sc="1" el="94" ec="2" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="2" uspid="94" ordinal="12" sl="94" sc="1" el="94" ec="2" bec="0" bev="0" fileid="5" />
               </SequencePoints>
               <BranchPoints>
                 <BranchPoint vc="1" uspid="75" ordinal="0" path="0" offset="15" offsetend="17" sl="75" fileid="5" />
-                <BranchPoint vc="0" uspid="75" ordinal="1" path="1" offset="15" offsetend="67" sl="75" fileid="5" />
+                <BranchPoint vc="1" uspid="75" ordinal="1" path="1" offset="15" offsetend="67" sl="75" fileid="5" />
               </BranchPoints>
-              <MethodPoint vc="8" uspid="0" p8:type="SequencePoint" ordinal="5" offset="5" sc="0" sl="72" ec="1" el="94" bec="0" bev="0" fileid="5" xmlns:p8="xsi" />
+              <MethodPoint vc="9" uspid="0" p8:type="SequencePoint" ordinal="5" offset="5" sc="0" sl="72" ec="1" el="94" bec="0" bev="0" fileid="5" xmlns:p8="xsi" />
             </Method>
             <Method cyclomaticComplexity="4" nPathComplexity="4" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
               <Summary numSequencePoints="12" visitedSequencePoints="12" numBranchPoints="4" visitedBranchPoints="4" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="4" minCyclomaticComplexity="4" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
@@ -464,9 +464,9 @@
         </Class>
       </Classes>
     </Module>
-    <Module hash="0421B66D-E001-4C17-899A-DFDB467AFDD9">
+    <Module hash="A063BBC4-3975-4DF2-9AEA-FE929E4E4D7A">
       <ModulePath>ControleDeContatos.Views.dll</ModulePath>
-      <ModuleTime>2023-05-18T06:09:03</ModuleTime>
+      <ModuleTime>2023-05-18T07:03:34</ModuleTime>
       <ModuleName>ControleDeContatos.Views</ModuleName>
       <Files />
       <Classes />

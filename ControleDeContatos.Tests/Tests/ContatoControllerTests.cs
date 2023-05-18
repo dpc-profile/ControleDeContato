@@ -75,8 +75,6 @@ namespace ControleDeContatos.Tests.Tests
         public void TestaCriarNotValidState()
         {
             // Arrange
-            // Cria o TempData
-            // Cria o mockRepo e o controller
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
@@ -84,19 +82,14 @@ namespace ControleDeContatos.Tests.Tests
             var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
 
             // Act
-            // Força o ModelState não ser valido
-            // Chama o criar
             controller.ModelState.AddModelError("fakeError", "fakeError");
-            var result = controller.Criar();
+            var result = controller.Criar(CriarUmContato());
 
             // Assert
-            // Confere se o tempData retornou vazio
-            // Confere se retornou view
-            // Confere se o state é invalido
             Assert.Empty(controller.TempData);
             var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.Equal("Invalid", viewResult.ViewData.ModelState.ValidationState.ToString());
-
+            // Verifica se a model tem conteudo
+            Assert.IsAssignableFrom<ContatoModel>(viewResult.ViewData.Model);            
         }
 
         [Fact]
