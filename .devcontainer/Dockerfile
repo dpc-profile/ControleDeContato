@@ -8,7 +8,7 @@ ENV PATH=$PATH:/root/.dotnet/tools
 
 # Nesse ponto, como os arquivos ainda não estão no container,
 # é preciso copiar para dentro
-COPY .devcontainer/dotnet_tools.sh /tmp/dotnet_tools-install.sh 
+COPY .devcontainer/dotnet_tools-install.sh /tmp/dotnet_tools-install.sh 
 
 # Instala as ferramentas do dotnet
 RUN /tmp/dotnet_tools-install.sh
