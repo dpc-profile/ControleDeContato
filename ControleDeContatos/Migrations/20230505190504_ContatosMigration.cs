@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System.Diagnostics.CodeAnalysis;
+
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ControleDeContatos.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class ContatosMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

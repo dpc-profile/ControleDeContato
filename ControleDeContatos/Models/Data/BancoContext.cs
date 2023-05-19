@@ -19,18 +19,19 @@ namespace ControleDeContatos.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string stringconexao;
-            string user = Environment.GetEnvironmentVariable("MYSQL_USER");
+            string server = Environment.GetEnvironmentVariable("MYSQL_SERVER");
+            string user = Environment.GetEnvironmentVariable("MYSQL_USER");            
             string pass = Environment.GetEnvironmentVariable("MYSQL_PASSWORD");
             
             if (IsRunningFromXUnit)
             {
                 string db_teste = Environment.GetEnvironmentVariable("MYSQL_TESTE_DATABASE");
-                string v = $"server=mysql_db;database={db_teste};user={user};password={pass}";
+                string v = $"server={server};database={db_teste};user={user};password={pass}";
                 stringconexao = v;
 
             } else {
                 string db = Environment.GetEnvironmentVariable("MYSQL_DATABASE");
-                string v = $"server=mysql_db;database={db};user={user};password={pass}";
+                string v = $"server={server};database={db};user={user};password={pass}";
                 stringconexao = v;
                 
             }
