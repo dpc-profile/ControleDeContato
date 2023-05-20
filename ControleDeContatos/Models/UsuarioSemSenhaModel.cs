@@ -5,7 +5,7 @@ using ControleDeContatos.Enums;
 
 namespace ControleDeContatos.Models
 {
-    public class UsuarioModel
+    public class UsuarioSemSenhaModel
     {
         public int Id { get; set; }
 
@@ -22,14 +22,6 @@ namespace ControleDeContatos.Models
         [Required(ErrorMessage = "A seleção do perfil do usuário é obrigatório")]
         public PerfilEnums? Perfil { get; set; }
 
-        [Required(ErrorMessage = "A senha do usuário é obrigatório")]
-        public string Senha {get; set;}
-        public DateTime DataCadastro { get; set; }
-        public DateTime? DataAtualizacao{ get; set; }
-
-        public bool SenhaValida(string senha)
-        {
-            return Senha == senha;
-        }
+        
     }
 }

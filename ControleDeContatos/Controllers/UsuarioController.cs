@@ -26,6 +26,44 @@ namespace ControleDeContatos.Controllers
         {
             return View();
         }
+        
+        public IActionResult Editar(int id)
+        {
+            UsuarioModel usuario = _usuarioRepository.ListarPorId(id);
+            return View(usuario);
+        }
+
+        public IActionResult ApagarConfirmacao(int id)
+        {
+            UsuarioModel usuario = _usuarioRepository.ListarPorId(id);
+            return View(usuario);
+        }
+
+        public IActionResult Apagar(int id)
+        {
+            try
+            {
+                bool isApagado = _usuarioRepository.Apagar(id);
+
+                if (isApagado)
+                {
+                    TempData["MensagemSucesso"] = "Usuário apagado com sucesso";
+                }
+                else
+                {
+                    TempData["MensagemErro"] = $"Ops, não conseguimos apagar o usuário";
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (System.Exception erro)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos apagar o usuário, tente novamente, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
+            }
+
+        }
+
 
         [HttpPost]
         public IActionResult Criar(UsuarioModel usuario)
@@ -51,6 +89,39 @@ namespace ControleDeContatos.Controllers
             }
 
 
+        }
+        
+        [HttpPost]
+        public IActionResult Alterar(UsuarioSemSenhaModel usuarioSemSenha)
+        {
+            UsuarioModel usuario = null;
+
+            if (ModelState.IsValid)
+            {
+                usuario = new UsuarioModel()
+                {
+                    Id = usuarioSemSenha.Id,
+                    Nome = usuarioSemSenha.Nome,
+                    Email = usuarioSemSenha.Email,
+                    Login = usuarioSemSenha.Login,
+                    Perfil = usuarioSemSenha.Perfil
+                };
+
+                UsuarioModel respostaAtualizar = _usuarioRepository.Atualizar(usuario);
+
+                if (respostaAtualizar == null)
+                {
+                    //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
+                    TempData["MensagemErro"] = $"Ops, não conseguimos atualizado o usuario, tente novamente.";
+                    return RedirectToAction("Index");
+                }
+
+                //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
+                TempData["MensagemSucesso"] = "Usuário atualizado com sucesso";
+                return RedirectToAction("Index");
+            }
+
+            return View("Editar", usuario);
         }
     }
 }
