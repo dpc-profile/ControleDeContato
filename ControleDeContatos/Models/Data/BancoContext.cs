@@ -10,6 +10,7 @@ namespace ControleDeContatos.Data
     public class BancoContext : DbContext
     {
         public DbSet<ContatoModel> Contatos { get; set; }
+        public DbSet<UsuarioModel> Usuarios { get; set; }
 
         // Detecta se está rodando pelo comando dotnet test
         public static readonly bool IsRunningFromXUnit = AppDomain

@@ -3,11 +3,17 @@
 
 // Write your JavaScript code.
 
+
+$(document).ready(function(){
+    ordenaDatatable('#table-contatos')
+    ordenaDatatable('#table-usuarios')
+});
+
 // Responsavel pela barra de pesquisa e paginação
 // As opções de entro das chaves não são obrigatórias, mas foram feitas
 // para traduzir as mensagens
-$(document).ready(function(){
-    $('#table-contatos').DataTable({
+function ordenaDatatable(id){
+    $(id).DataTable({
         "ordering": true,
         "paging": true,
         "searching": true,
@@ -35,7 +41,7 @@ $(document).ready(function(){
             }
         }
     });
-});
+}
 
 //Quando o evento acontecer, do close-alert receber um click, oculta a mensagem
 $('.close-alert').click(function (){

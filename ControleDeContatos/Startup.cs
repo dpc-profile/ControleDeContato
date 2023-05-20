@@ -32,12 +32,8 @@ namespace ControleDeContatos
         {
             services.AddControllersWithViews();
 
-            // string connectionString = Configuration.GetConnectionString("DbConnection");
-            // services.AddDbContext<BancoContext>(options =>
-            //     options.UseMySql(connectionString, 
-            //     ServerVersion.AutoDetect(connectionString)));
-
             services.AddScoped<IContatoRepository, ContatoRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
                
         }
 
