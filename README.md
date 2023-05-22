@@ -1,5 +1,20 @@
-## Controle de Contatos
-A versão do .NET usada é __3.1__
+# Controle de Contatos
+### Sobre o projeto
+Uma plataforma web, que tem com objetivo de cadastrar e organizar contatos dos usuários.
+É pretendido que o projeto tenha as features:
+- Cadastrar novos usuários. :heavy_check_mark:
+- Autenticação de login.
+- Cada usuário tem sua propria lista de contatos.
+- Poder visualizar, criar, editar, apagar seus contatos. :heavy_check_mark:
+
+Dev features:
+- Testes de unidade. (apenas na parte de contatos)
+- Analise de cobertura com SonarCloud. :heavy_check_mark:
+- Uso do docker no desenvolvimento. :heavy_check_mark:
+- Uso do docker para criar buid de produção.
+
+### Intuito do projeto
+O objetivo é para consolidar meus conhecimento de programação, com o uso de MVC, Banco de dados MySQL, Docker, Testes de Unidade e Cobertura de Código, além de adquirir experiência no framework .NET, e como desafio pessoal, o uso da versão do __.NET Core SDK 3.1__.
 ___
 ## Executando em Desenvolvimento
 Usando a extensão __Dev Containers__ do vscode, um container já configurado para desenvolvimento será criado.
