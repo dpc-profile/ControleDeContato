@@ -20,6 +20,12 @@ namespace ControleDeContatos.Repository
             return _bancoContext.Usuarios.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper());
         }
 
+        public UsuarioModel BuscarPorEmailELogin(string email, string login)
+        {
+            return _bancoContext.Usuarios.FirstOrDefault(x => 
+                x.Login.ToUpper() == login.ToUpper() && x.Email.ToUpper() == email.ToUpper());
+        }
+
         public UsuarioModel Adicionar(UsuarioModel usuario)
         {
             usuario.DataCadastro = DateTime.Now;
@@ -55,7 +61,7 @@ namespace ControleDeContatos.Repository
 
             _bancoContext.Usuarios.Update(usuarioDb);
             _bancoContext.SaveChanges();
-            
+
             return usuarioDb;
         }
 
@@ -68,5 +74,7 @@ namespace ControleDeContatos.Repository
         {
             return _bancoContext.Usuarios.FirstOrDefault(x => x.Id == id);
         }
+
+
     }
 }
