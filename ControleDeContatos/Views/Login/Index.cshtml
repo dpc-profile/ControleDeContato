@@ -1,20 +1,18 @@
 @using ControleDeContatos.Models
 @model LoginModel
 @{
-    ViewData["Title"] = "Login";
-    Layout = "_LayoutDeslogado";
+  ViewData["Title"] = "Login";
+  Layout = "_LayoutDeslogado";
 }
-<div>
-    @if (TempData["MensagemErro"] != null)
-    {
-        <div class="alert alert-danger" role="alert">
-            <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button
-            @TempData["MensagemErro"]
-        </div>
-    }
-</div>
+@if (TempData["MensagemErro"] != null)
+{
+  <div class="alert alert-danger" role="alert">
+    <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+    @TempData["MensagemErro"]
+  </div>
+}
 
-<br/>
+<br />
 
 <form asp-controller="Login" asp-action="Entrar" method="post">
   <div class="mb-3">
