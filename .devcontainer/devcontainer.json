@@ -36,7 +36,8 @@
 				"EditorConfig.EditorConfig",
 				"kevin-chatham.aspnetcorerazor-html-css-class-completion",
 				"adrianwilczynski.add-reference",
-				"redhat.vscode-xml"
+				"redhat.vscode-xml",
+				"adrianwilczynski.asp-net-core-switcher"
 			]
 		}
 	}

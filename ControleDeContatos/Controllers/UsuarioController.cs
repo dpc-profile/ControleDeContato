@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 using ControleDeContatos.Repository;
 using ControleDeContatos.Models;
+using ControleDeContatos.Filters;
 
 namespace ControleDeContatos.Controllers
 {
+    [PaginaRestritaSomenteAdmin]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioRepository _usuarioRepository;
