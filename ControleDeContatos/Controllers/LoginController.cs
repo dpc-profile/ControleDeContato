@@ -57,9 +57,10 @@ namespace ControleDeContatos.Controllers
 
                         TempData["MensagemErro"] = "Senha inválida";
                     }
-
-                    TempData["MensagemErro"] = "Usuário inválido";
-
+                    else
+                    {
+                        TempData["MensagemErro"] = "Usuário inválido";
+                    }
                 }
 
                 return View("Index");
@@ -90,10 +91,10 @@ namespace ControleDeContatos.Controllers
                         //De momento, o envio de email precisa ser configurado com um outlook valido
                         bool emailEnviado = _email.Enviar(usuario.Email, "Sistema de Contatos - Nova senha", mensagem);
                         emailEnviado = true;
-                        
+
                         if (emailEnviado)
                         {
-                            _usuarioRepository.Atualizar(usuario);    
+                            _usuarioRepository.Atualizar(usuario);
                             TempData["MensagemSucesso"] = $"Foi enviado para o email cadastrado uma nova senha, {mensagem}";
 
                         }
