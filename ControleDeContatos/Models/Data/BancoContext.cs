@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 
 using ControleDeContatos.Models;
+using ControleDeContatos.Models.Data.Map;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -38,6 +39,12 @@ namespace ControleDeContatos.Data
             }
             
             optionsBuilder.UseMySql(stringconexao, ServerVersion.AutoDetect(stringconexao));
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new ContatoMap());
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
