@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ControleDeContatos.Controllers
 {
     [PaginaUsuarioLogado]
-    public class Restrito : Controller
+    public class RestritoController : Controller
     {
         public IActionResult Index()
         {
