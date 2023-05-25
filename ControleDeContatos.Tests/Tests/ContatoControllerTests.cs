@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using ControleDeContatos.Models;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Http;
+using ControleDeContatos.Helper;
 
 namespace ControleDeContatos.Tests.Tests
 {
@@ -23,10 +24,16 @@ namespace ControleDeContatos.Tests.Tests
             // Arrange
             // Cria o mock, e faz o setup chamando o Apagar e retornando false
             var mockRepo = new Mock<IContatoRepository>();
-            mockRepo.Setup(repo => repo.BuscarTodos())
+            var mockSessao = new Mock<ISessao>();
+
+            mockRepo.Setup(repo => repo.BuscarTodos(1))
                     .Returns(CriarVariosContatos());
+
+            mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+
             // Instanciar o controller usando o obj do mockRepo
-            var controller = new ContatoController(mockRepo.Object);
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object);
 
             // Act
             // Faz a chamada do index
@@ -51,7 +58,14 @@ namespace ControleDeContatos.Tests.Tests
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
             // Instancia o mock do repository, instanciar o controller com o obj mockRepo e o tempData
             var mockRepo = new Mock<IContatoRepository>();
-            var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
+            // Mock da Sessao
+            var mockSessao = new Mock<ISessao>();
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+
+            // Cria o controller, com o mock do repository, da sessão e o tempData
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
             // Act
             // com o controller, criar os contatos do CriarUmContato()
@@ -78,8 +92,14 @@ namespace ControleDeContatos.Tests.Tests
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
             // Instancia o mock do repository
             var mockRepo = new Mock<IContatoRepository>();
-            // Instanciar o controller com o obj mockRepo e o tempData
-            var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
+            // Mock da Sessao
+            var mockSessao = new Mock<ISessao>();
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+
+            // Cria o controller, com o mock do repository, da sessão e o tempData
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
             // Act
             // Adiciona um model com um erro falso
@@ -102,10 +122,12 @@ namespace ControleDeContatos.Tests.Tests
             // Arrange
             // Cria o mock, e faz o setup chamando o ListarPorId e retornando um contato
             var mockRepo = new Mock<IContatoRepository>();
+            // Mock da Sessao
+            var mockSessao = new Mock<ISessao>();
             mockRepo.Setup(repo => repo.ListarPorId(1))
-                .Returns(CriarUmContato());
-            // Instancia o controller
-            var controller = new ContatoController(mockRepo.Object);
+                    .Returns(CriarUmContato());
+            // Instanciar o controller usando o obj do mockRepo
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object);
 
             // Act
             // Faz a chamada do editar
@@ -125,10 +147,12 @@ namespace ControleDeContatos.Tests.Tests
             int testId = 1;
             // Cria o mock, e faz o setup chamando o ListarPorId e retornando um contato
             var mockRepo = new Mock<IContatoRepository>();
+            // Mock da Sessao
+            var mockSessao = new Mock<ISessao>();
             mockRepo.Setup(repo => repo.ListarPorId(testId))
-                .Returns(CriarUmContato());
-            // Instanciar o controller
-            var controller = new ContatoController(mockRepo.Object);
+                    .Returns(CriarUmContato());
+            // Instanciar o controller usando o obj do mockRepo
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object);
 
             // Act
             // Faz a chamada do ApagarConfirmacao passando o id de teste
@@ -149,12 +173,17 @@ namespace ControleDeContatos.Tests.Tests
             // Cria a variavel tempData
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
-            // Cria o mock, e faz o setup chamando o Apagar e retornando true
+            // Cria o mock do repository e sessao
             var mockRepo = new Mock<IContatoRepository>();
+            var mockSessao = new Mock<ISessao>();
+            //Faz o setup chamando o Apagar e retornando true
             mockRepo.Setup(repo => repo.Apagar(testId))
-                .Returns(true);
-            // Instanciar o controller
-            var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
+                    .Returns(true);
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+            // Cria o controller, com o mock do repository, da sessão e o tempData
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
             // Act
             // Faz a chamada do Apagar
@@ -179,12 +208,18 @@ namespace ControleDeContatos.Tests.Tests
             // Cria o tempData
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
-            // Cria o mock, e faz o setup chamando o Apagar e retornando false
+            // Cria o mock do repository e sessao
             var mockRepo = new Mock<IContatoRepository>();
+            var mockSessao = new Mock<ISessao>();
+            //Faz o setup chamando o Apagar e retornando true
             mockRepo.Setup(repo => repo.Apagar(testId))
-                .Returns(false);
-            // Cria o controller com o obj mockRepo e o tempData
-            var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
+                    .Returns(false);
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+
+            // Cria o controller, com o mock do repository, da sessão e o tempData
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
             // Act
             // Faz a chamada do Apagar
@@ -217,12 +252,17 @@ namespace ControleDeContatos.Tests.Tests
             // Cria a variavel tempData
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
-            // Cria o mock, e faz o setup chamando o Atualizar passando o contato e retornando o proprio contato
+            // Cria o mock do repository e sessao
             var mockRepo = new Mock<IContatoRepository>();
+            var mockSessao = new Mock<ISessao>();
+            // Faz o setup chamando o Atualizar passando o contato e retornando o proprio contato
             mockRepo.Setup(repo => repo.Atualizar(contato))
-                .Returns(contato);
-            // Instanciar o controller
-            var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
+                    .Returns(contato);
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+            // Cria o controller, com o mock do repository, da sessão e o tempData
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
             // Act
             // Faz a chamada do Alterar passando o contato criado
@@ -246,10 +286,14 @@ namespace ControleDeContatos.Tests.Tests
             // Cria a variavel tempData
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
-            // Cria o mock, e faz o setup chamando o Atualizar passando o contato e retornando o proprio contato
+            // Cria o mock do repository e sessao
             var mockRepo = new Mock<IContatoRepository>();
-            // Instanciar o controller
-            var controller = new ContatoController(mockRepo.Object) { TempData = tempData };
+            var mockSessao = new Mock<ISessao>();
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+            // Cria o controller, com o mock do repository, da sessão e o tempData
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
             // Act
             // Faz a chamada do Alterar passando um contato vazio
@@ -269,9 +313,15 @@ namespace ControleDeContatos.Tests.Tests
         [Fact]
         public void TestarAlterarNotValidModel()
         {
-            // Cria o mock, e instancia o controller
+            // Cria o mock do repository e sessao
             var mockRepo = new Mock<IContatoRepository>();
-            var controller = new ContatoController(mockRepo.Object);
+            var mockSessao = new Mock<ISessao>();
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+
+            // Cria o controller, com o mock do repository, da sessão e o tempData
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object);
 
             // Act
             // Adiciona um model com um erro falso
@@ -287,6 +337,24 @@ namespace ControleDeContatos.Tests.Tests
 
         }
 
+
+        public UsuarioModel ModeloDadosUsuario()
+        {
+            var usuarioModel = new UsuarioModel()
+            {
+                Id = 1,
+                Nome = "Padronos Tester",
+                Login = "padronos",
+                Email = "padronos@gmail.com",
+                Senha = "teste",
+                Perfil = Enums.PerfilEnums.Padrao,
+                DataCadastro = DateTime.Now,
+                Contatos = CriarVariosContatos(),
+
+            };
+
+            return usuarioModel;
+        }
         private List<ContatoModel> CriarVariosContatos()
         {
             var contatos = new List<ContatoModel>();
@@ -296,7 +364,8 @@ namespace ControleDeContatos.Tests.Tests
                 Id = 1,
                 Nome = "Amilton Teste",
                 Email = "amilton@teste.com",
-                Celular = "11 98765-1234"
+                Celular = "11 98765-1234",
+                UsuarioId = 1,
             });
 
             contatos.Add(new ContatoModel()
@@ -304,7 +373,8 @@ namespace ControleDeContatos.Tests.Tests
                 Id = 2,
                 Nome = "Rodrigo Teste",
                 Email = "rodrigo@teste.com",
-                Celular = "11 98765-1234"
+                Celular = "11 98765-1234",
+                UsuarioId = 1,
             });
 
             return contatos;
