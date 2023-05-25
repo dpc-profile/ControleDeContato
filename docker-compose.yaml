@@ -12,6 +12,7 @@ services:
       - ASPNETCORE_URLS=http://localhost
     env_file:
       - mysql.env
+      - dev.env
     depends_on:
       - mysql_db
 

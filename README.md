@@ -4,7 +4,7 @@ Uma plataforma web, que tem com objetivo de cadastrar e organizar contatos dos u
 É pretendido que o projeto tenha as features:
 - Cadastrar novos usuários. :heavy_check_mark:
 - Sessão de login. :heavy_check_mark:
-- Cada usuário tem sua propria lista de contatos.
+- Cada usuário tem sua propria lista de contatos. :heavy_check_mark:
 - Poder visualizar, criar, editar, apagar seus contatos. :heavy_check_mark:
 
 Dev features:
