@@ -15,11 +15,16 @@ indent_size = 2
 # C# files
 [*.cs]
 
+# Cshtml files
+[*.cshtml]
+indent_size = 2
+
+
 #### Core EditorConfig Options ####
 
 # Indentation and spacing
-indent_size = 4
-tab_width = 4
+indent_size = 2
+tab_width = 2
 
 # New line preferences
 end_of_line = crlf

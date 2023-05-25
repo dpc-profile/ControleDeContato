@@ -10,6 +10,7 @@ Uma plataforma web, que tem com objetivo de cadastrar e organizar contatos dos u
 Dev features:
 - Testes de unidade. (apenas na parte de contatos)
 - Analise de cobertura com SonarCloud. :heavy_check_mark:
+- Criptografia de senhas. :heavy_check_mark:
 - Uso do docker no desenvolvimento. :heavy_check_mark:
 - Uso do docker para criar buid de produção.
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ControleDeContatos.Models
@@ -17,5 +18,9 @@ namespace ControleDeContatos.Models
         [Required(ErrorMessage = "O número do contato é obrigatório")]
         [Phone(ErrorMessage = "O número do contato não é valido.")]
         public string Celular { get; set; }
+        
+        public int? UsuarioId { get; set; }
+
+        public UsuarioModel Usuario { get; set; }
     }
 }

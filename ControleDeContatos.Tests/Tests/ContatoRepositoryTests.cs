@@ -29,7 +29,7 @@ namespace ControleDeContatos.Tests.Tests
         [Fact]
         public void TestarBuscarTodos()
         {
-            List<ContatoModel> lista = _repository.BuscarTodos();
+            List<ContatoModel> lista = _repository.BuscarTodos(1);
 
             Assert.NotNull(lista);
             Assert.True(lista.Count != 0);

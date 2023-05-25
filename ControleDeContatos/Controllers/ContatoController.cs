@@ -3,24 +3,32 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+
 using ControleDeContatos.Models;
 using ControleDeContatos.Repository;
+using ControleDeContatos.Filters;
+using ControleDeContatos.Helper;
 
 namespace ControleDeContatos.Controllers
 {
+    [PaginaUsuarioLogado]
     public class ContatoController : Controller
     {
         private readonly IContatoRepository _contatoRepository;
-        public ContatoController(IContatoRepository contatoRepository)
+        private readonly ISessao _sessao;
+
+        public ContatoController(IContatoRepository contatoRepository, ISessao sessao)
         {
             _contatoRepository = contatoRepository;
+            _sessao = sessao;
         }
 
         public IActionResult Index()
         {
-            List<ContatoModel> allContatos = _contatoRepository.BuscarTodos();
+            UsuarioModel usuarioLogado = _sessao.BuscarSessaoUsuario();
+            List<ContatoModel> allContatos = _contatoRepository.BuscarTodos(usuarioLogado.Id);
 
             return View(allContatos);
         }
@@ -74,6 +82,9 @@ namespace ControleDeContatos.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    UsuarioModel usuarioLogado = _sessao.BuscarSessaoUsuario();
+                    contato.UsuarioId = usuarioLogado.Id;
+
                     _contatoRepository.Adicionar(contato);
 
                     //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
@@ -98,6 +109,9 @@ namespace ControleDeContatos.Controllers
         {
             if (ModelState.IsValid)
             {
+                UsuarioModel usuarioLogado = _sessao.BuscarSessaoUsuario();
+                contato.UsuarioId = usuarioLogado.Id;
+
                 var respostaAtualizar = _contatoRepository.Atualizar(contato);
 
                 if (respostaAtualizar == null)

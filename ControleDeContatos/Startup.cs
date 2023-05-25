@@ -4,12 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
-using ControleDeContatos.Data;
+using ControleDeContatos.Helper;
 using ControleDeContatos.Repository;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,12 +32,17 @@ namespace ControleDeContatos
         {
             services.AddControllersWithViews();
 
-            // string connectionString = Configuration.GetConnectionString("DbConnection");
-            // services.AddDbContext<BancoContext>(options =>
-            //     options.UseMySql(connectionString, 
-            //     ServerVersion.AutoDetect(connectionString)));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<IContatoRepository, ContatoRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<ISessao, Sessao>();
+            services.AddScoped<IEmail, Email>();
+            
+            services.AddSession(option =>{
+                option.Cookie.HttpOnly = true;
+                option.Cookie.IsEssential = true;
+            });
                
         }
 
@@ -58,11 +63,13 @@ namespace ControleDeContatos
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

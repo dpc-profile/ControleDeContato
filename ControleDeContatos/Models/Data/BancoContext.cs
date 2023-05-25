@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 
 using ControleDeContatos.Models;
+using ControleDeContatos.Models.Data.Map;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,7 @@ namespace ControleDeContatos.Data
     public class BancoContext : DbContext
     {
         public DbSet<ContatoModel> Contatos { get; set; }
+        public DbSet<UsuarioModel> Usuarios { get; set; }
 
         // Detecta se está rodando pelo comando dotnet test
         public static readonly bool IsRunningFromXUnit = AppDomain
@@ -37,6 +39,12 @@ namespace ControleDeContatos.Data
             }
             
             optionsBuilder.UseMySql(stringconexao, ServerVersion.AutoDetect(stringconexao));
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new ContatoMap());
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
