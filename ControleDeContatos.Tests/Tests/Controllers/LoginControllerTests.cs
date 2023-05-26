@@ -16,7 +16,7 @@ using Moq;
 
 using Xunit;
 
-namespace ControleDeContatos.Tests.Tests
+namespace ControleDeContatos.Tests.Tests.Controllers
 {
     public class LoginControllerTests
     {

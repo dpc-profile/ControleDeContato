@@ -8,7 +8,7 @@ using ControleDeContatos.Models;
 
 using Xunit;
 
-namespace ControleDeContatos.Tests.Tests
+namespace ControleDeContatos.Tests.Tests.Repository
 {
     public class ContatoRepositoryTests
     {

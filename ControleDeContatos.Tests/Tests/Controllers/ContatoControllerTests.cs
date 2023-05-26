@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Http;
 using ControleDeContatos.Helper;
 
-namespace ControleDeContatos.Tests.Tests
+namespace ControleDeContatos.Tests.Tests.Controllers
 {
     public class ContatoControllerTests
     {
