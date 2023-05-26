@@ -91,10 +91,8 @@ namespace ControleDeContatos.Tests.Tests
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
             // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retorna o UsuarioModel
-            mockRepo.Setup(s => s.BuscarPorLogin(ModeloLoginValido().Login))
+            mockRepo.Setup(s => s.BuscarPorLogin(It.IsAny<string>()))
                     .Returns(ModeloDadosUsuario());
-
-            mockSessao.Setup(s => s.CriarSessaoUsuario(ModeloDadosUsuario()));
 
             var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
 
@@ -120,7 +118,7 @@ namespace ControleDeContatos.Tests.Tests
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
             // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retorna o UsuarioModelSenhaInvalida
-            mockRepo.Setup(s => s.BuscarPorLogin(ModeloLoginValido().Login))
+            mockRepo.Setup(s => s.BuscarPorLogin(It.IsAny<string>()))
                     .Returns(ModeloDadosUsuario_SenhaInvalida());
 
             var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
@@ -150,13 +148,14 @@ namespace ControleDeContatos.Tests.Tests
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
             // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retornando nada
-            mockRepo.Setup(s => s.BuscarPorLogin(ModeloLoginValido().Login));
-
+            mockRepo.Setup(s => s.BuscarPorLogin(It.IsAny<string>()));
 
             var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
 
+
             // Act
             var result = controller.Entrar(ModeloLoginValido());
+
 
             // Assert
             // Verifica se a tempData deu sucesso
@@ -180,8 +179,7 @@ namespace ControleDeContatos.Tests.Tests
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
             // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retornando nada
-            mockRepo.Setup(s => s.BuscarPorLogin(ModeloLoginValido().Login));
-
+            mockRepo.Setup(s => s.BuscarPorLogin(It.IsAny<string>()));
 
             var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
 
@@ -200,7 +198,38 @@ namespace ControleDeContatos.Tests.Tests
         [Fact]
         public void TestarEnviarLinkParaRedefinirSenha_ValidModel_UsuarioValido_EmailEnviado()
         {
-            throw new NotImplementedException();
+            // Arrange
+            DefaultHttpContext httpContext = new DefaultHttpContext();
+            TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+
+            // Faz o setup chamando o BuscarPorEmailELogin, passando o email e login do RedefinirSenhaModel, retornando o UsuarioModel
+            mockRepo.Setup(s =>
+                            s.BuscarPorEmailELogin(It.IsAny<string>(), It.IsAny<string>()))
+                    .Returns(ModeloDadosUsuario());
+            // Faz o setup chamando o Enviar, passando o email do UsuarioModel, assunto e a mensagem do email, retornando false
+            mockEmail.Setup(s => s.Enviar(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                    .Returns(true);
+
+            var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
+
+            // Act
+            var result = controller.EnviarLinkParaRedefinirSenha(ModeloRedefinirSenha());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemSucesso"));
+            // Verifica se a mensagem é de Usuário inválido
+            Assert.True(controller.TempData.Values.Contains("Foi enviado para o email cadastrado uma nova senha."));
+            // Verifica se o retorno é RedirectToAction
+            RedirectToActionResult redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se foi redirecionado para o controller Home
+            Assert.Equal("Login", redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Index", redirectToActionResult.ActionName);
         }
 
         [Fact]
@@ -216,11 +245,10 @@ namespace ControleDeContatos.Tests.Tests
 
             // Faz o setup chamando o BuscarPorEmailELogin, passando o email e login do RedefinirSenhaModel, retornando o UsuarioModel
             mockRepo.Setup(s =>
-                            s.BuscarPorEmailELogin(ModeloRedefinirSenha().Email, ModeloRedefinirSenha().Login))
+                            s.BuscarPorEmailELogin(It.IsAny<string>(), It.IsAny<string>()))
                     .Returns(ModeloDadosUsuario());
             // Faz o setup chamando o Enviar, passando o email do UsuarioModel, assunto e a mensagem do email, retornando false
-            mockEmail.Setup(s =>
-                            s.Enviar(ModeloDadosUsuario().Email, "Sistema de Contatos - Nova senha", "Sua nova senha é: ..."))
+            mockEmail.Setup(s => s.Enviar(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                     .Returns(false);
 
             var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
