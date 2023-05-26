@@ -26,7 +26,7 @@ namespace ControleDeContatos.Tests.Tests
             var mockRepo = new Mock<IContatoRepository>();
             var mockSessao = new Mock<ISessao>();
 
-            mockRepo.Setup(repo => repo.BuscarTodos(1))
+            mockRepo.Setup(repo => repo.BuscarTodos(It.IsAny<int>()))
                     .Returns(CriarVariosContatos());
 
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
@@ -50,7 +50,7 @@ namespace ControleDeContatos.Tests.Tests
         }
 
         [Fact]
-        public void TestaCriarValidStateSucesso()
+        public void TestaCriar_ValidState()
         {
             // Arrange
             // Cria a variavel tempData
@@ -74,17 +74,16 @@ namespace ControleDeContatos.Tests.Tests
             // Assert
             // Verifica se a tempData deu sucesso
             Assert.True(controller.TempData.ContainsKey("MensagemSucesso"));
+            // Verifica se a mensagem é de sucesso
+            Assert.True(controller.TempData.Values.Contains("Contato cadastrado com sucesso"));
             // Verifica se o retorno é RedirectToAction
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
-            // Verifica se foi redirecionado para algum lugar
-            Assert.Null(redirectToActionResult.ControllerName);
             // Verifica se foi redirecionado para Index
             Assert.Equal("Index", redirectToActionResult.ActionName);
-
         }
 
         [Fact]
-        public void TestaCriarNotValidState()
+        public void TestaCriar_InvalidState()
         {
             // Arrange
             // Cria a variavel tempData
@@ -124,14 +123,14 @@ namespace ControleDeContatos.Tests.Tests
             var mockRepo = new Mock<IContatoRepository>();
             // Mock da Sessao
             var mockSessao = new Mock<ISessao>();
-            mockRepo.Setup(repo => repo.ListarPorId(1))
+            mockRepo.Setup(repo => repo.ListarPorId(It.IsAny<int>()))
                     .Returns(CriarUmContato());
             // Instanciar o controller usando o obj do mockRepo
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object);
 
             // Act
             // Faz a chamada do editar
-            var result = controller.Editar(1);
+            var result = controller.Editar(It.IsAny<int>());
 
             // Assert
             // Confere o se o tipo é viewResult
@@ -144,19 +143,18 @@ namespace ControleDeContatos.Tests.Tests
         public void TestarApagarConfirmacao()
         {
             // Arrange
-            int testId = 1;
             // Cria o mock, e faz o setup chamando o ListarPorId e retornando um contato
             var mockRepo = new Mock<IContatoRepository>();
             // Mock da Sessao
             var mockSessao = new Mock<ISessao>();
-            mockRepo.Setup(repo => repo.ListarPorId(testId))
+            mockRepo.Setup(repo => repo.ListarPorId(It.IsAny<int>()))
                     .Returns(CriarUmContato());
             // Instanciar o controller usando o obj do mockRepo
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object);
 
             // Act
             // Faz a chamada do ApagarConfirmacao passando o id de teste
-            var result = controller.ApagarConfirmacao(testId);
+            var result = controller.ApagarConfirmacao(It.IsAny<int>());
 
             // Assert
             // Confere o se o tipo é viewResult
@@ -166,10 +164,9 @@ namespace ControleDeContatos.Tests.Tests
         }
 
         [Fact]
-        public void TestarApagarTrue()
+        public void TestarApagar_ApagarTrue()
         {
-            // Arrange
-            int testId = 3;
+            // Arrange            
             // Cria a variavel tempData
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
@@ -177,7 +174,7 @@ namespace ControleDeContatos.Tests.Tests
             var mockRepo = new Mock<IContatoRepository>();
             var mockSessao = new Mock<ISessao>();
             //Faz o setup chamando o Apagar e retornando true
-            mockRepo.Setup(repo => repo.Apagar(testId))
+            mockRepo.Setup(repo => repo.Apagar(It.IsAny<int>()))
                     .Returns(true);
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
@@ -187,24 +184,25 @@ namespace ControleDeContatos.Tests.Tests
 
             // Act
             // Faz a chamada do Apagar
-            var result = controller.Apagar(testId);
+            var result = controller.Apagar(It.IsAny<int>());
 
             // Assert
-            // Verifica se é a mensagem de sucesso
+            // Verifica se a tempData deu sucesso
             Assert.True(controller.TempData.ContainsKey("MensagemSucesso"));
+            // Verifica se a mensagem é de sucesso
+            Assert.True(controller.TempData.Values.Contains("Contato apagado com sucesso"));
             // Verifica se o retorno é RedirectToAction
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
-            // Verifica se foi redirecionado para algum lugar
+            // Verifica se a controller é nula
             Assert.Null(redirectToActionResult.ControllerName);
             // Verifica se está redirecionando para a Index
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
 
         [Fact]
-        public void TestarApagarFalse()
+        public void TestarApagar_ApagarFalse()
         {
             // Arrange
-            int testId = 0;
             // Cria o tempData
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
@@ -212,7 +210,7 @@ namespace ControleDeContatos.Tests.Tests
             var mockRepo = new Mock<IContatoRepository>();
             var mockSessao = new Mock<ISessao>();
             //Faz o setup chamando o Apagar e retornando true
-            mockRepo.Setup(repo => repo.Apagar(testId))
+            mockRepo.Setup(repo => repo.Apagar(It.IsAny<int>()))
                     .Returns(false);
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
@@ -223,11 +221,13 @@ namespace ControleDeContatos.Tests.Tests
 
             // Act
             // Faz a chamada do Apagar
-            var result = controller.Apagar(testId);
+            var result = controller.Apagar(It.IsAny<int>());
 
             // Assert
             // Verifica se a tempData deu erro
             Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de erro
+            Assert.True(controller.TempData.Values.Contains("Ops, não conseguimos apagar o contato"));
             // Verifica se o retorno é RedirectToAction
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             // Verifica o redirect tem algo
@@ -237,7 +237,7 @@ namespace ControleDeContatos.Tests.Tests
         }
 
         [Fact]
-        public void TestarAlterarValidModel()
+        public void TestarAlterar_ValidModel_AtualizarNotNull()
         {
             // Arrange
             // Cria um contato
@@ -256,7 +256,7 @@ namespace ControleDeContatos.Tests.Tests
             var mockRepo = new Mock<IContatoRepository>();
             var mockSessao = new Mock<ISessao>();
             // Faz o setup chamando o Atualizar passando o contato e retornando o proprio contato
-            mockRepo.Setup(repo => repo.Atualizar(contato))
+            mockRepo.Setup(repo => repo.Atualizar(It.IsAny<ContatoModel>()))
                     .Returns(contato);
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
@@ -269,8 +269,10 @@ namespace ControleDeContatos.Tests.Tests
             var result = controller.Alterar(contato);
 
             // Assert
-            // Verifica se é a mensagem de sucesso
+            // Verifica se a tempData deu sucesso
             Assert.True(controller.TempData.ContainsKey("MensagemSucesso"));
+            // Verifica se a mensagem é de senha invalida
+            Assert.True(controller.TempData.Values.Contains("Contato atualizado com sucesso"));
             // Verifica se o retorno é RedirectToAction
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             // Verifica se foi redirecionado para algum lugar
@@ -280,7 +282,7 @@ namespace ControleDeContatos.Tests.Tests
         }
 
         [Fact]
-        public void TestarAlterarValidModelNull()
+        public void TestarAlterar_ValidModel_AtualizarNull()
         {
             // Arrange
             // Cria a variavel tempData
@@ -300,8 +302,10 @@ namespace ControleDeContatos.Tests.Tests
             var result = controller.Alterar(new ContatoModel());
 
             // Assert
-            // Verifica se a tempData deu erro
+            // Verifica se a tempData deu sucesso
             Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de senha invalida
+            Assert.True(controller.TempData.Values.Contains("Ops, não conseguimos atualizado o contato, tente novamente."));
             // Verifica se o retorno é RedirectToAction
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             // Verifica se foi redirecionado para algum lugar
@@ -311,7 +315,7 @@ namespace ControleDeContatos.Tests.Tests
         }
 
         [Fact]
-        public void TestarAlterarNotValidModel()
+        public void TestarAlterar_InvalidModel()
         {
             // Cria o mock do repository e sessao
             var mockRepo = new Mock<IContatoRepository>();
@@ -334,7 +338,8 @@ namespace ControleDeContatos.Tests.Tests
             var viewResult = Assert.IsType<ViewResult>(result);
             // Verifica a view de redirect é a Editar
             Assert.Equal("Editar", viewResult.ViewName);
-
+            // Confere se o model tem algo
+            Assert.IsAssignableFrom<ContatoModel>(viewResult.ViewData.Model);
         }
 
 
