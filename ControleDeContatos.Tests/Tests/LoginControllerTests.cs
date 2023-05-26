@@ -151,7 +151,7 @@ namespace ControleDeContatos.Tests.Tests
             Mock<IEmail> mockEmail = new Mock<IEmail>();
             // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retornando nada
             mockRepo.Setup(s => s.BuscarPorLogin(ModeloLoginValido().Login));
-                    
+
 
             var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
 
@@ -181,7 +181,7 @@ namespace ControleDeContatos.Tests.Tests
             Mock<IEmail> mockEmail = new Mock<IEmail>();
             // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retornando nada
             mockRepo.Setup(s => s.BuscarPorLogin(ModeloLoginValido().Login));
-                    
+
 
             var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
 
@@ -202,23 +202,42 @@ namespace ControleDeContatos.Tests.Tests
         {
             throw new NotImplementedException();
         }
-        
+
         [Fact]
         public void TestarEnviarLinkParaRedefinirSenha_ValidModel_UsuarioValido_EmailNaoEnviado()
         {
             throw new NotImplementedException();
         }
-        
+
         [Fact]
         public void TestarEnviarLinkParaRedefinirSenha_ValidModel_UsuarioInvalido()
         {
             throw new NotImplementedException();
         }
-        
+
         [Fact]
         public void TestarEnviarLinkParaRedefinirSenha_InvalidModel()
         {
-            throw new NotImplementedException();
+            // Arrange
+            DefaultHttpContext httpContext = new DefaultHttpContext();
+            TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+
+            var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
+
+            // Act
+            // Adiciona um model com um erro falso
+            controller.ModelState.AddModelError("fakeError", "fakeError");
+            var result = controller.EnviarLinkParaRedefinirSenha(ModeloRedefinirSenha());
+
+            // Assert
+            // Confere o se o tipo é viewResult
+            ViewResult viewResult = Assert.IsType<ViewResult>(result);
+            // Verifica se a view é para Index
+            Assert.Equal("Index", viewResult.ViewName);
         }
 
         [Fact]
@@ -234,7 +253,7 @@ namespace ControleDeContatos.Tests.Tests
             // Act
             var result = controller.Sair();
 
-           // Verifica se o retorno é RedirectToAction
+            // Verifica se o retorno é RedirectToAction
             RedirectToActionResult redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             // Verifica se foi redirecionado para o controller Login
             Assert.Equal("Login", redirectToActionResult.ControllerName);
@@ -252,7 +271,7 @@ namespace ControleDeContatos.Tests.Tests
                 Nome = "Padronos Tester",
                 Login = "padronos",
                 Email = "padronos@gmail.com",
-                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",                
+                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",
                 Perfil = Enums.PerfilEnums.Padrao,
                 DataCadastro = DateTime.Now
             };
@@ -275,7 +294,7 @@ namespace ControleDeContatos.Tests.Tests
 
             return usuarioModel;
         }
-        
+
         public LoginModel ModeloLoginValido()
         {
             return new LoginModel()
@@ -285,5 +304,13 @@ namespace ControleDeContatos.Tests.Tests
             };
         }
 
+        public RedefinirSenhaModel ModeloRedefinirSenha()
+        {
+            return new RedefinirSenhaModel()
+            {
+                Login = "padronos",
+                Email = "padronos@gmail.com"
+            };
+        }
     }
 }
