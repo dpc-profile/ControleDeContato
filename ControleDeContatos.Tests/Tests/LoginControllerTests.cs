@@ -121,7 +121,7 @@ namespace ControleDeContatos.Tests.Tests
             Mock<IEmail> mockEmail = new Mock<IEmail>();
             // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retorna o UsuarioModelSenhaInvalida
             mockRepo.Setup(s => s.BuscarPorLogin(ModeloLoginValido().Login))
-                    .Returns(ModeloDadosUsuarioSenhaInvalida());
+                    .Returns(ModeloDadosUsuario_SenhaInvalida());
 
             var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
 
@@ -206,7 +206,39 @@ namespace ControleDeContatos.Tests.Tests
         [Fact]
         public void TestarEnviarLinkParaRedefinirSenha_ValidModel_UsuarioValido_EmailNaoEnviado()
         {
-            throw new NotImplementedException();
+            // Arrange
+            DefaultHttpContext httpContext = new DefaultHttpContext();
+            TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+
+            // Faz o setup chamando o BuscarPorEmailELogin, passando o email e login do RedefinirSenhaModel, retornando o UsuarioModel
+            mockRepo.Setup(s =>
+                            s.BuscarPorEmailELogin(ModeloRedefinirSenha().Email, ModeloRedefinirSenha().Login))
+                    .Returns(ModeloDadosUsuario());
+            // Faz o setup chamando o Enviar, passando o email do UsuarioModel, assunto e a mensagem do email, retornando false
+            mockEmail.Setup(s =>
+                            s.Enviar(ModeloDadosUsuario().Email, "Sistema de Contatos - Nova senha", "Sua nova senha é: ..."))
+                    .Returns(false);
+
+            var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
+
+            // Act
+            var result = controller.EnviarLinkParaRedefinirSenha(ModeloRedefinirSenha());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de Usuário inválido
+            Assert.True(controller.TempData.Values.Contains("Não conseguimos enviar o email, a senha não foi resetada, tente novamente"));
+            // Verifica se o retorno é RedirectToAction
+            RedirectToActionResult redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se foi redirecionado para o controller Home
+            Assert.Equal("Login", redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Index", redirectToActionResult.ActionName);
         }
 
         [Fact]
@@ -299,7 +331,7 @@ namespace ControleDeContatos.Tests.Tests
 
             return usuarioModel;
         }
-        public UsuarioModel ModeloDadosUsuarioSenhaInvalida()
+        public UsuarioModel ModeloDadosUsuario_SenhaInvalida()
         {
             // A senha não está convertida em hash
             var usuarioModel = new UsuarioModel()
