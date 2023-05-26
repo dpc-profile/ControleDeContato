@@ -1,0 +1,289 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+using ControleDeContatos.Controllers;
+using ControleDeContatos.Helper;
+using ControleDeContatos.Models;
+using ControleDeContatos.Repository;
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+
+using Moq;
+
+using Xunit;
+
+namespace ControleDeContatos.Tests.Tests
+{
+    public class LoginControllerTests
+    {
+        [Fact]
+        public void TestarIndex_SessaoNotNull()
+        {
+            // Arrange
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            var mockEmail = new Mock<IEmail>();
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(s => s.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+
+            var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object);
+
+            // Act
+            var result = controller.Index();
+
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se foi redirecionado para o controller Home
+            Assert.Equal("Home", redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
+
+        [Fact]
+        public void TestarIndex_SessaoNull()
+        {
+            // Arrange
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+
+            var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object);
+
+            // Act
+            var result = controller.Index();
+
+            // Assert
+            // Confere o se o tipo é viewResult
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public void TestarRedefinirSenha()
+        {
+            // Arrange
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+
+            var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object);
+
+            // Act
+            var result = controller.RedefinirSenha();
+
+            // Assert
+            // Confere o se o tipo é viewResult
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public void TestarEntrar_ValidModel_UsuarioESenhaValidos()
+        {
+            // Arrange
+            DefaultHttpContext httpContext = new DefaultHttpContext();
+            TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+            // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retorna o UsuarioModel
+            mockRepo.Setup(s => s.BuscarPorLogin(ModeloLoginValido().Login))
+                    .Returns(ModeloDadosUsuario());
+
+            mockSessao.Setup(s => s.CriarSessaoUsuario(ModeloDadosUsuario()));
+
+            var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
+
+            // Act
+            var result = controller.Entrar(ModeloLoginValido());
+
+            // Verifica se o retorno é RedirectToAction
+            RedirectToActionResult redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se foi redirecionado para o controller Home
+            Assert.Equal("Home", redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
+
+        [Fact]
+        public void TestarEntrar_ValidModel_UsuarioValidoSenhaInvalida()
+        {
+            // Arrange
+            DefaultHttpContext httpContext = new DefaultHttpContext();
+            TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+            // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retorna o UsuarioModelSenhaInvalida
+            mockRepo.Setup(s => s.BuscarPorLogin(ModeloLoginValido().Login))
+                    .Returns(ModeloDadosUsuarioSenhaInvalida());
+
+            var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
+
+            // Act
+            var result = controller.Entrar(ModeloLoginValido());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de senha invalida
+            Assert.True(controller.TempData.Values.Contains("Senha inválida"));
+            // Confere o se o tipo é viewResult
+            ViewResult viewResult = Assert.IsType<ViewResult>(result);
+            // Verifica se a view é para Index
+            Assert.Equal("Index", viewResult.ViewName);
+        }
+
+        [Fact]
+        public void TestarEntrar_ValidModel_UsuarioInvalido()
+        {
+            // Arrange
+            DefaultHttpContext httpContext = new DefaultHttpContext();
+            TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+            // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retornando nada
+            mockRepo.Setup(s => s.BuscarPorLogin(ModeloLoginValido().Login));
+                    
+
+            var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
+
+            // Act
+            var result = controller.Entrar(ModeloLoginValido());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de Usuário inválido
+            Assert.True(controller.TempData.Values.Contains("Usuário inválido"));
+            // Confere o se o tipo é viewResult
+            ViewResult viewResult = Assert.IsType<ViewResult>(result);
+            // Verifica se a view é para Index
+            Assert.Equal("Index", viewResult.ViewName);
+        }
+
+        [Fact]
+        public void TestarEntrar_InvalidModel()
+        {
+            // Arrange
+            DefaultHttpContext httpContext = new DefaultHttpContext();
+            TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+            // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retornando nada
+            mockRepo.Setup(s => s.BuscarPorLogin(ModeloLoginValido().Login));
+                    
+
+            var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
+
+            // Act
+            // Adiciona um model com um erro falso
+            controller.ModelState.AddModelError("fakeError", "fakeError");
+            var result = controller.Entrar(ModeloLoginValido());
+
+            // Assert
+            // Confere o se o tipo é viewResult
+            ViewResult viewResult = Assert.IsType<ViewResult>(result);
+            // Verifica se a view é para Index
+            Assert.Equal("Index", viewResult.ViewName);
+        }
+
+        [Fact]
+        public void TestarEnviarLinkParaRedefinirSenha_ValidModel_UsuarioValido_EmailEnviado()
+        {
+            throw new NotImplementedException();
+        }
+        
+        [Fact]
+        public void TestarEnviarLinkParaRedefinirSenha_ValidModel_UsuarioValido_EmailNaoEnviado()
+        {
+            throw new NotImplementedException();
+        }
+        
+        [Fact]
+        public void TestarEnviarLinkParaRedefinirSenha_ValidModel_UsuarioInvalido()
+        {
+            throw new NotImplementedException();
+        }
+        
+        [Fact]
+        public void TestarEnviarLinkParaRedefinirSenha_InvalidModel()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void TestarSair()
+        {
+            // Arrange
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+
+            var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object);
+
+            // Act
+            var result = controller.Sair();
+
+           // Verifica se o retorno é RedirectToAction
+            RedirectToActionResult redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se foi redirecionado para o controller Login
+            Assert.Equal("Login", redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
+
+
+        public UsuarioModel ModeloDadosUsuario()
+        {
+            // Senha: teste
+            var usuarioModel = new UsuarioModel()
+            {
+                Id = 1,
+                Nome = "Padronos Tester",
+                Login = "padronos",
+                Email = "padronos@gmail.com",
+                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",                
+                Perfil = Enums.PerfilEnums.Padrao,
+                DataCadastro = DateTime.Now
+            };
+
+            return usuarioModel;
+        }
+        public UsuarioModel ModeloDadosUsuarioSenhaInvalida()
+        {
+            // A senha não está convertida em hash
+            var usuarioModel = new UsuarioModel()
+            {
+                Id = 1,
+                Nome = "Padronos Tester",
+                Login = "padronos",
+                Email = "padronos@gmail.com",
+                Senha = "teste",
+                Perfil = Enums.PerfilEnums.Padrao,
+                DataCadastro = DateTime.Now
+            };
+
+            return usuarioModel;
+        }
+        
+        public LoginModel ModeloLoginValido()
+        {
+            return new LoginModel()
+            {
+                Login = "padronos",
+                Senha = "teste"
+            };
+        }
+
+    }
+}
