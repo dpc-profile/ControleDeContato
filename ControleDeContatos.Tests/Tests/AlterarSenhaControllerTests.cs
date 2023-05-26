@@ -21,26 +21,46 @@ namespace ControleDeContatos.Tests.Tests
     public class AlterarSenhaControllerTests
     {
         [Fact]
+        public void TestarIndex()
+        {
+            // Arrange
+            var mockRepo = new Mock<IUsuarioRepository>();
+            var mockSessao = new Mock<ISessao>();
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(s => s.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+
+            // Instanciar o controller usando o obj do mockRepo
+            var controller = new AlterarSenhaController(mockRepo.Object, mockSessao.Object);
+
+            // Act
+            var result = controller.Index();
+
+            // Assert
+            // Confere se o index retornou normalmente
+            Assert.NotNull(result);
+        }
+
+        [Fact]
         public void TestarAlterar_ValidModel()
         {
             // Arrange
             // Cria a variavel tempData
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
-            // Cria o mock, e faz o setup chamando o Apagar e retornando false
+            
             var mockRepo = new Mock<IUsuarioRepository>();
             var mockSessao = new Mock<ISessao>();
+
             //Faz o setup chamando o AlterarSenha
             mockRepo.Setup(r => r.AlterarSenha(alterarSenhaUsuario()));
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(s => s.BuscarSessaoUsuario())
                       .Returns(ModeloDadosUsuario());
 
-            // Instanciar o controller usando o obj do mockRepo
             var controller = new AlterarSenhaController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
             // Act
-            // Faz a chamada do index
             var result = controller.Alterar(alterarSenhaUsuario());
 
             // Assert
@@ -52,30 +72,26 @@ namespace ControleDeContatos.Tests.Tests
             Assert.Equal("Index", viewResult.ViewName);
             // Verifica se retornou o alterarSenhaUsuario
             Assert.NotNull(viewResult.Model);
-
         }
         
         [Fact]
         public void TestarAlterar_InvalidModel()
         {
             // Arrange
-            // Cria a variavel tempData
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
-            // Cria o mock, e faz o setup chamando o Apagar e retornando false
+
             var mockRepo = new Mock<IUsuarioRepository>();
             var mockSessao = new Mock<ISessao>();
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(s => s.BuscarSessaoUsuario())
                       .Returns(ModeloDadosUsuario());
 
-            // Instanciar o controller usando o obj do mockRepo
             var controller = new AlterarSenhaController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
             // Act
             // Adiciona um model com um erro falso
             controller.ModelState.AddModelError("fakeError", "fakeError");
-            // Faz a chamada do index
             var result = controller.Alterar(alterarSenhaUsuario());
 
             // Assert
