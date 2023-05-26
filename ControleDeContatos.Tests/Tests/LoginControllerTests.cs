@@ -212,7 +212,28 @@ namespace ControleDeContatos.Tests.Tests
         [Fact]
         public void TestarEnviarLinkParaRedefinirSenha_ValidModel_UsuarioInvalido()
         {
-            throw new NotImplementedException();
+            // Arrange
+            DefaultHttpContext httpContext = new DefaultHttpContext();
+            TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+
+            var controller = new LoginController(mockRepo.Object, mockSessao.Object, mockEmail.Object) { TempData = tempData };
+
+            // Act
+            var result = controller.EnviarLinkParaRedefinirSenha(ModeloRedefinirSenha());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de Usuário inválido
+            Assert.True(controller.TempData.Values.Contains("Não foi possivel redefinir sua senha, verifique os dados informados"));
+            // Confere o se o tipo é viewResult
+            ViewResult viewResult = Assert.IsType<ViewResult>(result);
+            // Verifica se a view é para Index
+            Assert.Equal("Index", viewResult.ViewName);
         }
 
         [Fact]
