@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 
 using ControleDeContatos.Models;
 using ControleDeContatos.Filters;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ControleDeContatos.Controllers
 {
+    [ExcludeFromCodeCoverage]
     [PaginaUsuarioLogado]
     public class HomeController : Controller
     {
