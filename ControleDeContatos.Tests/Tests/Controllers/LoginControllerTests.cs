@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using ControleDeContatos.Controllers;
-using ControleDeContatos.Helper;
 using ControleDeContatos.Models;
 using ControleDeContatos.Repository;
+using ControleDeContatos.Services.Interfaces;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

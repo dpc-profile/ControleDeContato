@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 using ControleDeContatos.Models;
 using ControleDeContatos.Repository;
-using ControleDeContatos.Helper;
+using ControleDeContatos.Services.Interfaces;
 
 namespace ControleDeContatos.Controllers
 {

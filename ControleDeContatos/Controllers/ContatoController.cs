@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using ControleDeContatos.Models;
 using ControleDeContatos.Filters;
-using ControleDeContatos.Services;
+using ControleDeContatos.Services.Interfaces;
 
 namespace ControleDeContatos.Controllers
 {

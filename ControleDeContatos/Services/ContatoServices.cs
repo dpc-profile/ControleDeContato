@@ -5,12 +5,18 @@ using System.Threading.Tasks;
 
 using ControleDeContatos.Models;
 using ControleDeContatos.Repository;
+using ControleDeContatos.Services.Interfaces;
 
 namespace ControleDeContatos.Services
 {
     public class ContatoServices : IContatoServices
     {
         private readonly IContatoRepository _contatoRepository;
+
+        public ContatoServices(IContatoRepository contatoRepository)
+        {
+            _contatoRepository = contatoRepository;
+        }
 
         public void ApagarContato(int id)
         {
@@ -50,9 +56,9 @@ namespace ControleDeContatos.Services
         {
             try
             {
-                List<ContatoModel> contatosDb = _contatoRepository.BuscarTodos(id);
+                var contatosDb = _contatoRepository.BuscarTodos(id);
 
-                if (!contatosDb.Any()) throw new Exception("Contato não existe");
+                if (!contatosDb.Any()) throw new Exception("Não existe contatos");
 
                 return contatosDb;
             }

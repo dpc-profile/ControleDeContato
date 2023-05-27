@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 
 using ControleDeContatos.Models;
+using ControleDeContatos.Services.Interfaces;
 
 namespace ControleDeContatos.Services
 {

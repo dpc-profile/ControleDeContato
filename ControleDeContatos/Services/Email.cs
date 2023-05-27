@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 using Microsoft.Extensions.Configuration;
 
-namespace ControleDeContatos.Helper
+using ControleDeContatos.Services.Interfaces;
+
+namespace ControleDeContatos.Services
 {
     public class Email : IEmail
     {

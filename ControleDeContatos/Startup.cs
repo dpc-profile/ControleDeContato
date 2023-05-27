@@ -4,8 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
-using ControleDeContatos.Helper;
 using ControleDeContatos.Repository;
+using ControleDeContatos.Services;
+using ControleDeContatos.Services.Interfaces;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,7 @@ namespace ControleDeContatos
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<IContatoRepository, ContatoRepository>();
+            services.AddScoped<IContatoServices, ContatoServices>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ISessao, Sessao>();
             services.AddScoped<IEmail, Email>();
