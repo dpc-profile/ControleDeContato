@@ -1,8 +1,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ControleDeContatos.Models
 {
+    [ExcludeFromCodeCoverage]
     public class AlterarSenhaModel
     {
         public int Id { get; set; }

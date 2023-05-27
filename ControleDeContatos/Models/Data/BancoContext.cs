@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 using ControleDeContatos.Models;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ControleDeContatos.Data
 {
+    [ExcludeFromCodeCoverage]
     public class BancoContext : DbContext
     {
         public DbSet<ContatoModel> Contatos { get; set; }

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ControleDeContatos.Models
 {
+    [ExcludeFromCodeCoverage]
     public class ContatoModel
     {
         public int Id { get; set; }

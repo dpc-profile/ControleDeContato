@@ -1,10 +1,12 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 using ControleDeContatos.Enums;
 
 namespace ControleDeContatos.Models
 {
+    [ExcludeFromCodeCoverage]
     public class UsuarioSemSenhaModel
     {
         public int Id { get; set; }
