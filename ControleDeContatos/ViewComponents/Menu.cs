@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 using ControleDeContatos.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ControleDeContatos.ViewComponents
 {
+    [ExcludeFromCodeCoverage]
     public class Menu : ViewComponent
     {
         public IViewComponentResult Invoke()
