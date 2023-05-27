@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
 using ControleDeContatos.Enums;
-using ControleDeContatos.Helper;
+using ControleDeContatos.Services;
 
 namespace ControleDeContatos.Models
 {

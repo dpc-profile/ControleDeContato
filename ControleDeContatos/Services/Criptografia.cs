@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ControleDeContatos.Helper
+namespace ControleDeContatos.Services
 {
     public static class Criptografia
     {

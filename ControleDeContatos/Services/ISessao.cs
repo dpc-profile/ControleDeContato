@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using ControleDeContatos.Models;
 
-namespace ControleDeContatos.Helper
+namespace ControleDeContatos.Services
 {
     public interface ISessao
     {

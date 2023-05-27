@@ -40,4 +40,7 @@ $ dotnet build --no-incremental
 $ dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
 
 $ dotnet sonarscanner end
+
+# Rodar o teste de mutação
+$ dotnet Stryker
 ```

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 using ControleDeContatos.Models;
 
-namespace ControleDeContatos.Helper
+namespace ControleDeContatos.Services
 {
     public class Sessao : ISessao
     {

@@ -12,10 +12,12 @@ namespace ControleDeContatos.Repository
         
         List<ContatoModel> BuscarTodos(int usuarioId);
 
-        ContatoModel Adicionar(ContatoModel contato);
+        void Adicionar(ContatoModel contato);
 
-        ContatoModel Atualizar(ContatoModel contato);
+        void Atualizar(ContatoModel contato);
 
-        bool Apagar(int id);
+        void Apagar(ContatoModel contatoModel);
+
+        
     }
 }

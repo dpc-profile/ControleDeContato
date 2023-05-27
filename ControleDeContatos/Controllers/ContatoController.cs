@@ -7,28 +7,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using ControleDeContatos.Models;
-using ControleDeContatos.Repository;
 using ControleDeContatos.Filters;
-using ControleDeContatos.Helper;
+using ControleDeContatos.Services;
 
 namespace ControleDeContatos.Controllers
 {
     [PaginaUsuarioLogado]
     public class ContatoController : Controller
     {
-        private readonly IContatoRepository _contatoRepository;
+        private readonly IContatoServices _contatoServices;
         private readonly ISessao _sessao;
 
-        public ContatoController(IContatoRepository contatoRepository, ISessao sessao)
+        public ContatoController(IContatoServices contatoServices, ISessao sessao)
         {
-            _contatoRepository = contatoRepository;
+            _contatoServices = contatoServices;
             _sessao = sessao;
         }
 
         public IActionResult Index()
         {
             UsuarioModel usuarioLogado = _sessao.BuscarSessaoUsuario();
-            List<ContatoModel> allContatos = _contatoRepository.BuscarTodos(usuarioLogado.Id);
+            List<ContatoModel> allContatos = _contatoServices.BuscarContatos(usuarioLogado.Id);
 
             return View(allContatos);
         }
@@ -40,13 +39,13 @@ namespace ControleDeContatos.Controllers
 
         public IActionResult Editar(int id)
         {
-            ContatoModel contato = _contatoRepository.ListarPorId(id);
+            ContatoModel contato = _contatoServices.BuscarContato(id);
             return View(contato);
         }
 
         public IActionResult ApagarConfirmacao(int id)
         {
-            ContatoModel contato = _contatoRepository.ListarPorId(id);
+            ContatoModel contato = _contatoServices.BuscarContato(id);
             return View(contato);
         }
 
@@ -54,16 +53,9 @@ namespace ControleDeContatos.Controllers
         {
             try
             {
-                bool isApagado = _contatoRepository.Apagar(id);
+                _contatoServices.ApagarContato(id);
 
-                if (isApagado)
-                {
-                    TempData["MensagemSucesso"] = "Contato apagado com sucesso";
-                }
-                else
-                {
-                    TempData["MensagemErro"] = $"Ops, não conseguimos apagar o contato";
-                }
+                TempData["MensagemSucesso"] = "Contato apagado com sucesso";
 
                 return RedirectToAction("Index");
             }
@@ -85,7 +77,7 @@ namespace ControleDeContatos.Controllers
                     UsuarioModel usuarioLogado = _sessao.BuscarSessaoUsuario();
                     contato.UsuarioId = usuarioLogado.Id;
 
-                    _contatoRepository.Adicionar(contato);
+                    _contatoServices.CriarContato(contato);
 
                     //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
                     TempData["MensagemSucesso"] = "Contato cadastrado com sucesso";
@@ -107,26 +99,28 @@ namespace ControleDeContatos.Controllers
         [HttpPost]
         public IActionResult Alterar(ContatoModel contato)
         {
-            if (ModelState.IsValid)
+            try
             {
-                UsuarioModel usuarioLogado = _sessao.BuscarSessaoUsuario();
-                contato.UsuarioId = usuarioLogado.Id;
-
-                var respostaAtualizar = _contatoRepository.Atualizar(contato);
-
-                if (respostaAtualizar == null)
+                if (ModelState.IsValid)
                 {
+                    UsuarioModel usuarioLogado = _sessao.BuscarSessaoUsuario();
+                    contato.UsuarioId = usuarioLogado.Id;
+
+                    _contatoServices.AtualizarContato(contato);
+
                     //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
-                    TempData["MensagemErro"] = $"Ops, não conseguimos atualizado o contato, tente novamente.";
+                    TempData["MensagemSucesso"] = "Contato atualizado com sucesso";
                     return RedirectToAction("Index");
                 }
 
-                //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
-                TempData["MensagemSucesso"] = "Contato atualizado com sucesso";
+                return View("Editar", contato);
+            }
+            catch (System.Exception erro)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos atualizado o contato, tente novamente. Detalhe do erro: {erro.Message}";
                 return RedirectToAction("Index");
             }
 
-            return View("Editar", contato);
         }
 
     }

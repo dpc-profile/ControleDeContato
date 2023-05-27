@@ -15,39 +15,45 @@ namespace ControleDeContatos.Repository
             _bancoContext = new BancoContext();
         }
 
-        public ContatoModel Adicionar(ContatoModel contato)
+        public void Adicionar(ContatoModel contato)
         {
-            _bancoContext.Contatos.Add(contato);
-            _bancoContext.SaveChanges();
-            return contato;
+            try
+            {
+                _bancoContext.Contatos.Add(contato);
+                _bancoContext.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+               throw new Exception("Erro ao adicionar o contato do banco de dados");
+            }
         }
 
-        public bool Apagar(int id)
+        public void Apagar(ContatoModel contatoModel)
         {
-            ContatoModel contatoDb = ListarPorId(id);
+            try
+            {
+                _bancoContext.Contatos.Remove(contatoModel);
+                _bancoContext.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                throw new Exception("Erro ao apagar o contato do banco de dados");
+            }
 
-            if (contatoDb == null) return false;
-
-            _bancoContext.Contatos.Remove(contatoDb);
-            _bancoContext.SaveChanges();
-
-            return true;
         }
 
-        public ContatoModel Atualizar(ContatoModel contato)
+        public void Atualizar(ContatoModel contato)
         {
-            ContatoModel contatoDb = ListarPorId(contato.Id);
+            try
+            {
+                _bancoContext.Contatos.Update(contato);
+                _bancoContext.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                throw new Exception("Erro ao atualizar o contato no banco de dados");
+            }
 
-            if (contatoDb == null) return null;
-
-            contatoDb.Nome = contato.Nome;
-            contatoDb.Email = contato.Email;
-            contatoDb.Celular = contato.Celular;
-
-            _bancoContext.Contatos.Update(contatoDb);
-            _bancoContext.SaveChanges();
-            
-            return contatoDb;
         }
 
         public List<ContatoModel> BuscarTodos(int usuarioId)
