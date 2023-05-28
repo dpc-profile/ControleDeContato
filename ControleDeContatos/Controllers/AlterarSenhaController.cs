@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 using ControleDeContatos.Models;
 using ControleDeContatos.Repository;
 using ControleDeContatos.Services.Interfaces;
+using ControleDeContatos.Filters;
 
 namespace ControleDeContatos.Controllers
 {
+    [PaginaUsuarioLogado]
     public class AlterarSenhaController : Controller
     {
         private readonly IUsuarioRepository _usuarioRepository;

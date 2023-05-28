@@ -42,6 +42,10 @@ namespace ControleDeContatos.Services
                 ContatoModel contatoDb = _contatoRepository.ListarPorId(contato.Id);
 
                 if (contatoDb == null) throw new Exception("Contato não existe");
+                
+                contatoDb.Nome = contato.Nome;
+                contatoDb.Email = contato.Email;
+                contatoDb.Celular = contato.Celular;
 
                 _contatoRepository.Atualizar(contatoDb);
             }
@@ -80,7 +84,7 @@ namespace ControleDeContatos.Services
             }
             catch (System.Exception)
             {
-                
+
                 throw;
             }
         }
