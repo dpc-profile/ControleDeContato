@@ -77,7 +77,7 @@ namespace ControleDeContatos.Controllers
                     usuario = _usuarioRepository.Adicionar(usuario);
 
                     //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
-                    TempData["MensagemSucesso"] = "Usuario cadastrado com sucesso";
+                    TempData["MensagemSucesso"] = "Usuário cadastrado com sucesso";
                     return RedirectToAction("Index");
                 }
 

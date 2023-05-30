@@ -20,8 +20,8 @@ describe("Acesso a página de contatos", () => {
   });
 
   it("Adicionar novo contato", () => {
-    const nome = "Caio";
-    const email = "caio@gmail.com";
+    const nome = "Amanda";
+    const email = "amanda@gmail.com";
     const celular = "11 91234-8762";
 
     cy.get('[data-cy="criar"]').click();
@@ -51,6 +51,8 @@ describe("Acesso a página de contatos", () => {
     // Botão alterar
     cy.get('[data-cy="submit"]').click();
 
+    cy.get(".alert").contains("Contato atualizado com sucesso");
+
     cy.get("#table-contatos tr:last").contains(novoNome);
   });
 
@@ -65,6 +67,7 @@ describe("Acesso a página de contatos", () => {
     cy.get('[data-cy="confirmar"]').click();
 
     cy.get(".alert").contains("Contato apagado com sucesso");
+    
     cy.get("#table-contatos tr:last").should("not.contain.text", nome);
   });
 });
