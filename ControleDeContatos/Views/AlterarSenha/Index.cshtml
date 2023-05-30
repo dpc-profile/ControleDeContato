@@ -26,23 +26,23 @@
 <form asp-controller="AlterarSenha" asp-action="Alterar" method="post">
   <div class="mb-3">
     <label for="senhaAtual">Senha Atual</label>
-    <input type="password" asp-for="SenhaAtual" class="form-control" placeholder="Digite a senha atual">
+    <input type="password" asp-for="SenhaAtual" class="form-control" data-cy="senhaAtual" placeholder="Digite a senha atual">
     @Html.ValidationMessageFor(x => x.SenhaAtual)
   </div>
 
   <div class="mb-3">
     <label for="novaSenha">Nova Senha</label>
-    <input type="password" asp-for="NovaSenha" class="form-control" placeholder="Digite a nova senha">
+    <input type="password" asp-for="NovaSenha" class="form-control" data-cy="novaSenha" placeholder="Digite a nova senha">
     @Html.ValidationMessageFor(x => x.NovaSenha)
   </div>
 
   <div class="mb-3">
     <label for="cofirmarNovaSenha">Cofirmar Nova Senha</label>
-    <input type="password" asp-for="ConfirmarNovaSenha" class="form-control" placeholder="Confirme a nova senha">
+    <input type="password" asp-for="ConfirmarNovaSenha" class="form-control" data-cy="cofirmarNovaSenha" placeholder="Confirme a nova senha">
     @Html.ValidationMessageFor(x => x.ConfirmarNovaSenha)
   </div>
 
-  <button type="submit" class="btn btn-primary btn-block">Alterar</button>
-  <a class="btn btn-secondary btn-block" asp-controller="Home" asp-action="Index" role="button">Voltar</a>
+  <button type="submit" class="btn btn-primary btn-block" data-cy="submit">Alterar</button>
+  <a class="btn btn-secondary btn-block" asp-controller="Home" asp-action="Index" role="button" data-cy="voltar">Voltar</a>
 
 </form>

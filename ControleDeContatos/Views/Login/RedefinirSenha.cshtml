@@ -15,17 +15,17 @@
 
 <form asp-controller="Login" asp-action="EnviarLinkParaRedefinirSenha" method="post">
   <div class="mb-3">
-    <label for="login" class="form-label">Login</label>
+    <label for="login" class="form-label" data-cy="login">Login</label>
     <input type="text" asp-for="Login" class="form-control" id="login">
     @Html.ValidationMessageFor(x => x.Login)
   </div>
 
   <div class="mb-3">
-    <label for="email" class="form-label">Email</label>
+    <label for="email" class="form-label" data-cy="email">Email</label>
     <input type="text" asp-for="Email" class="form-control" id="email">
     @Html.ValidationMessageFor(x => x.Email)
   </div>
 
-  <button type="submit" class="btn btn-primary btn-block">Redefinir Senha</button>
-  <a class="btn btn-secondary btn-block" asp-controller="Login" asp-action="Index" role="button">Voltar</a>
+  <button type="submit" class="btn btn-primary btn-block" data-cy="submit">Redefinir Senha</button>
+  <a class="btn btn-secondary btn-block" asp-controller="Login" asp-action="Index" role="button" data-cy="voltar">Voltar</a>
 </form>

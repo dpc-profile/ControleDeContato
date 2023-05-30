@@ -11,25 +11,25 @@
 <form asp-controller="Usuario" asp-action="Criar" method="post">
     <div class="mb-3">
         <label for="nome">Nome</label>
-        <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do usuário">
+        <input type="text" asp-for="Nome" class="form-control" data-cy="nome" placeholder="Digite o nome do usuário">
         @Html.ValidationMessageFor(x => x.Nome)
     </div>
 
     <div class="mb-3">
-        <label for="nome">E-mail</label>
-        <input type="text" asp-for="Email" class="form-control" placeholder="Digite o E-mail do usuário">
+        <label for="email">E-mail</label>
+        <input type="text" asp-for="Email" class="form-control" data-cy="email" placeholder="Digite o E-mail do usuário">
         @Html.ValidationMessageFor(x => x.Email)
     </div>
 
     <div class="mb-3">
-        <label for="nome">Login</label>
-        <input type="text" asp-for="Login" class="form-control" placeholder="Digite o login do usuário">
+        <label for="login">Login</label>
+        <input type="text" asp-for="Login" class="form-control" data-cy="login" placeholder="Digite o login do usuário">
         @Html.ValidationMessageFor(x => x.Login)
     </div>
     
     <div class="mb-3">
-        <label for="nome">Perfil</label>
-        <select asp-for="Perfil"  class="form-control">
+        <label for="perfil">Perfil</label>
+        <select asp-for="Perfil"  class="form-control" data-cy="perfil">
             <option value="">Selecione</option>
             <option value="@PerfilEnums.Admin">Administrador</option>
             <option value="@PerfilEnums.Padrao">Padrão</option>
@@ -43,6 +43,6 @@
         @Html.ValidationMessageFor(x => x.Senha)
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block">Adicionar</button>
-    <a class="btn btn-secondary btn-block" asp-controller="Usuario" asp-action="Index" role="button">Voltar</a>
+    <button type="submit" class="btn btn-primary btn-block" data-cy="submit">Adicionar</button>
+    <a class="btn btn-secondary btn-block" asp-controller="Usuario" asp-action="Index" role="button" data-cy="voltar">Voltar</a>
 </form>

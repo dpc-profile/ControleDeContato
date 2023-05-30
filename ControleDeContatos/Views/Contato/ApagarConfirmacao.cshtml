@@ -7,5 +7,5 @@
 <h3>Realmente deseja apagaer o contato (@Model.Nome)?</h3>
 </div>
 
-<a class="btn btn-primary btn-block" asp-action="Index" asp-controller="Contato">Cancelar exclusão</a>
-<a class="btn btn-danger btn-block" asp-action="Apagar" asp-controller="Contato" asp-route-id="@Model.Id">Confirmar exclusão</a>
+<a class="btn btn-primary btn-block" asp-action="Index" asp-controller="Contato" data-cy="cancelar">Cancelar exclusão</a>
+<a class="btn btn-danger btn-block" asp-action="Apagar" asp-controller="Contato" asp-route-id="@Model.Id" data-cy="confirmar">Confirmar exclusão</a>
