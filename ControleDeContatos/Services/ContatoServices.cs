@@ -62,7 +62,7 @@ namespace ControleDeContatos.Services
             {
                 var contatosDb = _contatoRepository.BuscarTodos(id);
 
-                if (!contatosDb.Any()) throw new Exception("Não existe contatos");
+                if (contatosDb == null) throw new Exception("Não existe contatos");
 
                 return contatosDb;
             }
