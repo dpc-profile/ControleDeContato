@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CoverageSession>
-  <Summary numSequencePoints="462" visitedSequencePoints="226" numBranchPoints="60" visitedBranchPoints="30" sequenceCoverage="48.91" branchCoverage="50" maxCyclomaticComplexity="96" minCyclomaticComplexity="0" visitedClasses="6" numClasses="12" visitedMethods="29" numMethods="56" />
+  <Summary numSequencePoints="462" visitedSequencePoints="230" numBranchPoints="60" visitedBranchPoints="30" sequenceCoverage="49.78" branchCoverage="50" maxCyclomaticComplexity="96" minCyclomaticComplexity="0" visitedClasses="6" numClasses="12" visitedMethods="29" numMethods="56" />
   <Modules>
-    <Module hash="D19F7F9F-C938-4923-83DC-1A1FA99CF816">
+    <Module hash="9AE507C3-458A-4BD2-8735-696230795277">
       <ModulePath>ControleDeContatos.dll</ModulePath>
-      <ModuleTime>2023-05-30T07:54:46</ModuleTime>
+      <ModuleTime>2023-05-30T09:01:19</ModuleTime>
       <ModuleName>ControleDeContatos</ModuleName>
       <Files>
         <File uid="1" fullPath="/source/ControleDeContatos/Services/ContatoServices.cs" />
@@ -665,7 +665,7 @@
           </Methods>
         </Class>
         <Class>
-          <Summary numSequencePoints="23" visitedSequencePoints="19" numBranchPoints="2" visitedBranchPoints="2" sequenceCoverage="82.6" branchCoverage="100" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" visitedClasses="1" numClasses="1" visitedMethods="3" numMethods="3" />
+          <Summary numSequencePoints="23" visitedSequencePoints="23" numBranchPoints="2" visitedBranchPoints="2" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" visitedClasses="1" numClasses="1" visitedMethods="3" numMethods="3" />
           <FullName>ControleDeContatos.Controllers.AlterarSenhaController</FullName>
           <Methods>
             <Method cyclomaticComplexity="1" nPathComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
@@ -681,15 +681,15 @@
               <BranchPoints />
               <MethodPoint vc="3" uspid="0" p8:type="SequencePoint" ordinal="0" offset="0" sc="0" sl="29" ec="1" el="31" bec="0" bev="0" fileid="9" xmlns:p8="xsi" />
             </Method>
-            <Method cyclomaticComplexity="2" nPathComplexity="2" sequenceCoverage="73.33" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
-              <Summary numSequencePoints="15" visitedSequencePoints="11" numBranchPoints="2" visitedBranchPoints="2" sequenceCoverage="73.33" branchCoverage="100" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+            <Method cyclomaticComplexity="2" nPathComplexity="2" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
+              <Summary numSequencePoints="15" visitedSequencePoints="15" numBranchPoints="2" visitedBranchPoints="2" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
               <MetadataToken />
               <Name>Microsoft.AspNetCore.Mvc.IActionResult ControleDeContatos.Controllers.AlterarSenhaController::Alterar(ControleDeContatos.Models.AlterarSenhaModel)</Name>
               <FileRef uid="9" />
               <SequencePoints>
-                <SequencePoint vc="2" uspid="35" ordinal="0" sl="35" sc="1" el="35" ec="2" bec="0" bev="0" fileid="9" />
-                <SequencePoint vc="2" uspid="37" ordinal="1" sl="37" sc="1" el="37" ec="2" bec="0" bev="0" fileid="9" />
-                <SequencePoint vc="2" uspid="38" ordinal="2" sl="38" sc="1" el="38" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="3" uspid="35" ordinal="0" sl="35" sc="1" el="35" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="3" uspid="37" ordinal="1" sl="37" sc="1" el="37" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="3" uspid="38" ordinal="2" sl="38" sc="1" el="38" ec="2" bec="0" bev="0" fileid="9" />
                 <SequencePoint vc="2" uspid="39" ordinal="3" sl="39" sc="1" el="39" ec="2" bec="0" bev="0" fileid="9" />
                 <SequencePoint vc="2" uspid="41" ordinal="4" sl="41" sc="1" el="41" ec="2" bec="2" bev="2" fileid="9" />
                 <SequencePoint vc="1" uspid="42" ordinal="5" sl="42" sc="1" el="42" ec="2" bec="0" bev="0" fileid="9" />
@@ -697,17 +697,17 @@
                 <SequencePoint vc="1" uspid="44" ordinal="7" sl="44" sc="1" el="44" ec="2" bec="0" bev="0" fileid="9" />
                 <SequencePoint vc="1" uspid="45" ordinal="8" sl="45" sc="1" el="45" ec="2" bec="0" bev="0" fileid="9" />
                 <SequencePoint vc="1" uspid="48" ordinal="9" sl="48" sc="1" el="48" ec="2" bec="0" bev="0" fileid="9" />
-                <SequencePoint vc="0" uspid="50" ordinal="10" sl="50" sc="1" el="50" ec="2" bec="0" bev="0" fileid="9" />
-                <SequencePoint vc="0" uspid="51" ordinal="11" sl="51" sc="1" el="51" ec="2" bec="0" bev="0" fileid="9" />
-                <SequencePoint vc="0" uspid="52" ordinal="12" sl="52" sc="1" el="52" ec="2" bec="0" bev="0" fileid="9" />
-                <SequencePoint vc="0" uspid="53" ordinal="13" sl="53" sc="1" el="53" ec="2" bec="0" bev="0" fileid="9" />
-                <SequencePoint vc="2" uspid="55" ordinal="14" sl="55" sc="1" el="55" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="1" uspid="50" ordinal="10" sl="50" sc="1" el="50" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="1" uspid="51" ordinal="11" sl="51" sc="1" el="51" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="1" uspid="52" ordinal="12" sl="52" sc="1" el="52" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="1" uspid="53" ordinal="13" sl="53" sc="1" el="53" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="3" uspid="55" ordinal="14" sl="55" sc="1" el="55" ec="2" bec="0" bev="0" fileid="9" />
               </SequencePoints>
               <BranchPoints>
                 <BranchPoint vc="1" uspid="41" ordinal="0" path="0" offset="40" offsetend="42" sl="41" fileid="9" />
                 <BranchPoint vc="1" uspid="41" ordinal="1" path="1" offset="40" offsetend="93" sl="41" fileid="9" />
               </BranchPoints>
-              <MethodPoint vc="11" uspid="0" p8:type="SequencePoint" ordinal="1" offset="1" sc="0" sl="35" ec="1" el="55" bec="0" bev="0" fileid="9" xmlns:p8="xsi" />
+              <MethodPoint vc="15" uspid="0" p8:type="SequencePoint" ordinal="1" offset="1" sc="0" sl="35" ec="1" el="55" bec="0" bev="0" fileid="9" xmlns:p8="xsi" />
             </Method>
             <Method cyclomaticComplexity="1" nPathComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="True" isGetter="False" isSetter="False" isStatic="True">
               <Summary numSequencePoints="5" visitedSequencePoints="5" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
@@ -715,11 +715,11 @@
               <Name>System.Void ControleDeContatos.Controllers.AlterarSenhaController::.ctor(ControleDeContatos.Repository.IUsuarioRepository,ControleDeContatos.Services.Interfaces.ISessao)</Name>
               <FileRef uid="9" />
               <SequencePoints>
-                <SequencePoint vc="3" uspid="22" ordinal="0" sl="22" sc="1" el="22" ec="2" bec="0" bev="0" fileid="9" />
-                <SequencePoint vc="3" uspid="23" ordinal="1" sl="23" sc="1" el="23" ec="2" bec="0" bev="0" fileid="9" />
-                <SequencePoint vc="3" uspid="24" ordinal="2" sl="24" sc="1" el="24" ec="2" bec="0" bev="0" fileid="9" />
-                <SequencePoint vc="3" uspid="25" ordinal="3" sl="25" sc="1" el="25" ec="2" bec="0" bev="0" fileid="9" />
-                <SequencePoint vc="3" uspid="26" ordinal="4" sl="26" sc="1" el="26" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="4" uspid="22" ordinal="0" sl="22" sc="1" el="22" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="4" uspid="23" ordinal="1" sl="23" sc="1" el="23" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="4" uspid="24" ordinal="2" sl="24" sc="1" el="24" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="4" uspid="25" ordinal="3" sl="25" sc="1" el="25" ec="2" bec="0" bev="0" fileid="9" />
+                <SequencePoint vc="4" uspid="26" ordinal="4" sl="26" sc="1" el="26" ec="2" bec="0" bev="0" fileid="9" />
               </SequencePoints>
               <BranchPoints />
               <MethodPoint vc="5" uspid="0" p8:type="SequencePoint" ordinal="2" offset="2" sc="0" sl="22" ec="1" el="26" bec="0" bev="0" fileid="9" xmlns:p8="xsi" />
@@ -1197,9 +1197,9 @@
         </Class>
       </Classes>
     </Module>
-    <Module hash="40937313-64C0-4B15-9C04-763F87F21753">
+    <Module hash="5BF29EC3-859C-48FD-9768-73F03E455E0D">
       <ModulePath>ControleDeContatos.Views.dll</ModulePath>
-      <ModuleTime>2023-05-30T07:54:46</ModuleTime>
+      <ModuleTime>2023-05-30T09:01:19</ModuleTime>
       <ModuleName>ControleDeContatos.Views</ModuleName>
       <Files />
       <Classes />

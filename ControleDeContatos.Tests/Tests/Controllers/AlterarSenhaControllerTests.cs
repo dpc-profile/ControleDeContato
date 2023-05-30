@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 using ControleDeContatos.Controllers;
 using ControleDeContatos.Models;
@@ -103,6 +100,37 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Assert.NotNull(viewResult.Model);
         }
 
+        [Fact]
+        public void TestarAlterar_Exception()
+        {
+            // Arrange
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            var mockRepo = new Mock<IUsuarioRepository>();
+            var mockSessao = new Mock<ISessao>();
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(s => s.BuscarSessaoUsuario())
+                      .Throws(new Exception());
+                      
+            var controller = new AlterarSenhaController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
+
+            // Assert
+            var result = controller.Alterar(alterarSenhaUsuario());
+
+            // Assert
+            // Verifica se a tempData deu MensagemErro
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de erro 
+            Assert.Matches("Ops, não conseguimos atualizado o usuario", controller.TempData["MensagemErro"].ToString());         
+            // Confere o se o tipo é viewResult
+            var viewResult = Assert.IsType<ViewResult>(result);
+            // Verifica se a view é para Index
+            Assert.Equal("Index", viewResult.ViewName);
+            // Verifica se retornou o alterarSenhaUsuario
+            Assert.NotNull(viewResult.Model);
+
+        }
         public UsuarioModel ModeloDadosUsuario()
         {
             var usuarioModel = new UsuarioModel()
