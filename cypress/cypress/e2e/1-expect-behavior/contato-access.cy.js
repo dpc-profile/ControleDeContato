@@ -2,26 +2,24 @@
 
 describe("Acesso a página de contatos", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:5000/Login/Sair");
-    cy.visit("http://localhost:5000");
+    cy.visit("Login/Sair");
 
     cy.get('[data-cy="login"]').type("teste");
     cy.get('[data-cy="senha"]').type("admin");
 
-    cy.get('[data-cy="submit"]').click()
+    cy.get('[data-cy="submit"]').click();
     cy.get('[data-cy="sair"]').should("be.visible");
 
     cy.get('[data-cy="contato"]').click();
   });
 
   it("Verificando página de Contatos", () => {
-
     cy.get(".display-4").contains("Listagem de contatos");
   });
 
   it("Adicionar novo contato", () => {
-    const nome = "Amanda";
-    const email = "amanda@gmail.com";
+    const nome = "Caio";
+    const email = "caio@gmail.com";
     const celular = "11 91234-8762";
 
     cy.get('[data-cy="criar"]').click();
@@ -67,7 +65,7 @@ describe("Acesso a página de contatos", () => {
     cy.get('[data-cy="confirmar"]').click();
 
     cy.get(".alert").contains("Contato apagado com sucesso");
-    
+
     cy.get("#table-contatos tr:last").should("not.contain.text", nome);
   });
 });

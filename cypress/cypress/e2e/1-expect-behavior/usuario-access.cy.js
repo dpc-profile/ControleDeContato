@@ -2,10 +2,9 @@
 
 describe("Acesso a página de usuários", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:5000/Login/Sair");
-    cy.visit("http://localhost:5000");
+    cy.visit("Login/Sair");
 
-    cy.get('[data-cy="login"]').type("sus");
+    cy.get('[data-cy="login"]').type("admin");
     cy.get('[data-cy="senha"]').type("admin");
 
     cy.get('[data-cy="submit"]').click();
