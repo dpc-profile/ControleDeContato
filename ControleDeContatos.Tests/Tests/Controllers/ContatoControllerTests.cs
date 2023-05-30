@@ -163,7 +163,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         }
 
         [Fact]
-        public void TestarApagar_ApagarTrue()
+        public void TestarApagar()
         {
             // Arrange            
             // Cria a variavel tempData
@@ -199,7 +199,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         }
 
         [Fact]
-        public void TestarAlterar_ValidModel_AtualizarNotNull()
+        public void TestarAlterar_ValidModel()
         {
             // Arrange
             // Cria um contato
@@ -312,7 +312,6 @@ namespace ControleDeContatos.Tests.Tests.Controllers
 
             return contatos;
         }
-
         private ContatoModel CriarUmContato()
         {
             ContatoModel contatos = new ContatoModel();
