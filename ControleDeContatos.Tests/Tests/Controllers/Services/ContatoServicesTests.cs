@@ -143,7 +143,35 @@ namespace ControleDeContatos.Tests.Tests.Controllers.Services
         [Fact]
         public void TestarBuscarContato()
         {
-            throw new NotImplementedException();
+            // Arrange
+            Mock<IContatoRepository> mockRepo = new Mock<IContatoRepository>();
+            mockRepo.Setup(s => s.ListarPorId(It.IsAny<int>()))
+                    .Returns(UmContato());
+
+            ContatoServices services = new ContatoServices(mockRepo.Object);
+
+            // Act
+            var resposta = services.BuscarContato(It.IsAny<int>());
+
+            // Assert
+            Assert.IsType<ContatoModel>(resposta);
+        }
+        
+        [Fact]
+        public void TestarBuscarContato_Null()
+        {
+            // Arrange
+            Mock<IContatoRepository> mockRepo = new Mock<IContatoRepository>();
+            mockRepo.Setup(s => s.ListarPorId(It.IsAny<int>()));
+
+            ContatoServices services = new ContatoServices(mockRepo.Object);
+
+            // Assert
+            var mensagem = Assert.Throws<Exception>(
+                // Act
+                () => services.BuscarContato(It.IsAny<int>())
+            );
+            Assert.Equal("Contato não existe", mensagem.Message);
         }
 
         private List<ContatoModel> VariosContatos()
