@@ -54,22 +54,18 @@ namespace ControleDeContatos.Repository
 
         }
 
-        public UsuarioModel Atualizar(UsuarioModel usuario)
+        public void Atualizar(UsuarioModel usuario)
         {
-            UsuarioModel usuarioDb = ListarPorId(usuario.Id);
+            try
+            {
+                _bancoContext.Usuarios.Update(usuario);
+                _bancoContext.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                throw new Exception("Erro ao atualizar o usuário no banco de dados");
+            }
 
-            if (usuarioDb == null) return null;
-
-            usuarioDb.Nome = usuario.Nome;
-            usuarioDb.Email = usuario.Email;
-            usuarioDb.Login = usuario.Login;
-            usuarioDb.Perfil = usuario.Perfil;
-            usuarioDb.DataAtualizacao = DateTime.Now;
-
-            _bancoContext.Usuarios.Update(usuarioDb);
-            _bancoContext.SaveChanges();
-
-            return usuarioDb;
         }
 
         public UsuarioModel AlterarSenha(AlterarSenhaModel alterarSenha)

@@ -93,34 +93,38 @@ namespace ControleDeContatos.Controllers
         [HttpPost]
         public IActionResult Alterar(UsuarioSemSenhaModel usuarioSemSenha)
         {
-            UsuarioModel usuario = null;
-
-            if (ModelState.IsValid)
+            try
             {
-                usuario = new UsuarioModel()
-                {
-                    Id = usuarioSemSenha.Id,
-                    Nome = usuarioSemSenha.Nome,
-                    Email = usuarioSemSenha.Email,
-                    Login = usuarioSemSenha.Login,
-                    Perfil = usuarioSemSenha.Perfil
-                };
+                UsuarioModel usuario = null;
 
-                UsuarioModel respostaAtualizar = _usuarioRepository.Atualizar(usuario);
-
-                if (respostaAtualizar == null)
+                if (ModelState.IsValid)
                 {
+                    usuario = new UsuarioModel()
+                    {
+                        Id = usuarioSemSenha.Id,
+                        Nome = usuarioSemSenha.Nome,
+                        Email = usuarioSemSenha.Email,
+                        Login = usuarioSemSenha.Login,
+                        Perfil = usuarioSemSenha.Perfil
+                    };
+
+                    _usuarioServices.AtualizarUsuario(usuario);
+
                     //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
-                    TempData["MensagemErro"] = $"Ops, não conseguimos atualizado o usuario, tente novamente.";
+                    TempData["MensagemSucesso"] = "Usuário atualizado com sucesso";
                     return RedirectToAction("Index");
                 }
 
-                //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
-                TempData["MensagemSucesso"] = "Usuário atualizado com sucesso";
+                return View("Editar", usuario);
+            }
+            catch (System.Exception erro)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos atualizado o usuario, tente novamente, detalhe do erro: {erro.Message}";
                 return RedirectToAction("Index");
             }
 
-            return View("Editar", usuario);
+
+
         }
     }
 }

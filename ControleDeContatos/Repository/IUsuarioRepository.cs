@@ -17,7 +17,7 @@ namespace ControleDeContatos.Repository
         
         void Adicionar(UsuarioModel usuario);
 
-        UsuarioModel Atualizar(UsuarioModel usuario);
+        void Atualizar(UsuarioModel usuario);
         
         UsuarioModel AlterarSenha(AlterarSenhaModel alterarSenha);
 

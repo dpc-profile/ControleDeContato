@@ -52,7 +52,17 @@ namespace ControleDeContatos.Services
 
         public void AtualizarUsuario(UsuarioModel usuario)
         {
-            throw new NotImplementedException();
+            UsuarioModel usuarioDb = _usuarioRepository.ListarPorId(usuario.Id);
+
+            if (usuarioDb == null) throw new Exception("Usuário não existe");
+
+            usuarioDb.Nome = usuario.Nome;
+            usuarioDb.Email = usuario.Email;
+            usuarioDb.Login = usuario.Login;
+            usuarioDb.Perfil = usuario.Perfil;
+            usuarioDb.DataAtualizacao = DateTime.Now;
+
+            _usuarioRepository.Atualizar(usuarioDb);
         }
 
         public UsuarioModel BuscarUsuario(int id)
