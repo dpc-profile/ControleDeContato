@@ -8,7 +8,8 @@ namespace ControleDeContatos.Repository
     public interface IUsuarioServices
     {
         UsuarioModel BuscarPorLogin(string login);
-        
+        UsuarioModel BuscarPorEmail(string email);
+                
         UsuarioModel BuscarPorEmailELogin(string email, string login);
 
         List<UsuarioModel> BuscarTodos();

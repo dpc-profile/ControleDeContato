@@ -22,8 +22,13 @@ namespace ControleDeContatos.Services
         {
             try
             {
+                if (_usuarioRepository.BuscarPorLogin(usuario.Login) != null) throw new Exception("Login já cadastrado");
+
+                if (_usuarioRepository.BuscarPorEmail(usuario.Email) != null) throw new Exception("Email já cadastrado");
+                
                 usuario.DataCadastro = DateTime.Now;
                 usuario.SetSenhaHash();
+
                 _usuarioRepository.Adicionar(usuario);
             }
             catch (System.Exception)
@@ -78,7 +83,6 @@ namespace ControleDeContatos.Services
             }
             catch (System.Exception)
             {
-
                 throw;
             }
 
