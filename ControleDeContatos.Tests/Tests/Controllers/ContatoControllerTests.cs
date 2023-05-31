@@ -115,6 +115,63 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         }
 
         [Fact]
+        public void TestarCriar_View()
+        {
+            // Arrange
+            var mockRepo = new Mock<IContatoServices>();
+            var mockSessao = new Mock<ISessao>();
+
+            // Cria o controller, com o mock do repository, da sessão e o tempData
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object);
+
+            // Act
+            // com o controller, criar os contatos do CriarUmContato()
+            var result = controller.Criar();
+
+            // Assert
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public void TestarCriar_Exception()
+        {
+            // Arrange            
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            var mockRepo = new Mock<IContatoServices>();
+            var mockSessao = new Mock<ISessao>();
+            //Faz o setup chamando o ApagarContato e estourando excessão
+            mockRepo.Setup(repo => repo.CriarContato(It.IsAny<ContatoModel>()))
+                    .Throws(new Exception());
+
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+            // Cria o controller, com o mock do repository, da sessão e o tempData
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
+
+
+            // Act
+            // Faz a chamada do Apagar
+            var result = controller.Criar(It.IsAny<ContatoModel>());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de erro
+            Assert.Matches("Ops, não conseguimos cadastrar o contato", controller.TempData["MensagemErro"].ToString()); 
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se o controlelr é null
+            Assert.Equal(null, redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+            
+        }
+
+        [Fact]
         public void TestarEditar()
         {
             // Arrange
@@ -199,6 +256,44 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         }
 
         [Fact]
+        public void TestarApagar_Exception()
+        {
+            // Arrange            
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+            // Cria o mock do repository e sessao
+            var mockRepo = new Mock<IContatoServices>();
+            var mockSessao = new Mock<ISessao>();
+            //Faz o setup chamando o ApagarContato e estourando excessão
+            mockRepo.Setup(repo => repo.ApagarContato(It.IsAny<int>()))
+                    .Throws(new Exception());
+
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+            // Cria o controller, com o mock do repository, da sessão e o tempData
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
+
+
+            // Act
+            // Faz a chamada do Apagar
+            var result = controller.Apagar(It.IsAny<int>());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de erro
+            Assert.Matches("Ops, não conseguimos apagar o contato", controller.TempData["MensagemErro"].ToString()); 
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se o controlelr é null
+            Assert.Equal(null, redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
+
+        [Fact]
         public void TestarAlterar_ValidModel()
         {
             // Arrange
@@ -270,7 +365,43 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Assert.IsAssignableFrom<ContatoModel>(viewResult.ViewData.Model);
         }
 
+        [Fact]
+        public void TestarAlterar_Exception()
+        {
+            // Arrange            
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
+            var mockRepo = new Mock<IContatoServices>();
+            var mockSessao = new Mock<ISessao>();
+            //Faz o setup chamando o ApagarContato e estourando excessão
+            mockRepo.Setup(repo => repo.AtualizarContato(It.IsAny<ContatoModel>()))
+                    .Throws(new Exception());
+
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
+                      .Returns(ModeloDadosUsuario());
+            // Cria o controller, com o mock do repository, da sessão e o tempData
+            var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
+
+
+            // Act
+            // Faz a chamada do Apagar
+            var result = controller.Alterar(It.IsAny<ContatoModel>());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de erro
+            Assert.Matches("Ops, não conseguimos atualizado o contato", controller.TempData["MensagemErro"].ToString()); 
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se o controlelr é null
+            Assert.Equal(null, redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
         public UsuarioModel ModeloDadosUsuario()
         {
             var usuarioModel = new UsuarioModel()
