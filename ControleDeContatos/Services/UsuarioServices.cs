@@ -50,44 +50,50 @@ namespace ControleDeContatos.Services
 
         }
 
-        public void AtualizarUsuario(UsuarioModel usuario)
+        public void AtualizarUsuario(UsuarioSemSenhaModel usuarioSemSenha)
         {
-            UsuarioModel usuarioDb = _usuarioRepository.ListarPorId(usuario.Id);
+            try
+            {
+                UsuarioModel usuario = new UsuarioModel()
+                {
+                    Id = usuarioSemSenha.Id,
+                    Nome = usuarioSemSenha.Nome,
+                    Email = usuarioSemSenha.Email,
+                    Login = usuarioSemSenha.Login,
+                    Perfil = usuarioSemSenha.Perfil
+                };
 
-            if (usuarioDb == null) throw new Exception("Usuário não existe");
+                UsuarioModel usuarioDb = _usuarioRepository.ListarPorId(usuario.Id);
 
-            usuarioDb.Nome = usuario.Nome;
-            usuarioDb.Email = usuario.Email;
-            usuarioDb.Login = usuario.Login;
-            usuarioDb.Perfil = usuario.Perfil;
-            usuarioDb.DataAtualizacao = DateTime.Now;
+                if (usuarioDb == null) throw new Exception("Usuário não existe");
 
-            _usuarioRepository.Atualizar(usuarioDb);
+                usuarioDb.Nome = usuario.Nome;
+                usuarioDb.Email = usuario.Email;
+                usuarioDb.Login = usuario.Login;
+                usuarioDb.Perfil = usuario.Perfil;
+                usuarioDb.DataAtualizacao = DateTime.Now;
+
+                _usuarioRepository.Atualizar(usuarioDb);
+                
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+
         }
 
         public UsuarioModel BuscarUsuario(int id)
         {
-            throw new NotImplementedException();
-        }
+            return _usuarioRepository.ListarPorId(id);
 
-        public UsuarioModel BuscarUsuarioPorEmail(string email)
-        {
-            throw new NotImplementedException();
-        }
-
-        public UsuarioModel BuscarUsuarioPorLogin(string login)
-        {
-            throw new NotImplementedException();
         }
 
         public List<UsuarioModel> BuscarUsuarios()
         {
-            throw new NotImplementedException();
+            return _usuarioRepository.BuscarTodos();
         }
 
-        public void EditarUsuario(UsuarioModel usuario)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

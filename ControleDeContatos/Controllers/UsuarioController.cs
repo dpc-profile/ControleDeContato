@@ -11,38 +11,26 @@ namespace ControleDeContatos.Controllers
     [PaginaRestritaSomenteAdmin]
     public class UsuarioController : Controller
     {
-        private readonly IUsuarioServices _usuarioRepository;
         private readonly IUSuarioServices _usuarioServices;
 
-
-        public UsuarioController(IUsuarioServices usuarioRepository, IUSuarioServices usuarioServices)
+        public UsuarioController(IUSuarioServices usuarioServices)
         {
-            _usuarioRepository = usuarioRepository;
             _usuarioServices = usuarioServices;
         }
 
         public IActionResult Index()
         {
-            List<UsuarioModel> allUsuarios = _usuarioRepository.BuscarTodos();
-
-            return View(allUsuarios);
-        }
-
-        public IActionResult Criar()
-        {
-            return View();
+            return View(_usuarioServices.BuscarUsuarios());
         }
 
         public IActionResult Editar(int id)
         {
-            UsuarioModel usuario = _usuarioRepository.ListarPorId(id);
-            return View(usuario);
+            return View(_usuarioServices.BuscarUsuario(id));
         }
 
         public IActionResult ApagarConfirmacao(int id)
         {
-            UsuarioModel usuario = _usuarioRepository.ListarPorId(id);
-            return View(usuario);
+            return View(_usuarioServices.BuscarUsuario(id));
         }
 
         public IActionResult Apagar(int id)
@@ -63,7 +51,10 @@ namespace ControleDeContatos.Controllers
 
         }
 
-
+        public IActionResult Criar()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult Criar(UsuarioModel usuario)
         {
@@ -95,36 +86,22 @@ namespace ControleDeContatos.Controllers
         {
             try
             {
-                UsuarioModel usuario = null;
-
                 if (ModelState.IsValid)
                 {
-                    usuario = new UsuarioModel()
-                    {
-                        Id = usuarioSemSenha.Id,
-                        Nome = usuarioSemSenha.Nome,
-                        Email = usuarioSemSenha.Email,
-                        Login = usuarioSemSenha.Login,
-                        Perfil = usuarioSemSenha.Perfil
-                    };
-
-                    _usuarioServices.AtualizarUsuario(usuario);
+                    _usuarioServices.AtualizarUsuario(usuarioSemSenha);
 
                     //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
                     TempData["MensagemSucesso"] = "Usuário atualizado com sucesso";
                     return RedirectToAction("Index");
                 }
 
-                return View("Editar", usuario);
+                return View("Editar");
             }
             catch (System.Exception erro)
             {
                 TempData["MensagemErro"] = $"Ops, não conseguimos atualizado o usuario, tente novamente, detalhe do erro: {erro.Message}";
                 return RedirectToAction("Index");
             }
-
-
-
         }
     }
 }
