@@ -4,17 +4,21 @@ using Microsoft.AspNetCore.Mvc;
 using ControleDeContatos.Repository;
 using ControleDeContatos.Models;
 using ControleDeContatos.Filters;
+using ControleDeContatos.Services.Interfaces;
 
 namespace ControleDeContatos.Controllers
 {
     [PaginaRestritaSomenteAdmin]
     public class UsuarioController : Controller
     {
-        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IUsuarioServices _usuarioRepository;
+        private readonly IUSuarioServices _usuarioServices;
 
-        public UsuarioController(IUsuarioRepository usuarioRepository)
+
+        public UsuarioController(IUsuarioServices usuarioRepository, IUSuarioServices usuarioServices)
         {
             _usuarioRepository = usuarioRepository;
+            _usuarioServices = usuarioServices;
         }
 
         public IActionResult Index()
@@ -28,7 +32,7 @@ namespace ControleDeContatos.Controllers
         {
             return View();
         }
-        
+
         public IActionResult Editar(int id)
         {
             UsuarioModel usuario = _usuarioRepository.ListarPorId(id);
@@ -45,16 +49,9 @@ namespace ControleDeContatos.Controllers
         {
             try
             {
-                bool isApagado = _usuarioRepository.Apagar(id);
+                _usuarioServices.ApagarUsuario(id);
 
-                if (isApagado)
-                {
-                    TempData["MensagemSucesso"] = "Usuário apagado com sucesso";
-                }
-                else
-                {
-                    TempData["MensagemErro"] = $"Ops, não conseguimos apagar o usuário";
-                }
+                TempData["MensagemSucesso"] = "Usuário apagado com sucesso";
 
                 return RedirectToAction("Index");
             }
@@ -74,14 +71,14 @@ namespace ControleDeContatos.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    usuario = _usuarioRepository.Adicionar(usuario);
+                    _usuarioServices.AdicionarUsuario(usuario);
 
                     //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
                     TempData["MensagemSucesso"] = "Usuário cadastrado com sucesso";
                     return RedirectToAction("Index");
                 }
 
-                return View(usuario);
+                return View();
             }
             catch (System.Exception erro)
             {
@@ -92,7 +89,7 @@ namespace ControleDeContatos.Controllers
 
 
         }
-        
+
         [HttpPost]
         public IActionResult Alterar(UsuarioSemSenhaModel usuarioSemSenha)
         {

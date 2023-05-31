@@ -7,7 +7,7 @@ using ControleDeContatos.Models;
 
 namespace ControleDeContatos.Repository
 {
-    public class UsuarioRepository : IUsuarioRepository
+    public class UsuarioRepository : IUsuarioServices
     {
         private readonly BancoContext _bancoContext;
         public UsuarioRepository()
@@ -22,29 +22,36 @@ namespace ControleDeContatos.Repository
 
         public UsuarioModel BuscarPorEmailELogin(string email, string login)
         {
-            return _bancoContext.Usuarios.FirstOrDefault(x => 
+            return _bancoContext.Usuarios.FirstOrDefault(x =>
                 x.Login.ToUpper() == login.ToUpper() && x.Email.ToUpper() == email.ToUpper());
         }
 
-        public UsuarioModel Adicionar(UsuarioModel usuario)
+        public void Adicionar(UsuarioModel usuario)
         {
-            usuario.DataCadastro = DateTime.Now;
-            usuario.SetSenhaHash();
-            _bancoContext.Usuarios.Add(usuario);
-            _bancoContext.SaveChanges();
-            return usuario;
+            try
+            {
+                _bancoContext.Usuarios.Add(usuario);
+                _bancoContext.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                throw new Exception("Erro ao adicionar o usuário do banco de dados");
+            }
+
         }
 
-        public bool Apagar(int id)
+        public void Apagar(UsuarioModel usuario)
         {
-            UsuarioModel usuarioDb = ListarPorId(id);
+            try
+            {
+                _bancoContext.Usuarios.Remove(usuario);
+                _bancoContext.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                throw new Exception("Erro ao apagar o usuário do banco de dados");
+            }
 
-            if (usuarioDb == null) return false;
-
-            _bancoContext.Usuarios.Remove(usuarioDb);
-            _bancoContext.SaveChanges();
-
-            return true;
         }
 
         public UsuarioModel Atualizar(UsuarioModel usuario)
@@ -71,9 +78,9 @@ namespace ControleDeContatos.Repository
 
             if (usuarioDB == null) throw new Exception("Usuário não encontrado!");
 
-            if (!usuarioDB.SenhaValida(alterarSenha.SenhaAtual)) throw new Exception ("Senha atual não confere!");
+            if (!usuarioDB.SenhaValida(alterarSenha.SenhaAtual)) throw new Exception("Senha atual não confere!");
 
-            if (usuarioDB.SenhaValida(alterarSenha.NovaSenha)) throw new Exception ("Nova senha deve ser diferente da senha atual!");
+            if (usuarioDB.SenhaValida(alterarSenha.NovaSenha)) throw new Exception("Nova senha deve ser diferente da senha atual!");
 
             usuarioDB.SetNovaSenha(alterarSenha.NovaSenha);
             usuarioDB.DataAtualizacao = DateTime.Now;
@@ -94,6 +101,6 @@ namespace ControleDeContatos.Repository
             return _bancoContext.Usuarios.FirstOrDefault(x => x.Id == id);
         }
 
-        
+
     }
 }

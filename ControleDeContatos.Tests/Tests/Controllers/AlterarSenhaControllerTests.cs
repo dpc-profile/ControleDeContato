@@ -21,7 +21,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         public void TestarIndex()
         {
             // Arrange
-            var mockRepo = new Mock<IUsuarioRepository>();
+            var mockRepo = new Mock<IUsuarioServices>();
             var mockSessao = new Mock<ISessao>();
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(s => s.BuscarSessaoUsuario())
@@ -46,7 +46,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
             
-            var mockRepo = new Mock<IUsuarioRepository>();
+            var mockRepo = new Mock<IUsuarioServices>();
             var mockSessao = new Mock<ISessao>();
 
             //Faz o setup chamando o AlterarSenha
@@ -78,7 +78,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
-            var mockRepo = new Mock<IUsuarioRepository>();
+            var mockRepo = new Mock<IUsuarioServices>();
             var mockSessao = new Mock<ISessao>();
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(s => s.BuscarSessaoUsuario())
@@ -107,7 +107,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
-            var mockRepo = new Mock<IUsuarioRepository>();
+            var mockRepo = new Mock<IUsuarioServices>();
             var mockSessao = new Mock<ISessao>();
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(s => s.BuscarSessaoUsuario())

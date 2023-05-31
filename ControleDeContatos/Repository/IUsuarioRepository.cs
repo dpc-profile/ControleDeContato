@@ -5,7 +5,7 @@ using ControleDeContatos.Models;
 
 namespace ControleDeContatos.Repository
 {
-    public interface IUsuarioRepository
+    public interface IUsuarioServices
     {
         UsuarioModel BuscarPorLogin(string login);
         
@@ -15,12 +15,12 @@ namespace ControleDeContatos.Repository
 
         UsuarioModel ListarPorId(int id);
         
-        UsuarioModel Adicionar(UsuarioModel usuario);
+        void Adicionar(UsuarioModel usuario);
 
         UsuarioModel Atualizar(UsuarioModel usuario);
         
         UsuarioModel AlterarSenha(AlterarSenhaModel alterarSenha);
 
-        bool Apagar(int id);
+        void Apagar(UsuarioModel usuario);
     }
 }
