@@ -5,7 +5,7 @@ using ControleDeContatos.Models;
 
 namespace ControleDeContatos.Repository
 {
-    public interface IUsuarioServices
+    public interface IUsuarioRepository
     {
         UsuarioModel BuscarPorLogin(string login);
         UsuarioModel BuscarPorEmail(string email);

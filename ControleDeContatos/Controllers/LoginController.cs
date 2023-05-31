@@ -15,11 +15,11 @@ namespace ControleDeContatos.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IUsuarioServices _usuarioRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
         private readonly ISessao _sessao;
         private readonly IEmail _email;
 
-        public LoginController(IUsuarioServices usuarioRepository, ISessao sessao, IEmail email)
+        public LoginController(IUsuarioRepository usuarioRepository, ISessao sessao, IEmail email)
         {
             _usuarioRepository = usuarioRepository;
             _sessao = sessao;

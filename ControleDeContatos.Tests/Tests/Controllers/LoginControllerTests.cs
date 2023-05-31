@@ -24,7 +24,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         public void TestarIndex_SessaoNotNull()
         {
             // Arrange
-            Mock<IUsuarioServices> mockRepo = new Mock<IUsuarioServices>();
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             var mockEmail = new Mock<IEmail>();
             // Faz setup buscando uma sessão e retornando o usuarioModel
@@ -48,7 +48,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         public void TestarIndex_SessaoNull()
         {
             // Arrange
-            Mock<IUsuarioServices> mockRepo = new Mock<IUsuarioServices>();
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
 
@@ -66,7 +66,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         public void TestarRedefinirSenha()
         {
             // Arrange
-            Mock<IUsuarioServices> mockRepo = new Mock<IUsuarioServices>();
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
 
@@ -87,7 +87,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             DefaultHttpContext httpContext = new DefaultHttpContext();
             TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
-            Mock<IUsuarioServices> mockRepo = new Mock<IUsuarioServices>();
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
             // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retorna o UsuarioModel
@@ -114,7 +114,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             DefaultHttpContext httpContext = new DefaultHttpContext();
             TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
-            Mock<IUsuarioServices> mockRepo = new Mock<IUsuarioServices>();
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
             // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retorna o UsuarioModelSenhaInvalida
@@ -144,7 +144,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             DefaultHttpContext httpContext = new DefaultHttpContext();
             TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
-            Mock<IUsuarioServices> mockRepo = new Mock<IUsuarioServices>();
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
             // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retornando nada
@@ -175,7 +175,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             DefaultHttpContext httpContext = new DefaultHttpContext();
             TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
-            Mock<IUsuarioServices> mockRepo = new Mock<IUsuarioServices>();
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
             // Faz setup chamando o BuscarPorLogin passando o LoginModel.login e retornando nada
@@ -202,7 +202,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             DefaultHttpContext httpContext = new DefaultHttpContext();
             TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
-            Mock<IUsuarioServices> mockRepo = new Mock<IUsuarioServices>();
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
 
@@ -239,7 +239,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             DefaultHttpContext httpContext = new DefaultHttpContext();
             TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
-            Mock<IUsuarioServices> mockRepo = new Mock<IUsuarioServices>();
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
 
@@ -276,7 +276,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             DefaultHttpContext httpContext = new DefaultHttpContext();
             TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
-            Mock<IUsuarioServices> mockRepo = new Mock<IUsuarioServices>();
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
 
@@ -303,7 +303,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             DefaultHttpContext httpContext = new DefaultHttpContext();
             TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
-            Mock<IUsuarioServices> mockRepo = new Mock<IUsuarioServices>();
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
 
@@ -325,7 +325,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         public void TestarSair()
         {
             // Arrange
-            Mock<IUsuarioServices> mockRepo = new Mock<IUsuarioServices>();
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
             Mock<IEmail> mockEmail = new Mock<IEmail>();
 

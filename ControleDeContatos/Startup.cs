@@ -36,7 +36,7 @@ namespace ControleDeContatos
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<IContatoRepository, ContatoRepository>();
-            services.AddScoped<IUsuarioServices, UsuarioRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IContatoServices, ContatoServices>();
             services.AddScoped<IUSuarioServices, UsuarioServices>();
             services.AddScoped<ISessao, Sessao>();

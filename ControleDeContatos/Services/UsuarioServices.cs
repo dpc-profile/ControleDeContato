@@ -11,9 +11,9 @@ namespace ControleDeContatos.Services
 {
     public class UsuarioServices : IUSuarioServices
     {
-        private readonly IUsuarioServices _usuarioRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
 
-        public UsuarioServices(IUsuarioServices usuarioRepository)
+        public UsuarioServices(IUsuarioRepository usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
         }
@@ -52,7 +52,6 @@ namespace ControleDeContatos.Services
             {
                 throw;
             }
-
         }
 
         public void AtualizarUsuario(UsuarioSemSenhaModel usuarioSemSenha)
@@ -91,13 +90,11 @@ namespace ControleDeContatos.Services
         public UsuarioModel BuscarUsuario(int id)
         {
             return _usuarioRepository.ListarPorId(id);
-
         }
 
         public List<UsuarioModel> BuscarUsuarios()
         {
             return _usuarioRepository.BuscarTodos();
         }
-
     }
 }

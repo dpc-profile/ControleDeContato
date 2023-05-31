@@ -16,10 +16,10 @@ namespace ControleDeContatos.Controllers
     [PaginaUsuarioLogado]
     public class AlterarSenhaController : Controller
     {
-        private readonly IUsuarioServices _usuarioRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
         private readonly ISessao _sessao;
 
-        public AlterarSenhaController(IUsuarioServices usuarioRepository, ISessao sessao)
+        public AlterarSenhaController(IUsuarioRepository usuarioRepository, ISessao sessao)
         {
             _usuarioRepository = usuarioRepository;
             _sessao = sessao;
