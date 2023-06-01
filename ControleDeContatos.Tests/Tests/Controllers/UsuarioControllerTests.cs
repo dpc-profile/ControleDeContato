@@ -174,7 +174,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         }
 
         [Fact]
-        public void TestaCriar_ValidState()
+        public void TestarCriar_ValidState()
         {
             // Arrange
             // Cria a variavel tempData
@@ -205,7 +205,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
         [Fact]
-        public void TestaCriar_InvalidState()
+        public void TestarCriar_InvalidState()
         {
             // Arrange
             // Cria a variavel tempData
@@ -230,6 +230,39 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Assert.Empty(controller.TempData);
             // Verifica se é uma view
             var viewResult = Assert.IsType<ViewResult>(result);
+        }
+        
+        [Fact]
+        public void TestarCriar_Exception()
+        {
+            // Arrange
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
+
+            var mockRepo = new Mock<IUSuarioServices>();
+            mockRepo.Setup(repo => repo.AdicionarUsuario(It.IsAny<UsuarioModel>()))
+                    .Throws(new Exception());
+
+            // Instanciar o controller usando o obj do mockRepo
+            var controller = new UsuarioController(mockRepo.Object){ TempData = tempData };
+
+            // Act
+            // Faz a chamada do Apagar
+            var result = controller.Criar(It.IsAny<UsuarioModel>());
+
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de erro
+            Assert.Matches("Ops, não conseguimos cadastrar o usuario", controller.TempData["MensagemErro"].ToString()); 
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se a controller é nula
+            Assert.Null(redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Index", redirectToActionResult.ActionName);
         }
     }
 }
