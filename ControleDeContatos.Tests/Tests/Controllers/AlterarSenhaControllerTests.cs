@@ -25,7 +25,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var mockSessao = new Mock<ISessao>();
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(s => s.BuscarSessaoUsuario())
-                      .Returns(ModeloDadosUsuario());
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
 
             // Instanciar o controller usando o obj do mockRepo
             var controller = new AlterarSenhaController(mockRepo.Object, mockSessao.Object);
@@ -50,15 +50,15 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var mockSessao = new Mock<ISessao>();
 
             //Faz o setup chamando o AlterarSenha
-            mockRepo.Setup(r => r.AlterarSenha(alterarSenhaUsuario()));
+            mockRepo.Setup(r => r.AlterarSenha(fakeUsuario.alterarSenhaUsuario()));
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(s => s.BuscarSessaoUsuario())
-                      .Returns(ModeloDadosUsuario());
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
 
             var controller = new AlterarSenhaController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
             // Act
-            var result = controller.Alterar(alterarSenhaUsuario());
+            var result = controller.Alterar(fakeUsuario.alterarSenhaUsuario());
 
             // Assert
             // Verifica se a tempData deu sucesso
@@ -82,14 +82,14 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var mockSessao = new Mock<ISessao>();
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(s => s.BuscarSessaoUsuario())
-                      .Returns(ModeloDadosUsuario());
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
 
             var controller = new AlterarSenhaController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
             // Act
             // Adiciona um model com um erro falso
             controller.ModelState.AddModelError("fakeError", "fakeError");
-            var result = controller.Alterar(alterarSenhaUsuario());
+            var result = controller.Alterar(fakeUsuario.alterarSenhaUsuario());
 
             // Assert
             // Confere o se o tipo é viewResult
@@ -116,7 +116,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var controller = new AlterarSenhaController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
             // Assert
-            var result = controller.Alterar(alterarSenhaUsuario());
+            var result = controller.Alterar(fakeUsuario.alterarSenhaUsuario());
 
             // Assert
             // Verifica se a tempData deu MensagemErro
@@ -131,32 +131,5 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Assert.NotNull(viewResult.Model);
 
         }
-        public UsuarioModel ModeloDadosUsuario()
-        {
-            var usuarioModel = new UsuarioModel()
-            {
-                Id = 1,
-                Nome = "Padronos Tester",
-                Login = "padronos",
-                Email = "padronos@gmail.com",
-                Senha = "teste",
-                Perfil = Enums.PerfilEnums.Padrao,
-                DataCadastro = DateTime.Now
-            };
-
-            return usuarioModel;
-        }
-        public AlterarSenhaModel alterarSenhaUsuario()
-        {
-            var alterarSenhaModel = new AlterarSenhaModel()
-            {
-                SenhaAtual = "123",
-                NovaSenha = "456",
-                ConfirmarNovaSenha = "456"
-            };
-
-            return alterarSenhaModel;
-        }
-
     }
 }

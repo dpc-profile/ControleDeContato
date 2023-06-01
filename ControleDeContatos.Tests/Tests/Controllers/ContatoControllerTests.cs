@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 using Xunit;
 using Moq;
-using ControleDeContatos.Repository;
 using ControleDeContatos.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using ControleDeContatos.Models;
@@ -17,7 +16,6 @@ namespace ControleDeContatos.Tests.Tests.Controllers
 {
     public class ContatoControllerTests
     {
-
         [Fact]
         public void TestaIndex()
         {
@@ -26,10 +24,10 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var mockSessao = new Mock<ISessao>();
 
             mockRepo.Setup(repo => repo.BuscarContatos(It.IsAny<int>()))
-                    .Returns(CriarVariosContatos());
+                    .Returns(fakeContato.VariosContatos());
 
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
-                      .Returns(ModeloDadosUsuario());
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
 
             // Instanciar o controller usando o obj do mockRepo
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object);
@@ -61,14 +59,14 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var mockSessao = new Mock<ISessao>();
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
-                      .Returns(ModeloDadosUsuario());
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
 
             // Cria o controller, com o mock do repository, da sessão e o tempData
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
             // Act
-            // com o controller, criar os contatos do CriarUmContato()
-            var result = controller.Criar(CriarUmContato());
+            // com o controller, criar os contatos do fakeContato.UmContato()
+            var result = controller.Criar(fakeContato.UmContato());
 
             // Assert
             // Verifica se a tempData deu sucesso
@@ -94,7 +92,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var mockSessao = new Mock<ISessao>();
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
-                      .Returns(ModeloDadosUsuario());
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
 
             // Cria o controller, com o mock do repository, da sessão e o tempData
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
@@ -103,7 +101,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             // Adiciona um model com um erro falso
             controller.ModelState.AddModelError("fakeError", "fakeError");
             // Chama o Criar passando um obj com informações de um contato
-            var result = controller.Criar(CriarUmContato());
+            var result = controller.Criar(fakeContato.UmContato());
 
             // Assert
             // Verifica se tem algma mensagem no temData
@@ -125,7 +123,6 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object);
 
             // Act
-            // com o controller, criar os contatos do CriarUmContato()
             var result = controller.Criar();
 
             // Assert
@@ -148,7 +145,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
 
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
-                      .Returns(ModeloDadosUsuario());
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
             // Cria o controller, com o mock do repository, da sessão e o tempData
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
@@ -180,7 +177,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             // Mock da Sessao
             var mockSessao = new Mock<ISessao>();
             mockRepo.Setup(repo => repo.BuscarContato(It.IsAny<int>()))
-                    .Returns(CriarUmContato());
+                    .Returns(fakeContato.UmContato());
             // Instanciar o controller usando o obj do mockRepo
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object);
 
@@ -204,7 +201,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             // Mock da Sessao
             var mockSessao = new Mock<ISessao>();
             mockRepo.Setup(repo => repo.BuscarContato(It.IsAny<int>()))
-                    .Returns(CriarUmContato());
+                    .Returns(fakeContato.UmContato());
             // Instanciar o controller usando o obj do mockRepo
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object);
 
@@ -234,7 +231,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
 
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
-                      .Returns(ModeloDadosUsuario());
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
             // Cria o controller, com o mock do repository, da sessão e o tempData
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
@@ -271,7 +268,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
 
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
-                      .Returns(ModeloDadosUsuario());
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
             // Cria o controller, com o mock do repository, da sessão e o tempData
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
@@ -316,7 +313,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             mockRepo.Setup(repo => repo.AtualizarContato(It.IsAny<ContatoModel>()));
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
-                      .Returns(ModeloDadosUsuario());
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
             // Cria o controller, com o mock do repository, da sessão e o tempData
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
@@ -345,7 +342,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var mockSessao = new Mock<ISessao>();
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
-                      .Returns(ModeloDadosUsuario());
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
 
             // Cria o controller, com o mock do repository, da sessão e o tempData
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object);
@@ -381,7 +378,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
 
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(repo => repo.BuscarSessaoUsuario())
-                      .Returns(ModeloDadosUsuario());
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
             // Cria o controller, com o mock do repository, da sessão e o tempData
             var controller = new ContatoController(mockRepo.Object, mockSessao.Object) { TempData = tempData };
 
@@ -400,57 +397,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             // Verifica se foi redirecionado para Index do controller
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
-        public UsuarioModel ModeloDadosUsuario()
-        {
-            var usuarioModel = new UsuarioModel()
-            {
-                Id = 1,
-                Nome = "Padronos Tester",
-                Login = "padronos",
-                Email = "padronos@gmail.com",
-                Senha = "teste",
-                Perfil = Enums.PerfilEnums.Padrao,
-                DataCadastro = DateTime.Now,
-                Contatos = CriarVariosContatos(),
-
-            };
-
-            return usuarioModel;
-        }
-        private List<ContatoModel> CriarVariosContatos()
-        {
-            var contatos = new List<ContatoModel>();
-
-            contatos.Add(new ContatoModel()
-            {
-                Id = 1,
-                Nome = "Amilton Teste",
-                Email = "amilton@teste.com",
-                Celular = "11 98765-1234",
-                UsuarioId = 1,
-            });
-
-            contatos.Add(new ContatoModel()
-            {
-                Id = 2,
-                Nome = "Rodrigo Teste",
-                Email = "rodrigo@teste.com",
-                Celular = "11 98765-1234",
-                UsuarioId = 1,
-            });
-
-            return contatos;
-        }
-        private ContatoModel CriarUmContato()
-        {
-            ContatoModel contatos = new ContatoModel();
-
-            contatos.Id = 3;
-            contatos.Nome = "Arlindo Tester";
-            contatos.Email = "arlindo@teste.com";
-            contatos.Celular = "11 94325-1234";
-
-            return contatos;
-        }
+       
+        
     }
 }

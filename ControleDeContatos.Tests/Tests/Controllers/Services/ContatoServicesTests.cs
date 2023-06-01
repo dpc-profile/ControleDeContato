@@ -51,12 +51,12 @@ namespace ControleDeContatos.Tests.Tests.Controllers.Services
             // Arrange
             Mock<IContatoRepository> mockRepo = new Mock<IContatoRepository>();
             mockRepo.Setup(s => s.ListarPorId(It.IsAny<int>()))
-                    .Returns(UmContato());
+                    .Returns(fakeContato.UmContato());
 
             ContatoServices services = new ContatoServices(mockRepo.Object);
 
             // Act
-            services.AtualizarContato(UmContato());
+            services.AtualizarContato(fakeContato.UmContato());
         }
 
         [Fact]
@@ -71,7 +71,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers.Services
             // Assert
             var mensagem = Assert.Throws<Exception>(
                 // Act
-                () => services.AtualizarContato(UmContato())
+                () => services.AtualizarContato(fakeContato.UmContato())
             );
             Assert.Equal("Contato não existe", mensagem.Message);
         }
@@ -82,7 +82,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers.Services
             // Arrange
             Mock<IContatoRepository> mockRepo = new Mock<IContatoRepository>();
             mockRepo.Setup(s => s.ListarPorId(It.IsAny<int>()))
-                    .Returns(UmContato());
+                    .Returns(fakeContato.UmContato());
 
             ContatoServices services = new ContatoServices(mockRepo.Object);
 
@@ -113,7 +113,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers.Services
             // Arrange
             Mock<IContatoRepository> mockRepo = new Mock<IContatoRepository>();
             mockRepo.Setup(s => s.BuscarTodos(It.IsAny<int>()))
-                    .Returns(VariosContatos());
+                    .Returns(fakeContato.VariosContatos());
 
             ContatoServices services = new ContatoServices(mockRepo.Object);
 
@@ -146,7 +146,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers.Services
             // Arrange
             Mock<IContatoRepository> mockRepo = new Mock<IContatoRepository>();
             mockRepo.Setup(s => s.ListarPorId(It.IsAny<int>()))
-                    .Returns(UmContato());
+                    .Returns(fakeContato.UmContato());
 
             ContatoServices services = new ContatoServices(mockRepo.Object);
 
@@ -174,41 +174,5 @@ namespace ControleDeContatos.Tests.Tests.Controllers.Services
             Assert.Equal("Contato não existe", mensagem.Message);
         }
 
-        private List<ContatoModel> VariosContatos()
-        {
-            var contatos = new List<ContatoModel>();
-
-            contatos.Add(new ContatoModel()
-            {
-                Id = 1,
-                Nome = "Amilton Teste",
-                Email = "amilton@teste.com",
-                Celular = "11 98765-1234",
-                UsuarioId = 1,
-            });
-
-            contatos.Add(new ContatoModel()
-            {
-                Id = 2,
-                Nome = "Rodrigo Teste",
-                Email = "rodrigo@teste.com",
-                Celular = "11 98765-1234",
-                UsuarioId = 1,
-            });
-
-            return contatos;
-        }
-
-        private ContatoModel UmContato()
-        {
-            ContatoModel contatos = new ContatoModel();
-
-            contatos.Id = 3;
-            contatos.Nome = "Arlindo Tester";
-            contatos.Email = "arlindo@teste.com";
-            contatos.Celular = "11 94325-1234";
-
-            return contatos;
-        }
     }
 }

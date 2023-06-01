@@ -1,0 +1,34 @@
+using System;
+
+using ControleDeContatos.Models;
+
+namespace ControleDeContatos.Tests.Tests.Controllers
+{
+    public static class fakeUsuario
+    {
+        public static UsuarioModel ModeloDadosUsuario()
+        {
+            return new UsuarioModel()
+            {
+                Id = 1,
+                Nome = "Padronos Tester",
+                Login = "padronos",
+                Email = "padronos@gmail.com",
+                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",
+                Perfil = Enums.PerfilEnums.Padrao,
+                DataCadastro = DateTime.Now
+
+            };
+        }
+
+        public static AlterarSenhaModel alterarSenhaUsuario()
+        {
+            return new AlterarSenhaModel()
+            {
+                SenhaAtual = "123",
+                NovaSenha = "456",
+                ConfirmarNovaSenha = "456"
+            };
+        }
+    }
+}

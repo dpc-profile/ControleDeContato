@@ -20,7 +20,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers.Services
         {
             // Arrange
             var mockRepo = new Mock<IUsuarioRepository>();
-            mockRepo.Setup(s => s.Adicionar(It.IsAny<UsuarioModel>()));
+            mockRepo.Setup(s => s.BuscarPorLogin(It.IsAny<string>()));
 
             var services = new UsuarioServices(mockRepo.Object);
 
