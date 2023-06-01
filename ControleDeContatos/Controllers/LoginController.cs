@@ -14,19 +14,16 @@ namespace ControleDeContatos.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IUsuarioServices _usuarioServices;
         private readonly ILoginServices _loginServices;
         private readonly ISessao _sessao;
-        private readonly IEmail _email;
 
-        public LoginController(IUsuarioRepository usuarioRepository,
+        public LoginController(IUsuarioServices usuarioServices,
                                ISessao sessao,
-                               IEmail email,
                                ILoginServices loginServices)
         {
-            _usuarioRepository = usuarioRepository;
+            _usuarioServices = usuarioServices;
             _sessao = sessao;
-            _email = email;
             _loginServices = loginServices;
         }
 
@@ -82,33 +79,36 @@ namespace ControleDeContatos.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    UsuarioModel usuario = _usuarioRepository.BuscarPorEmailELogin(redefinirSenha.Email, redefinirSenha.Login);
+                    UsuarioModel usuario = _loginServices.ValidaUsuarioCadastrado(redefinirSenha.Email, redefinirSenha.Login);
 
-                    if (usuario != null)
-                    {
-                        string novaSenha = usuario.GerarNovaSenha();
-                        string mensagem = $"Sua nova senha é: {novaSenha}";
+                    string novaSenha = usuario.GerarNovaSenha();
+                    string mensagem = $"Sua nova senha é: {novaSenha}";
 
-                        //De momento, o envio de email precisa ser configurado com um outlook valido
-                        bool emailEnviado = _email.Enviar(usuario.Email, "Sistema de Contatos - Nova senha", mensagem);
+                    _loginServices.EnviarNovaSenha(usuario.Email, mensagem);
 
-                        if (emailEnviado)
-                        {
-                            _usuarioRepository.Atualizar(usuario);
-                            TempData["MensagemSucesso"] = $"Foi enviado para o email cadastrado uma nova senha.";
+                    _usuarioServices.AtualizarUsuarioComSenha(usuario);
 
-                        }
-                        else
-                        {
-                            TempData["MensagemErro"] = "Não conseguimos enviar o email, a senha não foi resetada, tente novamente";
-                        }
+                    TempData["MensagemSucesso"] = $"Foi enviado para o email informado uma nova senha.";
 
-                        return RedirectToAction("Index", "Login");
-                    }
+                    return RedirectToAction("Index", "Login");
 
-                    TempData["MensagemErro"] = "Não foi possivel redefinir sua senha, verifique os dados informados";
                 }
 
+                return View("Index");
+            }
+            catch (EmailNaoEncontradoException erro)
+            {
+                TempData["MensagemErro"] = $"{erro.Message}";
+                return View("Index");
+            }
+            catch (LoginNaoEncontradoException erro)
+            {
+                TempData["MensagemErro"] = $"{erro.Message}";
+                return View("Index");
+            }
+            catch (FalhaAoEnviarEmail erro)
+            {
+                TempData["MensagemErro"] = $"{erro.Message} A senha não foi resetada, tente novamente";
                 return View("Index");
             }
             catch (Exception erro)

@@ -12,10 +12,12 @@ namespace ControleDeContatos.Services
     public class LoginServices : ILoginServices
     {
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IEmail _email;
 
-        public LoginServices(IUsuarioRepository usuarioRepository)
+        public LoginServices(IUsuarioRepository usuarioRepository, IEmail email)
         {
             _usuarioRepository = usuarioRepository;
+            _email = email;
         }
 
         public void FazerLogin(LoginModel loginModel, ISessao sessao)
@@ -37,6 +39,38 @@ namespace ControleDeContatos.Services
                 throw;
             }
 
+        }
+
+        public UsuarioModel ValidaUsuarioCadastrado(string email, string login)
+        {
+            try
+            {
+                UsuarioModel usuario = _usuarioRepository.BuscarPorEmail(email);
+
+                if (usuario == null) throw new EmailNaoEncontradoException("O email informado não foi encontrado");
+
+                if (usuario.Login != login) throw new LoginNaoEncontradoException("O login informado não foi encontrado");
+
+                return usuario;
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public void EnviarNovaSenha(string email, string mensagem)
+        {
+            try
+            {
+                //De momento, o envio de email precisa ser configurado com um outlook valido
+                _email.Enviar(email, "Sistema de Contatos - Nova senha", mensagem);
+
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
         }
     }
 }

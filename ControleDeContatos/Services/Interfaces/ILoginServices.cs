@@ -10,5 +10,7 @@ namespace ControleDeContatos.Services.Interfaces
     public interface ILoginServices
     {
         public void FazerLogin(LoginModel loginModel, ISessao sessao);
+        public UsuarioModel ValidaUsuarioCadastrado(string email, string login);
+        public void EnviarNovaSenha(string email, string mensagem);
     }
 }

@@ -10,6 +10,7 @@ namespace ControleDeContatos.Services.Interfaces
         UsuarioModel BuscarUsuario(int id);
         void AdicionarUsuario(UsuarioModel usuario);
         void AtualizarUsuario(UsuarioSemSenhaModel usuarioSemSenha);
+        void AtualizarUsuarioComSenha(UsuarioModel usuarioModel);
         void ApagarUsuario(int id);
     }
 }

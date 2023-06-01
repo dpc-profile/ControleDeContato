@@ -86,6 +86,23 @@ namespace ControleDeContatos.Services
 
         }
 
+        public void AtualizarUsuarioComSenha(UsuarioModel usuarioModel)
+        {
+            try
+            {
+                UsuarioModel usuarioDb = _usuarioRepository.ListarPorId(usuarioModel.Id);
+
+                if (usuarioDb == null) throw new Exception("Usuário não existe");
+
+                _usuarioRepository.Atualizar(usuarioModel);
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
+
         public UsuarioModel BuscarUsuario(int id)
         {
             return _usuarioRepository.ListarPorId(id);

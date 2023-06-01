@@ -20,7 +20,7 @@ namespace ControleDeContatos.Services
             _configuration = configuration;
         }
 
-        public bool Enviar(string email, string assunto, string mensagem)
+        public void Enviar(string email, string assunto, string mensagem)
         {
             try
             {
@@ -46,13 +46,12 @@ namespace ControleDeContatos.Services
                     smtp.EnableSsl = true;
 
                     smtp.Send(mail);
-                    return true;
                 }
             }
             catch (System.Exception)
             {
                 // Criar Logs????
-                return false;
+                throw new FalhaAoEnviarEmail("Não conseguimos enviar o email.");
             }
         }
     }
