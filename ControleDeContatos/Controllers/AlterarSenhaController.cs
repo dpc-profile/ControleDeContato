@@ -20,11 +20,9 @@ namespace ControleDeContatos.Controllers
         private readonly IAlterarSenhaServices _alterarSenhaServices;
         private readonly ISessao _sessao;
 
-        public AlterarSenhaController(IUsuarioServices usuarioServices,
-                                      ISessao sessao,
+        public AlterarSenhaController(ISessao sessao,
                                       IAlterarSenhaServices alterarSenhaServices)
         {
-            _usuarioServices = usuarioServices;
             _sessao = sessao;
             _alterarSenhaServices = alterarSenhaServices;
         }
