@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using ControleDeContatos.Models;
-using ControleDeContatos.Repository;
 using ControleDeContatos.Services.Interfaces;
 
 namespace ControleDeContatos.Controllers
@@ -88,7 +87,7 @@ namespace ControleDeContatos.Controllers
 
                     _usuarioServices.AtualizarUsuarioComSenha(usuario);
 
-                    TempData["MensagemSucesso"] = $"Foi enviado para o email informado uma nova senha.";
+                    TempData["MensagemSucesso"] = "Foi enviado para o email informado uma nova senha.";
 
                     return RedirectToAction("Index", "Login");
 
@@ -99,17 +98,17 @@ namespace ControleDeContatos.Controllers
             catch (EmailNaoEncontradoException erro)
             {
                 TempData["MensagemErro"] = $"{erro.Message}";
-                return View("Index");
+                return View("RedefinirSenha");
             }
             catch (LoginNaoEncontradoException erro)
             {
                 TempData["MensagemErro"] = $"{erro.Message}";
-                return View("Index");
+                return View("RedefinirSenha");
             }
             catch (FalhaAoEnviarEmail erro)
             {
                 TempData["MensagemErro"] = $"{erro.Message} A senha não foi resetada, tente novamente";
-                return View("Index");
+                return View("RedefinirSenha");
             }
             catch (Exception erro)
             {
