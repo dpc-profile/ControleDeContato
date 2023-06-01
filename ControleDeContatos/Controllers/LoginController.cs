@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 using ControleDeContatos.Models;
 using ControleDeContatos.Repository;
@@ -16,14 +15,19 @@ namespace ControleDeContatos.Controllers
     public class LoginController : Controller
     {
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly ILoginServices _loginServices;
         private readonly ISessao _sessao;
         private readonly IEmail _email;
 
-        public LoginController(IUsuarioRepository usuarioRepository, ISessao sessao, IEmail email)
+        public LoginController(IUsuarioRepository usuarioRepository,
+                               ISessao sessao,
+                               IEmail email,
+                               ILoginServices loginServices)
         {
             _usuarioRepository = usuarioRepository;
             _sessao = sessao;
             _email = email;
+            _loginServices = loginServices;
         }
 
         public IActionResult Index()
@@ -45,26 +49,23 @@ namespace ControleDeContatos.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    UsuarioModel usuario = _usuarioRepository.BuscarPorLogin(loginModel.Login);
+                    _loginServices.FazerLogin(loginModel, _sessao);
 
-                    if (usuario != null)
-                    {
-                        if (usuario.SenhaValida(loginModel.Senha))
-                        {
-                            _sessao.CriarSessaoUsuario(usuario);
-                            return RedirectToAction("Index", "Home");
-                        }
-
-                        TempData["MensagemErro"] = "Senha inválida";
-                    }
-                    else
-                    {
-                        TempData["MensagemErro"] = "Usuário inválido";
-                    }
+                    return RedirectToAction("Index", "Home");
                 }
 
                 return View("Index");
 
+            }
+            catch (UsuarioInvalidoException erro)
+            {
+                TempData["MensagemErro"] = $"{erro.Message}";
+                return RedirectToAction("Index");
+            }
+            catch (SenhaInvalidaException erro)
+            {
+                TempData["MensagemErro"] = $"{erro.Message}";
+                return RedirectToAction("Index");
             }
             catch (Exception erro)
             {
@@ -90,7 +91,7 @@ namespace ControleDeContatos.Controllers
 
                         //De momento, o envio de email precisa ser configurado com um outlook valido
                         bool emailEnviado = _email.Enviar(usuario.Email, "Sistema de Contatos - Nova senha", mensagem);
-                        
+
                         if (emailEnviado)
                         {
                             _usuarioRepository.Atualizar(usuario);

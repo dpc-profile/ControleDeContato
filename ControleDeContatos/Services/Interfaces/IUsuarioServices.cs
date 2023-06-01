@@ -4,7 +4,7 @@ using ControleDeContatos.Models;
 
 namespace ControleDeContatos.Services.Interfaces
 {
-    public interface IUSuarioServices
+    public interface IUsuarioServices
     {
         List<UsuarioModel> BuscarUsuarios() ;
         UsuarioModel BuscarUsuario(int id);

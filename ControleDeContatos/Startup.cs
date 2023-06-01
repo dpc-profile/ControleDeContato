@@ -38,7 +38,8 @@ namespace ControleDeContatos
             services.AddScoped<IContatoRepository, ContatoRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IContatoServices, ContatoServices>();
-            services.AddScoped<IUSuarioServices, UsuarioServices>();
+            services.AddScoped<IUsuarioServices, UsuarioServices>();
+            services.AddScoped<ILoginServices, LoginServices>();
             services.AddScoped<ISessao, Sessao>();
             services.AddScoped<IEmail, Email>();
             

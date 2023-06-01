@@ -11,9 +11,9 @@ namespace ControleDeContatos.Controllers
     [PaginaRestritaSomenteAdmin]
     public class UsuarioController : Controller
     {
-        private readonly IUSuarioServices _usuarioServices;
+        private readonly IUsuarioServices _usuarioServices;
 
-        public UsuarioController(IUSuarioServices usuarioServices)
+        public UsuarioController(IUsuarioServices usuarioServices)
         {
             _usuarioServices = usuarioServices;
         }

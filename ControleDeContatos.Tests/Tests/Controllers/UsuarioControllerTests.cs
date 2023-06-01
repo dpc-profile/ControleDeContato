@@ -23,7 +23,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         public void TestarIndex()
         {
             // Arrange
-            var mockRepo = new Mock<IUSuarioServices>();
+            var mockRepo = new Mock<IUsuarioServices>();
 
             mockRepo.Setup(repo => repo.BuscarUsuarios())
                     .Returns(fakeUsuario.VariosUsuarios());
@@ -49,7 +49,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         public void TestarEditar()
         {
             // Arrange
-            var mockRepo = new Mock<IUSuarioServices>();
+            var mockRepo = new Mock<IUsuarioServices>();
             var mockSessao = new Mock<ISessao>();
 
             mockRepo.Setup(repo => repo.BuscarUsuario(It.IsAny<int>()))
@@ -73,7 +73,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         public void TestarApagarConfirmacao()
         {
             // Arrange
-            var mockRepo = new Mock<IUSuarioServices>();
+            var mockRepo = new Mock<IUsuarioServices>();
 
             mockRepo.Setup(repo => repo.BuscarUsuario(It.IsAny<int>()))
                     .Returns(fakeUsuario.ModeloDadosUsuario());
@@ -100,7 +100,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
 
-            var mockRepo = new Mock<IUSuarioServices>();
+            var mockRepo = new Mock<IUsuarioServices>();
             mockRepo.Setup(repo => repo.ApagarUsuario(It.IsAny<int>()));
 
             // Instanciar o controller usando o obj do mockRepo
@@ -132,7 +132,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
 
-            var mockRepo = new Mock<IUSuarioServices>();
+            var mockRepo = new Mock<IUsuarioServices>();
             mockRepo.Setup(repo => repo.ApagarUsuario(It.IsAny<int>()))
                     .Throws(new Exception());
 
@@ -161,7 +161,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         public void TestarCriar_View()
         {
             // Arrange
-            var mockRepo = new Mock<IUSuarioServices>();
+            var mockRepo = new Mock<IUsuarioServices>();
 
             // Cria o controller, com o mock do repository, da sessão e o tempData
             var controller = new UsuarioController(mockRepo.Object);
@@ -181,7 +181,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
 
-            var mockRepo = new Mock<IUSuarioServices>();
+            var mockRepo = new Mock<IUsuarioServices>();
             mockRepo.Setup(repo => repo.AdicionarUsuario(It.IsAny<UsuarioModel>()));
 
             // Instanciar o controller usando o obj do mockRepo
@@ -209,7 +209,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         public void TestarCriar_InvalidState()
         {
             // Arrange
-            var mockRepo = new Mock<IUSuarioServices>();
+            var mockRepo = new Mock<IUsuarioServices>();
             mockRepo.Setup(repo => repo.AdicionarUsuario(It.IsAny<UsuarioModel>()));
 
             // Instanciar o controller usando o obj do mockRepo
@@ -235,7 +235,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
 
-            var mockRepo = new Mock<IUSuarioServices>();
+            var mockRepo = new Mock<IUsuarioServices>();
             mockRepo.Setup(repo => repo.AdicionarUsuario(It.IsAny<UsuarioModel>()))
                     .Throws(new Exception());
 
@@ -268,7 +268,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
 
-            var mockRepo = new Mock<IUSuarioServices>();
+            var mockRepo = new Mock<IUsuarioServices>();
             mockRepo.Setup(repo => repo.AtualizarUsuario(It.IsAny<UsuarioSemSenhaModel>()));
 
             // Instanciar o controller usando o obj do mockRepo
@@ -300,7 +300,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
 
-            var mockRepo = new Mock<IUSuarioServices>();
+            var mockRepo = new Mock<IUsuarioServices>();
 
             // Instanciar o controller usando o obj do mockRepo
             var controller = new UsuarioController(mockRepo.Object){ TempData = tempData };
@@ -327,7 +327,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
 
-            var mockRepo = new Mock<IUSuarioServices>();
+            var mockRepo = new Mock<IUsuarioServices>();
             mockRepo.Setup(repo => repo.AtualizarUsuario(It.IsAny<UsuarioSemSenhaModel>()))
                     .Throws(new Exception());
 

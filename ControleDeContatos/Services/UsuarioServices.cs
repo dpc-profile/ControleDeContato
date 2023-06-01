@@ -9,7 +9,7 @@ using ControleDeContatos.Services.Interfaces;
 
 namespace ControleDeContatos.Services
 {
-    public class UsuarioServices : IUSuarioServices
+    public class UsuarioServices : IUsuarioServices
     {
         private readonly IUsuarioRepository _usuarioRepository;
 
