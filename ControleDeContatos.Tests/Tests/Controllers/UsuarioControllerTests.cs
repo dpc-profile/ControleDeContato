@@ -157,6 +157,52 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
 
+        [Fact]
+        public void TestarCriar_View()
+        {
+            // Arrange
+            var mockRepo = new Mock<IUSuarioServices>();
 
+            // Cria o controller, com o mock do repository, da sessão e o tempData
+            var controller = new UsuarioController(mockRepo.Object);
+
+            // Act
+            var result = controller.Criar();
+
+            // Assert
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public void TestaCriar_ValidState()
+        {
+            // Arrange
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
+
+            var mockRepo = new Mock<IUSuarioServices>();
+            mockRepo.Setup(repo => repo.AdicionarUsuario(It.IsAny<UsuarioModel>()));
+
+            // Instanciar o controller usando o obj do mockRepo
+            var controller = new UsuarioController(mockRepo.Object){ TempData = tempData };
+
+            // Act
+            // Faz a chamada do Apagar
+            var result = controller.Criar(It.IsAny<UsuarioModel>());
+
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemSucesso"));
+            // Verifica se a mensagem é de sucesso
+            Assert.True(controller.TempData.Values.Contains("Usuário cadastrado com sucesso"));
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se a controller é nula
+            Assert.Null(redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
     }
 }
