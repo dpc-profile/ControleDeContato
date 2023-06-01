@@ -204,6 +204,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             // Verifica se foi redirecionado para Index
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
+
         [Fact]
         public void TestarCriar_InvalidState()
         {
@@ -262,6 +263,38 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             // Verifica se a controller é nula
             Assert.Null(redirectToActionResult.ControllerName);
             // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
+
+        [Fact]
+        public void TestarAlterar_ValidState()
+        {
+            // Arrange
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
+
+            var mockRepo = new Mock<IUSuarioServices>();
+            mockRepo.Setup(repo => repo.AtualizarUsuario(It.IsAny<UsuarioSemSenhaModel>()));
+
+            // Instanciar o controller usando o obj do mockRepo
+            var controller = new UsuarioController(mockRepo.Object){ TempData = tempData };
+
+            // Act
+            // Faz a chamada do Apagar
+            var result = controller.Alterar(It.IsAny<UsuarioSemSenhaModel>());
+
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemSucesso"));
+            // Verifica se a mensagem é de sucesso
+            Assert.True(controller.TempData.Values.Contains("Usuário atualizado com sucesso"));
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se a controller é nula
+            Assert.Null(redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
     }
