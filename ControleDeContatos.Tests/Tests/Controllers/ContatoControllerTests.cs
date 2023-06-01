@@ -75,6 +75,8 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Assert.True(controller.TempData.Values.Contains("Contato cadastrado com sucesso"));
             // Verifica se o retorno é RedirectToAction
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se a controller é nula
+            Assert.Null(redirectToActionResult.ControllerName);
             // Verifica se foi redirecionado para Index
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
@@ -161,8 +163,8 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Assert.Matches("Ops, não conseguimos cadastrar o contato", controller.TempData["MensagemErro"].ToString()); 
             // Verifica se o retorno é RedirectToAction
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
-            // Verifica se o controlelr é null
-            Assert.Equal(null, redirectToActionResult.ControllerName);
+            // Verifica se a controller é nula
+            Assert.Null(redirectToActionResult.ControllerName);
             // Verifica se foi redirecionado para Index do controller
             Assert.Equal("Index", redirectToActionResult.ActionName);
             
@@ -284,8 +286,8 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Assert.Matches("Ops, não conseguimos apagar o contato", controller.TempData["MensagemErro"].ToString()); 
             // Verifica se o retorno é RedirectToAction
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
-            // Verifica se o controlelr é null
-            Assert.Equal(null, redirectToActionResult.ControllerName);
+            // Verifica se a controller é nula
+            Assert.Null(redirectToActionResult.ControllerName);
             // Verifica se foi redirecionado para Index do controller
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
@@ -394,6 +396,8 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Assert.Matches("Ops, não conseguimos atualizado o contato", controller.TempData["MensagemErro"].ToString()); 
             // Verifica se o retorno é RedirectToAction
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se a controller é nula
+            Assert.Null(redirectToActionResult.ControllerName);
             // Verifica se foi redirecionado para Index do controller
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
