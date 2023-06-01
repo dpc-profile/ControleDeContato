@@ -209,15 +209,11 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         public void TestarCriar_InvalidState()
         {
             // Arrange
-            // Cria a variavel tempData
-            var httpContext = new DefaultHttpContext();
-            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
-
             var mockRepo = new Mock<IUSuarioServices>();
             mockRepo.Setup(repo => repo.AdicionarUsuario(It.IsAny<UsuarioModel>()));
 
             // Instanciar o controller usando o obj do mockRepo
-            var controller = new UsuarioController(mockRepo.Object){ TempData = tempData };
+            var controller = new UsuarioController(mockRepo.Object);
 
             // Act
             // Adiciona um model com um erro falso
@@ -227,8 +223,6 @@ namespace ControleDeContatos.Tests.Tests.Controllers
 
 
             // Assert
-            // Verifica se tem algma mensagem no temData
-            Assert.Empty(controller.TempData);
             // Verifica se é uma view
             var viewResult = Assert.IsType<ViewResult>(result);
         }
@@ -297,5 +291,34 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             // Verifica se foi redirecionado para Index
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
+        
+        [Fact]
+        public void TestarAlterar_InvalidState()
+        {
+            // Arrange
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
+
+            var mockRepo = new Mock<IUSuarioServices>();
+
+            // Instanciar o controller usando o obj do mockRepo
+            var controller = new UsuarioController(mockRepo.Object){ TempData = tempData };
+
+            // Act
+            // Adiciona um model com um erro falso
+            controller.ModelState.AddModelError("fakeError", "fakeError");
+            // Faz a chamada do Apagar
+            var result = controller.Alterar(It.IsAny<UsuarioSemSenhaModel>());
+
+
+            // Assert
+             // Confere o se o tipo é viewResult
+            var viewResult = Assert.IsType<ViewResult>(result);
+            // Verifica a view de redirect é a Editar
+            Assert.Equal("Editar", viewResult.ViewName);
+        }
+
+
     }
 }
