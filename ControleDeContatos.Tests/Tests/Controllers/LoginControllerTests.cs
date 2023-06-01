@@ -265,6 +265,32 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         }
 
         
+        [Fact]
+        public void TestarSair()
+        {
+            // Arrange
+            Mock<IUsuarioServices> mockUsuarioServices = new Mock<IUsuarioServices>();
+            Mock<ILoginServices> mockLoginServices = new Mock<ILoginServices>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(s => s.BuscarSessaoUsuario());
+            mockLoginServices.Setup(s => s.FazerLogin(It.IsAny<LoginModel>(), It.IsAny<ISessao>()))
+                             .Throws(new Exception());
 
+            var controller = new LoginController(
+                mockUsuarioServices.Object,
+                mockSessao.Object,
+                mockLoginServices.Object);
+
+            // Act
+            var result = controller.Sair();
+
+            // Verifica se o retorno é RedirectToAction
+            RedirectToActionResult redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se foi redirecionado para o controller Login
+            Assert.Equal("Login", redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
     }
 }
