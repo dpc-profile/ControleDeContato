@@ -204,5 +204,32 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             // Verifica se foi redirecionado para Index
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
+        [Fact]
+        public void TestaCriar_InvalidState()
+        {
+            // Arrange
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
+
+            var mockRepo = new Mock<IUSuarioServices>();
+            mockRepo.Setup(repo => repo.AdicionarUsuario(It.IsAny<UsuarioModel>()));
+
+            // Instanciar o controller usando o obj do mockRepo
+            var controller = new UsuarioController(mockRepo.Object){ TempData = tempData };
+
+            // Act
+            // Adiciona um model com um erro falso
+            controller.ModelState.AddModelError("fakeError", "fakeError");
+            // Faz a chamada do Apagar
+            var result = controller.Criar(It.IsAny<UsuarioModel>());
+
+
+            // Assert
+            // Verifica se tem algma mensagem no temData
+            Assert.Empty(controller.TempData);
+            // Verifica se é uma view
+            var viewResult = Assert.IsType<ViewResult>(result);
+        }
     }
 }

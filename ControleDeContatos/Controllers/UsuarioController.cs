@@ -55,7 +55,7 @@ namespace ControleDeContatos.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public IActionResult Criar(UsuarioModel usuario)
         {
