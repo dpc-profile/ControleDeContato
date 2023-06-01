@@ -21,7 +21,6 @@ namespace ControleDeContatos.Tests.Tests.Controllers
 
             };
         }
-
         public static List<UsuarioModel> VariosUsuarios()
         {
             List<UsuarioModel> usuarios = new List<UsuarioModel>();
@@ -59,7 +58,6 @@ namespace ControleDeContatos.Tests.Tests.Controllers
                 ConfirmarNovaSenha = "456"
             };
         }
-
         public static UsuarioSemSenhaModel ModeloUsuarioSemSenha()
         {
             return new UsuarioSemSenhaModel()
@@ -69,6 +67,36 @@ namespace ControleDeContatos.Tests.Tests.Controllers
                 Login = "padronos",
                 Email = "padronos@gmail.com",
                 Perfil = Enums.PerfilEnums.Padrao,
+            };
+        }
+        public static RedefinirSenhaModel ModeloRedefinirSenha()
+        {
+            return new RedefinirSenhaModel()
+            {
+                Login = "padronos",
+                Email = "padronos@gmail.com"
+            };
+        }
+        public static LoginModel ModeloLoginValido()
+        {
+            return new LoginModel()
+            {
+                Login = "padronos",
+                Senha = "teste"
+            };
+        }
+        public static UsuarioModel ModeloDadosUsuario_SenhaInvalida()
+        {
+            // A senha não está convertida em hash
+            return new UsuarioModel()
+            {
+                Id = 1,
+                Nome = "Padronos Tester",
+                Login = "padronos",
+                Email = "padronos@gmail.com",
+                Senha = "teste",
+                Perfil = Enums.PerfilEnums.Padrao,
+                DataCadastro = DateTime.Now
             };
         }
     }
