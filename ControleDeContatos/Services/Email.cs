@@ -51,7 +51,7 @@ namespace ControleDeContatos.Services
             catch (System.Exception)
             {
                 // Criar Logs????
-                throw new FalhaAoEnviarEmail("Não conseguimos enviar o email.");
+                throw new FalhaAoEnviarEmailException("Não conseguimos enviar o email.");
             }
         }
     }

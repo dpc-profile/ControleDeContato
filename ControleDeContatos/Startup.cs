@@ -40,6 +40,7 @@ namespace ControleDeContatos
             services.AddScoped<IContatoServices, ContatoServices>();
             services.AddScoped<IUsuarioServices, UsuarioServices>();
             services.AddScoped<ILoginServices, LoginServices>();
+            services.AddScoped<IAlterarSenhaServices, AlterarSenhaServices>();
             services.AddScoped<ISessao, Sessao>();
             services.AddScoped<IEmail, Email>();
             

@@ -21,14 +21,17 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         public void TestarIndex()
         {
             // Arrange
-            var mockRepo = new Mock<IUsuarioRepository>();
+            var mockUsuarioServices = new Mock<IUsuarioServices>();
+            var mockAlterarSenhaServices = new Mock<IAlterarSenhaServices>();
             var mockSessao = new Mock<ISessao>();
             // Faz setup buscando uma sessão e retornando o usuarioModel
             mockSessao.Setup(s => s.BuscarSessaoUsuario())
                       .Returns(fakeUsuario.ModeloDadosUsuario());
 
             // Instanciar o controller usando o obj do mockRepo
-            var controller = new AlterarSenhaController(mockRepo.Object, mockSessao.Object);
+            var controller = new AlterarSenhaController(mockUsuarioServices.Object,
+                                                        mockSessao.Object,
+                                                        mockAlterarSenhaServices.Object);
 
             // Act
             var result = controller.Index();

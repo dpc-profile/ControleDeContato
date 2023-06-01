@@ -105,7 +105,7 @@ namespace ControleDeContatos.Controllers
                 TempData["MensagemErro"] = $"{erro.Message}";
                 return View("RedefinirSenha");
             }
-            catch (FalhaAoEnviarEmail erro)
+            catch (FalhaAoEnviarEmailException erro)
             {
                 TempData["MensagemErro"] = $"{erro.Message} A senha não foi resetada, tente novamente";
                 return View("RedefinirSenha");

@@ -8,6 +8,7 @@ namespace ControleDeContatos.Repository
     public interface IUsuarioRepository
     {
         UsuarioModel BuscarPorLogin(string login);
+        
         UsuarioModel BuscarPorEmail(string email);
                 
         UsuarioModel BuscarPorEmailELogin(string email, string login);
@@ -20,8 +21,6 @@ namespace ControleDeContatos.Repository
 
         void Atualizar(UsuarioModel usuario);
         
-        UsuarioModel AlterarSenha(AlterarSenhaModel alterarSenha);
-
         void Apagar(UsuarioModel usuario);
     }
 }

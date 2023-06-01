@@ -16,13 +16,17 @@ namespace ControleDeContatos.Controllers
     [PaginaUsuarioLogado]
     public class AlterarSenhaController : Controller
     {
-        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IUsuarioServices _usuarioServices;
+        private readonly IAlterarSenhaServices _alterarSenhaServices;
         private readonly ISessao _sessao;
 
-        public AlterarSenhaController(IUsuarioRepository usuarioRepository, ISessao sessao)
+        public AlterarSenhaController(IUsuarioServices usuarioServices,
+                                      ISessao sessao,
+                                      IAlterarSenhaServices alterarSenhaServices)
         {
-            _usuarioRepository = usuarioRepository;
+            _usuarioServices = usuarioServices;
             _sessao = sessao;
+            _alterarSenhaServices = alterarSenhaServices;
         }
 
         public IActionResult Index()
@@ -40,8 +44,10 @@ namespace ControleDeContatos.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    _usuarioRepository.AlterarSenha(alterarSenha);
+                    _alterarSenhaServices.AlterarSenha(alterarSenha);
+
                     TempData["MensagemSucesso"] = "Senha atualizada com sucesso";
+
                     return View("Index", alterarSenha);
                 }
 
