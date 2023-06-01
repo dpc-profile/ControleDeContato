@@ -21,13 +21,25 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             };
         }
 
-        public static AlterarSenhaModel alterarSenhaUsuario()
+        public static AlterarSenhaModel ModeloAlterarSenhaUsuario()
         {
             return new AlterarSenhaModel()
             {
                 SenhaAtual = "123",
                 NovaSenha = "456",
                 ConfirmarNovaSenha = "456"
+            };
+        }
+
+        public static UsuarioSemSenhaModel ModeloUsuarioSemSenha()
+        {
+            return new UsuarioSemSenhaModel()
+            {
+                Id = 1,
+                Nome = "Padronos Tester",
+                Login = "padronos",
+                Email = "padronos@gmail.com",
+                Perfil = Enums.PerfilEnums.Padrao,
             };
         }
     }

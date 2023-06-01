@@ -35,7 +35,6 @@ namespace ControleDeContatos.Services
             {
                 throw;
             }
-
         }
 
         public void ApagarUsuario(int id)
