@@ -255,7 +255,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             // Verifica se a tempData deu sucesso
             Assert.True(controller.TempData.ContainsKey("MensagemErro"));
             // Verifica se a mensagem é de erro
-            Assert.Matches("Ops, não foi possivel fazer o login", controller.TempData["MensagemErro"].ToString()); 
+            Assert.Matches("Ops, não foi possivel fazer o login", controller.TempData["MensagemErro"].ToString());
             // Verifica se o retorno é RedirectToAction
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             // Verifica se a controller é nula
@@ -264,7 +264,95 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
 
-        
+        [Fact]
+        public void TestarEnviarLinkParaRedefinirSenha_ValidModel()
+        {
+            // Arrange
+            DefaultHttpContext httpContext = new DefaultHttpContext();
+            TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioServices> mockUsuarioServices = new Mock<IUsuarioServices>();
+            Mock<ILoginServices> mockLoginServices = new Mock<ILoginServices>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(s => s.BuscarSessaoUsuario());
+            mockLoginServices.Setup(s => s.ValidaUsuarioCadastrado(It.IsAny<string>(), It.IsAny<string>()))
+                             .Returns(fakeUsuario.ModeloDadosUsuario());
+
+            var controller = new LoginController(
+                mockUsuarioServices.Object,
+                mockSessao.Object,
+                mockLoginServices.Object)
+            { TempData = tempData };
+
+            var result = controller.EnviarLinkParaRedefinirSenha(fakeUsuario.ModeloRedefinirSenha());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemSucesso"));
+            // Verifica se a mensagem é de senha invalida
+            Assert.True(controller.TempData.Values.Contains("Foi enviado para o email informado uma nova senha."));
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se a controller é a login
+            Assert.Equal("Login", redirectToActionResult.ControllerName);
+            // Verifica se está redirecionando para a Index
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+
+        }
+
+        [Fact]
+        public void TestarEnviarLinkParaRedefinirSenha_InvalidModel()
+        {
+            // Arrange
+            DefaultHttpContext httpContext = new DefaultHttpContext();
+            TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioServices> mockUsuarioServices = new Mock<IUsuarioServices>();
+            Mock<ILoginServices> mockLoginServices = new Mock<ILoginServices>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(s => s.BuscarSessaoUsuario());
+            mockLoginServices.Setup(s => s.ValidaUsuarioCadastrado(It.IsAny<string>(), It.IsAny<string>()))
+                             .Returns(fakeUsuario.ModeloDadosUsuario());
+
+            var controller = new LoginController(
+                mockUsuarioServices.Object,
+                mockSessao.Object,
+                mockLoginServices.Object)
+            { TempData = tempData };
+
+            controller.ModelState.AddModelError("fakeError", "fakeError");
+            var result = controller.EnviarLinkParaRedefinirSenha(fakeUsuario.ModeloRedefinirSenha());
+
+            // Assert
+            // Confere o se o tipo é viewResult
+            var viewResult = Assert.IsType<ViewResult>(result);
+            // Verifica se a view é para Index
+            Assert.Equal("Index", viewResult.ViewName);
+        }
+
+        [Fact]
+        public void TestarEnviarLinkParaRedefinirSenha_Exception_EmailNaoEncontrado()
+        {
+            throw new NotImplementedException();
+        }
+        [Fact]
+        public void TestarEnviarLinkParaRedefinirSenha_Exception_LoginNaoEncontrado()
+        {
+            throw new NotImplementedException();
+        }
+        [Fact]
+        public void TestarEnviarLinkParaRedefinirSenha_Exception_FalhaAoEnviarEmail()
+        {
+            throw new NotImplementedException();
+        }
+        [Fact]
+        public void TestarEnviarLinkParaRedefinirSenha_Exception_Generico()
+        {
+            throw new NotImplementedException();
+        }
+
         [Fact]
         public void TestarSair()
         {
