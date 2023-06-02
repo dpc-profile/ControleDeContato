@@ -38,5 +38,30 @@ namespace ControleDeContatos.Tests.Tests.Services
             services.FazerLogin(fakeUsuario.ModeloLoginValido(), mockSessao.Object);
 
         }
+        [Fact]
+        public void TestarFazerLogin_Exception_UsuarioInvalido()
+        {
+            // Arrange
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+
+            // Mock do usuarioRepository retornando nada
+            mockRepo.Setup(s => s.BuscarPorLogin(It.IsAny<string>()));
+            
+            mockSessao.Setup(s => s.BuscarSessaoUsuario())
+                      .Returns(fakeUsuario.ModeloDadosUsuario());
+
+            var services = new LoginServices(mockRepo.Object, mockEmail.Object);
+
+
+            // Assert
+            var mensagem = Assert.Throws<UsuarioInvalidoException>(
+                // Act
+                () => services.FazerLogin(fakeUsuario.ModeloLoginValido(), mockSessao.Object)
+            );
+            Assert.Equal("Usuário inválido", mensagem.Message);
+
+        }
     }
 }
