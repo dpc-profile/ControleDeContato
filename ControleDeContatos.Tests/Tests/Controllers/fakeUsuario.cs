@@ -53,9 +53,27 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         {
             return new AlterarSenhaModel()
             {
-                SenhaAtual = "123",
-                NovaSenha = "456",
-                ConfirmarNovaSenha = "456"
+                SenhaAtual = "teste",
+                NovaSenha = "novaSenha",
+                ConfirmarNovaSenha = "novaSenha"
+            };
+        }
+        public static AlterarSenhaModel ModeloInvalidoAlterarSenhaUsuario_SenhaNaoConfere()
+        {
+            return new AlterarSenhaModel()
+            {
+                SenhaAtual = "teste",
+                NovaSenha = "novaSenha",
+                ConfirmarNovaSenha = "1111"
+            };
+        }
+        public static AlterarSenhaModel ModeloInvalidoAlterarSenhaUsuario_SenhaIguais()
+        {
+            return new AlterarSenhaModel()
+            {
+                SenhaAtual = "teste",
+                NovaSenha = "teste",
+                ConfirmarNovaSenha = "teste"
             };
         }
         public static UsuarioSemSenhaModel ModeloUsuarioSemSenha()
