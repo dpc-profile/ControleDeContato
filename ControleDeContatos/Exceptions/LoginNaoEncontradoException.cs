@@ -1,4 +1,5 @@
 [System.Serializable]
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public class LoginNaoEncontradoException : System.Exception
 {
     public LoginNaoEncontradoException() { }

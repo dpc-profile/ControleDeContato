@@ -1,4 +1,5 @@
 [System.Serializable]
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public class SenhaNaoConfereException : System.Exception
 {
     public SenhaNaoConfereException() { }

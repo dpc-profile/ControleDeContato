@@ -1,4 +1,5 @@
 [System.Serializable]
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public class FalhaAoEnviarEmailException : System.Exception
 {
     public FalhaAoEnviarEmailException() { }

@@ -1,4 +1,5 @@
 [System.Serializable]
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public class SenhaInvalidaException : System.Exception
 {
     public SenhaInvalidaException() { }
