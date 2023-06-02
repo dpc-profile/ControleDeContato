@@ -88,5 +88,26 @@ namespace ControleDeContatos.Tests.Tests.Services
             Assert.Equal("Senha inválida", mensagem.Message);
 
         }
+
+        [Fact]
+        public void TestarValidaUsuarioCadastrado()
+        {
+            // Arrange
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+
+            mockRepo.Setup(s => s.BuscarPorEmail(It.IsAny<string>()))
+                    .Returns(fakeUsuario.ModeloDadosUsuario());
+
+            var services = new LoginServices(mockRepo.Object, mockEmail.Object);
+
+
+            // Act
+            var result = services.ValidaUsuarioCadastrado(It.IsAny<string>(),
+                                                          fakeUsuario.ModeloDadosUsuario().Login);
+
+            // Assert
+            Assert.IsType<UsuarioModel>(result);
+        }
     }
 }
