@@ -7,6 +7,21 @@ namespace ControleDeContatos.Tests.Tests.Controllers
 {
     public static class fakeUsuario
     {
+        public static UsuarioModel UsuarioModel_Database()
+        {
+            // Senha teste
+            return new UsuarioModel()
+            {
+                Id = 2,
+                Nome = "Padronos Tester",
+                Login = "padronos",
+                Email = "padronos@gmail.com",
+                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",
+                Perfil = Enums.PerfilEnums.Padrao,
+                DataCadastro = DateTime.Now
+
+            };
+        }
         public static UsuarioModel ModeloDadosUsuario()
         {
             return new UsuarioModel()
@@ -26,7 +41,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             List<UsuarioModel> usuarios = new List<UsuarioModel>();
 
             usuarios.Add(new UsuarioModel()
-            {   
+            {
                 Id = 2,
                 Nome = "Paula Tester",
                 Login = "paulaT",
@@ -35,9 +50,9 @@ namespace ControleDeContatos.Tests.Tests.Controllers
                 Perfil = Enums.PerfilEnums.Padrao,
                 DataCadastro = DateTime.Now
             });
-            
+
             usuarios.Add(new UsuarioModel()
-            {   
+            {
                 Id = 3,
                 Nome = "Thomas Tester",
                 Login = "thomasT",

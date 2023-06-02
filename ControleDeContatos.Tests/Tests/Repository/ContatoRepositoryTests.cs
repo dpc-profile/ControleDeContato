@@ -13,7 +13,7 @@ namespace ControleDeContatos.Tests.Tests.Repository
 {
     public class ContatoRepositoryTests
     {
-        private IContatoRepository _repository;
+        private readonly IContatoRepository _repository;
         public ContatoRepositoryTests()
         {
             _repository = new ContatoRepository();

@@ -54,6 +54,7 @@ TestResult.xml
 #Test Report
 coveragereport/
 .sonarqube/
+coverage.xml
 !*/TestResults/
 
 # Build Results of an ATL Project
