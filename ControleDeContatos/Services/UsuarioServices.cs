@@ -92,7 +92,7 @@ namespace ControleDeContatos.Services
             {
                 UsuarioModel usuarioDb = _usuarioRepository.ListarPorId(usuarioModel.Id);
 
-                if (usuarioDb == null) throw new Exception("Usuário não existe");
+                if (usuarioDb == null) throw new UsuarioInvalidoException("Usuário não existe");
 
                 _usuarioRepository.Atualizar(usuarioModel);
             }

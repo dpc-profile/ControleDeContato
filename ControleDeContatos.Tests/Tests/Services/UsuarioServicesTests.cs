@@ -134,7 +134,37 @@ namespace ControleDeContatos.Tests.Tests.Services
 
             Assert.Equal("Usuário não existe", message.Message);
         }
+        [Fact]
+        public void TestarAtualizarUsuarioComSenha()
+        {
+            // Arrange
+            var mockRepo = new Mock<IUsuarioRepository>();
+            mockRepo.Setup(s => s.ListarPorId(It.IsAny<int>()))
+                    .Returns(fakeUsuario.ModeloDadosUsuario());
 
+            var services = new UsuarioServices(mockRepo.Object);
+
+            // Act
+            services.AtualizarUsuarioComSenha(fakeUsuario.ModeloDadosUsuario());
+        }
+        [Fact]
+        public void TestarAtualizarUsuarioComSenha_Exception_UsuarioInvalido()
+        {
+            // Arrange
+            var mockRepo = new Mock<IUsuarioRepository>();
+            mockRepo.Setup(s => s.ListarPorId(It.IsAny<int>()));
+
+            var services = new UsuarioServices(mockRepo.Object);
+
+
+            // Assert
+            var message = Assert.Throws<UsuarioInvalidoException>(
+                // Act
+                () => services.AtualizarUsuarioComSenha(fakeUsuario.ModeloDadosUsuario())
+            );
+
+            Assert.Equal("Usuário não existe", message.Message);
+        }
         [Fact]
         public void TestarBuscarUsuario()
         {
