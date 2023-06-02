@@ -8,6 +8,7 @@ using ControleDeContatos.Models;
 
 namespace ControleDeContatos.Filters
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class PaginaRestritaSomenteAdmin : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)

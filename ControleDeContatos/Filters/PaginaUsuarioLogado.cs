@@ -9,6 +9,7 @@ using ControleDeContatos.Models;
 namespace ControleDeContatos.Filters
 {
     // Filtro que valida se o usuário está logado
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class PaginaUsuarioLogado : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)
