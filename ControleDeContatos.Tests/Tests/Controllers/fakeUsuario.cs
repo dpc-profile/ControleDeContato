@@ -12,7 +12,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             // Senha teste
             return new UsuarioModel()
             {
-                Id = 2,
+                Id = 1,
                 Nome = "Padronos Tester",
                 Login = "padronos",
                 Email = "padronos@gmail.com",

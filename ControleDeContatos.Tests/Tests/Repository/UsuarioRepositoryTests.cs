@@ -19,13 +19,13 @@ namespace ControleDeContatos.Tests.Tests.Repository
         {
             _usuarioRepository = new UsuarioRepository();
 
-            FazerSetup();
+            OrganizarPreTeste();
 
         }
 
         public void Dispose()
         {
-            LimparSetup();
+            // LimparPosTeste();
         }
 
         [Fact]
@@ -38,14 +38,14 @@ namespace ControleDeContatos.Tests.Tests.Repository
             Assert.True(result.Count == 1);
         }
 
-        private void FazerSetup()
+        private void OrganizarPreTeste()
         {
             // Cria um contato no banco de dados
             _usuarioRepository.Adicionar(fakeUsuario.UsuarioModel_Database());
 
         }
 
-        private void LimparSetup()
+        private void LimparPosTeste()
         {
             // Limpar o db de teste
             var usuarios = _usuarioRepository.BuscarTodos();

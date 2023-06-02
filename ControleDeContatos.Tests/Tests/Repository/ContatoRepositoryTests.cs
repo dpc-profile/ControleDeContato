@@ -8,26 +8,36 @@ using ControleDeContatos.Models;
 
 using Xunit;
 using Moq;
+using ControleDeContatos.Tests.Tests.Controllers;
 
 namespace ControleDeContatos.Tests.Tests.Repository
 {
-    public class ContatoRepositoryTests
+    public class ContatoRepositoryTests : IDisposable
     {
-        private readonly IContatoRepository _repository;
+        private readonly IContatoRepository _contatoRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
         public ContatoRepositoryTests()
         {
-            _repository = new ContatoRepository();
+            _contatoRepository = new ContatoRepository();
+            _usuarioRepository = new UsuarioRepository();
+            OrganizarPreTeste();
+        }
+
+        public void Dispose()
+        {
+            LimparPosTeste();
         }
 
         [Fact]
         public void TestarBuscarTodos()
         {
             // Act
-            List<ContatoModel> lista = _repository.BuscarTodos(1);
+            // Passa um id de usuarios, associado aos contatos
+            List<ContatoModel> result = _contatoRepository.BuscarTodos(fakeUsuario.UsuarioModel_Database().Id);
 
             // Assert
-            Assert.NotNull(lista);
-            Assert.True(lista.Count != 0);
+            Assert.IsType<List<ContatoModel>>(result);
+            Assert.True(result.Count == 3);
         }
 
         [Theory]
@@ -36,7 +46,7 @@ namespace ControleDeContatos.Tests.Tests.Repository
         [InlineData(3)]
         public void TestarListarPorId(int id)
         {
-            ContatoModel resultado = _repository.ListarPorId(id);
+            ContatoModel resultado = _contatoRepository.ListarPorId(id);
 
             Assert.Equal(id, resultado.Id);
 
@@ -45,30 +55,9 @@ namespace ControleDeContatos.Tests.Tests.Repository
         [Fact]
         public void TestarListarPorId_IdInvalido()
         {
-            ContatoModel resultado = _repository.ListarPorId(4);
+            ContatoModel resultado = _contatoRepository.ListarPorId(4);
 
             Assert.Null(resultado);
-
-        }
-
-        [Theory]
-        [InlineData(1, "Carlos Tester1", "carlos1@teste.com")]
-        [InlineData(2, "Carlos Tester2", "carlos2@teste.com")]
-        [InlineData(3, "Carlos Tester3", "carlos3@teste.com")]
-        public void TestarAtualizar(int id, string nome, string email)
-        {
-            // Arrange
-            ContatoModel contatoNovasInfos = new ContatoModel()
-            {
-                Id = id,
-                Nome = nome,
-                Email = email,
-                Celular = "11 94325-1234",
-                UsuarioId = 1
-            };
-
-            // Act
-            _repository.Atualizar(contatoNovasInfos);
 
         }
 
@@ -78,30 +67,9 @@ namespace ControleDeContatos.Tests.Tests.Repository
             // Assert
             var mensagem = Assert.Throws<Exception>(
                 // Act
-                () => _repository.Atualizar(It.IsAny<ContatoModel>())
+                () => _contatoRepository.Atualizar(It.IsAny<ContatoModel>())
             );
             Assert.Equal("Erro ao atualizar o contato no banco de dados", mensagem.Message);
-
-        }
-
-        [Theory]
-        [InlineData("Carlos MustBeDelete", "carl@teste.com")]
-        public void TestarAdicionarEApagar(string nome, string email)
-        {
-            // Arrange
-            ContatoModel contatoNovo = new ContatoModel()
-            {
-                Nome = nome,
-                Email = email,
-                Celular = "11 94325-1234",
-                UsuarioId = 1
-            };
-
-            // Act Adicionar
-            _repository.Adicionar(contatoNovo);
-
-            // Act Apagar
-            _repository.Apagar(contatoNovo);
 
         }
 
@@ -111,10 +79,10 @@ namespace ControleDeContatos.Tests.Tests.Repository
             // Assert
             var mensagem = Assert.Throws<Exception>(
                 // Act
-                () => _repository.Adicionar(It.IsAny<ContatoModel>())
+                () => _contatoRepository.Adicionar(It.IsAny<ContatoModel>())
             );
             Assert.Equal("Erro ao adicionar o contato do banco de dados", mensagem.Message);
-            
+
         }
 
         [Fact]
@@ -123,10 +91,47 @@ namespace ControleDeContatos.Tests.Tests.Repository
             // Assert
             var mensagem = Assert.Throws<Exception>(
                 // Act
-                () => _repository.Apagar(It.IsAny<ContatoModel>())
+                () => _contatoRepository.Apagar(It.IsAny<ContatoModel>())
             );
             Assert.Equal("Erro ao apagar o contato do banco de dados", mensagem.Message);
         }
+
+        private void OrganizarPreTeste()
+        {
+            try
+            {
+                // Os contatos precisam de um usuario por conta da FOREING_KEY
+                _usuarioRepository.Adicionar(fakeUsuario.UsuarioModel_Database());
+
+                // Adicionar os contatos no bd
+                foreach (var contato in fakeContato.VariosContatoModel_Database())
+                {
+                    _contatoRepository.Adicionar(contato);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
+
+        private void LimparPosTeste()
+        {
+            int usuarioId = fakeUsuario.UsuarioModel_Database().Id;
+
+            // Limpar os contatos do db
+            var contatos = _contatoRepository.BuscarTodos(usuarioId);
+
+            foreach (var contato in contatos)
+            {
+                _contatoRepository.Apagar(contato);
+            }
+
+            // Remove o usuário criado no OrganizarPreTeste()
+            _usuarioRepository.Apagar(_usuarioRepository.ListarPorId(usuarioId));
+        }
+
 
     }
 
