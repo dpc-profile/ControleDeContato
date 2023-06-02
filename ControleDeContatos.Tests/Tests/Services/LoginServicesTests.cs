@@ -154,5 +154,18 @@ namespace ControleDeContatos.Tests.Tests.Services
 
             Assert.Equal("O login informado não foi encontrado", mensagem.Message);
         }
+        [Fact]
+        public void TestarEnviarNovaSenha()
+        {
+            // Arrange
+            Mock<IUsuarioRepository> mockRepo = new Mock<IUsuarioRepository>();
+            Mock<IEmail> mockEmail = new Mock<IEmail>();
+
+            mockEmail.Setup(s => s.Enviar(It.IsAny<string>(),It.IsAny<string>(),It.IsAny<string>()));
+
+            var services = new LoginServices(mockRepo.Object, mockEmail.Object);
+
+            services.EnviarNovaSenha(It.IsAny<string>(),It.IsAny<string>());
+        }
     }
 }
