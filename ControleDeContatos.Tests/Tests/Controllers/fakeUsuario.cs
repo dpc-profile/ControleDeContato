@@ -62,9 +62,9 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         {
             return new AlterarSenhaModel()
             {
-                SenhaAtual = "teste",
+                SenhaAtual = "outroTeste",
                 NovaSenha = "novaSenha",
-                ConfirmarNovaSenha = "1111"
+                ConfirmarNovaSenha = "novaSenha"
             };
         }
         public static AlterarSenhaModel ModeloInvalidoAlterarSenhaUsuario_SenhaIguais()

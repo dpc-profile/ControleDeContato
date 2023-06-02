@@ -51,5 +51,25 @@ namespace Services
 
             Assert.Equal("Usuário não encontrado!", message.Message);
         }
+        [Fact]
+        public void TestarAlterarSenha_Exception_SenhaNaoConfere()
+        {
+            // Arrange
+            var mockUsuarioServices = new Mock<IUsuarioServices>();
+
+            mockUsuarioServices.Setup(s => s.BuscarUsuario(It.IsAny<int>()))
+                               .Returns(fakeUsuario.ModeloDadosUsuario());
+
+            var services = new AlterarSenhaServices(mockUsuarioServices.Object);
+
+            // Assert
+            var message = Assert.Throws<SenhaNaoConfereException>(
+                // Act
+                () => services.AlterarSenha(fakeUsuario.ModeloInvalidoAlterarSenhaUsuario_SenhaNaoConfere())
+            );
+
+            Assert.Equal("Senha atual não confere!", message.Message);
+
+        }
     }
 }
