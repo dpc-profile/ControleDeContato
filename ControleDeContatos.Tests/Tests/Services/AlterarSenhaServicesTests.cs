@@ -71,5 +71,25 @@ namespace Services
             Assert.Equal("Senha atual não confere!", message.Message);
 
         }
+        [Fact]
+        public void TestarAlterarSenha_Exception_NovaSenhaIgualAtual()
+        {
+            // Arrange
+            var mockUsuarioServices = new Mock<IUsuarioServices>();
+
+            mockUsuarioServices.Setup(s => s.BuscarUsuario(It.IsAny<int>()))
+                               .Returns(fakeUsuario.ModeloDadosUsuario());
+
+            var services = new AlterarSenhaServices(mockUsuarioServices.Object);
+
+            // Assert
+            var message = Assert.Throws<NovaSenhaIgualAtualException>(
+                // Act
+                () => services.AlterarSenha(fakeUsuario.ModeloInvalidoAlterarSenhaUsuario_SenhaIguais())
+            );
+
+            Assert.Equal("Nova senha deve ser diferente da senha atual!", message.Message);
+
+        }
     }
 }
