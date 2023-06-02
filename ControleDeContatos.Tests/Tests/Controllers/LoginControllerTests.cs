@@ -335,7 +335,35 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         [Fact]
         public void TestarEnviarLinkParaRedefinirSenha_Exception_EmailNaoEncontrado()
         {
-            throw new NotImplementedException();
+            // Arrange
+            DefaultHttpContext httpContext = new DefaultHttpContext();
+            TempDataDictionary tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioServices> mockUsuarioServices = new Mock<IUsuarioServices>();
+            Mock<ILoginServices> mockLoginServices = new Mock<ILoginServices>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            // Faz setup buscando uma sessão e retornando o usuarioModel
+            mockSessao.Setup(s => s.BuscarSessaoUsuario());
+            mockLoginServices.Setup(s => s.ValidaUsuarioCadastrado(It.IsAny<string>(), It.IsAny<string>()))
+                             .Throws(new EmailNaoEncontradoException("O email informado não foi encontrado"));
+
+            var controller = new LoginController(
+                mockUsuarioServices.Object,
+                mockSessao.Object,
+                mockLoginServices.Object)
+            { TempData = tempData };
+
+            var result = controller.EnviarLinkParaRedefinirSenha(fakeUsuario.ModeloRedefinirSenha());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de senha invalida
+            Assert.True(controller.TempData.Values.Contains("O email informado não foi encontrado"));
+            // Confere o se o tipo é viewResult
+            var viewResult = Assert.IsType<ViewResult>(result);
+            // Verifica se a view é para Index
+            Assert.Equal("RedefinirSenha", viewResult.ViewName);
         }
         [Fact]
         public void TestarEnviarLinkParaRedefinirSenha_Exception_LoginNaoEncontrado()
