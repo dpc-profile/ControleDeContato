@@ -24,12 +24,6 @@ namespace ControleDeContatos.Repository
             return _bancoContext.Usuarios.FirstOrDefault(x => x.Email.ToUpper() == email.ToUpper());
         }
 
-        public UsuarioModel BuscarPorEmailELogin(string email, string login)
-        {
-            return _bancoContext.Usuarios.FirstOrDefault(x =>
-                x.Login.ToUpper() == login.ToUpper() && x.Email.ToUpper() == email.ToUpper());
-        }
-
         public void Adicionar(UsuarioModel usuario)
         {
             try

@@ -38,6 +38,40 @@ namespace ControleDeContatos.Tests.Tests.Repository
             Assert.True(result.Count != 0);
         }
 
+        [Fact]
+        public void TestarBuscarPorLogin()
+        {
+            var result = _usuarioRepository.BuscarPorLogin(
+                fakeUsuario.UsuarioModel_Database().Login);
+
+            Assert.NotNull(result);
+        }
+    
+        [Fact]
+        public void TestarBuscarPorLogin_DeveRetornarNulo()
+        {
+            var result = _usuarioRepository.BuscarPorLogin("");
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void TestarBuscarPorEmail()
+        {
+            var result = _usuarioRepository.BuscarPorEmail(
+                fakeUsuario.UsuarioModel_Database().Email);
+
+            Assert.NotNull(result);
+        }
+    
+        [Fact]
+        public void TestarBuscarPorEmail_DeveRetornarNulo()
+        {
+            var result = _usuarioRepository.BuscarPorEmail("");
+
+            Assert.Null(result);
+        }
+
         private void OrganizarPreTeste()
         {
             _usuarioRepository.Adicionar(fakeUsuario.UsuarioModel_Database());
