@@ -12,6 +12,21 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             // Senha teste
             return new UsuarioModel()
             {
+                Id = 2,
+                Nome = "Amanda Tester",
+                Login = "amanda",
+                Email = "amanda@gmail.com",
+                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",
+                Perfil = Enums.PerfilEnums.Padrao,
+                DataCadastro = DateTime.Now
+
+            };
+        }
+        public static UsuarioModel UsuarioModelParaContatos_Database()
+        {
+            // Senha teste
+            return new UsuarioModel()
+            {
                 Id = 1,
                 Nome = "Padronos Tester",
                 Login = "padronos",

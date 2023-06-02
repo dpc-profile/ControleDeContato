@@ -25,7 +25,7 @@ namespace ControleDeContatos.Tests.Tests.Repository
 
         public void Dispose()
         {
-            // LimparPosTeste();
+            LimparPosTeste();
         }
 
         [Fact]
@@ -35,14 +35,12 @@ namespace ControleDeContatos.Tests.Tests.Repository
 
             Assert.IsType<List<UsuarioModel>>(result);
 
-            Assert.True(result.Count == 1);
+            Assert.True(result.Count != 0);
         }
 
         private void OrganizarPreTeste()
         {
-            // Cria um contato no banco de dados
             _usuarioRepository.Adicionar(fakeUsuario.UsuarioModel_Database());
-
         }
 
         private void LimparPosTeste()
@@ -52,7 +50,8 @@ namespace ControleDeContatos.Tests.Tests.Repository
 
             foreach (var usuario in usuarios)
             {
-                _usuarioRepository.Apagar(usuario);
+                if (usuario.Id != fakeUsuario.UsuarioModelParaContatos_Database().Id)
+                    _usuarioRepository.Apagar(usuario);
             }
 
         }

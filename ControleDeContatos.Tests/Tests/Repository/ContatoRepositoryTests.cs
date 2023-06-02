@@ -20,6 +20,8 @@ namespace ControleDeContatos.Tests.Tests.Repository
         {
             _contatoRepository = new ContatoRepository();
             _usuarioRepository = new UsuarioRepository();
+            // Pra garantir que o db vai ficar limpo
+            LimparPosTeste();
             OrganizarPreTeste();
         }
 
@@ -33,7 +35,7 @@ namespace ControleDeContatos.Tests.Tests.Repository
         {
             // Act
             // Passa um id de usuarios, associado aos contatos
-            List<ContatoModel> result = _contatoRepository.BuscarTodos(fakeUsuario.UsuarioModel_Database().Id);
+            List<ContatoModel> result = _contatoRepository.BuscarTodos(fakeUsuario.UsuarioModelParaContatos_Database().Id);
 
             // Assert
             Assert.IsType<List<ContatoModel>>(result);
@@ -58,6 +60,24 @@ namespace ControleDeContatos.Tests.Tests.Repository
             ContatoModel resultado = _contatoRepository.ListarPorId(4);
 
             Assert.Null(resultado);
+
+        }
+
+        [Theory]
+        [InlineData(1, "Carlos 1", "carlos1@teste.com")]
+        [InlineData(2, "Carlos SuperTester", "carlos2@teste.com")]
+        [InlineData(3, "Carlos UltraTester", "carlos3@teste.com")]
+        public void TestarAtualizar(int id, string nome, string email)
+        {
+            // Arrange
+            ContatoModel contatoDb = _contatoRepository.ListarPorId(id);
+
+            contatoDb.Nome = nome;
+            contatoDb.Email = email;
+            contatoDb.Celular = "11 94325-1234";
+
+            // Act
+            _contatoRepository.Atualizar(contatoDb);
 
         }
 
@@ -98,41 +118,39 @@ namespace ControleDeContatos.Tests.Tests.Repository
 
         private void OrganizarPreTeste()
         {
-            try
-            {
-                // Os contatos precisam de um usuario por conta da FOREING_KEY
-                _usuarioRepository.Adicionar(fakeUsuario.UsuarioModel_Database());
 
-                // Adicionar os contatos no bd
-                foreach (var contato in fakeContato.VariosContatoModel_Database())
-                {
-                    _contatoRepository.Adicionar(contato);
-                }
-            }
-            catch (Exception e)
-            {
+            // Os contatos precisam de um usuario por conta da FOREING_KEY
+            _usuarioRepository.Adicionar(fakeUsuario.UsuarioModelParaContatos_Database());
 
+            // Adicionar os contatos no bd
+            foreach (var contato in fakeContato.VariosContatoModel_Database())
+            {
+                _contatoRepository.Adicionar(contato);
             }
 
         }
 
         private void LimparPosTeste()
         {
-            int usuarioId = fakeUsuario.UsuarioModel_Database().Id;
-
-            // Limpar os contatos do db
-            var contatos = _contatoRepository.BuscarTodos(usuarioId);
-
-            foreach (var contato in contatos)
+            try
             {
-                _contatoRepository.Apagar(contato);
+                int usuarioId = fakeUsuario.UsuarioModelParaContatos_Database().Id;
+
+                // Limpar os contatos do db
+                var contatos = _contatoRepository.BuscarTodos(usuarioId);
+
+                foreach (var contato in contatos)
+                {
+                    _contatoRepository.Apagar(contato);
+                }
+
+                // Remove o usuário criado no OrganizarPreTeste()
+                _usuarioRepository.Apagar(_usuarioRepository.ListarPorId(usuarioId));
+
             }
+            catch (System.Exception e) { }
 
-            // Remove o usuário criado no OrganizarPreTeste()
-            _usuarioRepository.Apagar(_usuarioRepository.ListarPorId(usuarioId));
         }
-
-
     }
 
 }
