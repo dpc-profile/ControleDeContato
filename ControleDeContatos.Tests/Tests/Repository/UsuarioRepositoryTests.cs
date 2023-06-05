@@ -7,6 +7,8 @@ using ControleDeContatos.Models;
 using ControleDeContatos.Repository;
 using ControleDeContatos.Tests.Tests.Controllers;
 
+using Moq;
+
 using Xunit;
 
 namespace ControleDeContatos.Tests.Tests.Repository
@@ -70,6 +72,17 @@ namespace ControleDeContatos.Tests.Tests.Repository
             var result = _usuarioRepository.BuscarPorEmail("");
 
             Assert.Null(result);
+        }
+
+        [Fact]
+        public void TestarAdicionarException()
+        {
+            var message = Assert.Throws<Exception>(
+                () => _usuarioRepository.Adicionar(It.IsAny<UsuarioModel>())
+            );
+            
+            Assert.Equal("Erro ao adicionar o usuário do banco de dados", message.Message);
+
         }
 
         private void OrganizarPreTeste()
