@@ -87,6 +87,17 @@ namespace ControleDeContatos.Tests.Tests.Repository
 
         }
 
+        [Fact]
+        public void TestarApagar_Exception()
+        {
+            var message = Assert.Throws<Exception>(
+                () => _usuarioRepository.Apagar(It.IsAny<UsuarioModel>())
+            );
+            
+            Assert.Equal("Erro ao apagar o usuário do banco de dados", message.Message);
+            
+
+        }
         private void Setup_OrganizarPreTeste()
         {
             _usuarioRepository.Adicionar(fakeUsuario.UsuarioModel_Database());
