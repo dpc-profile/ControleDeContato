@@ -62,35 +62,43 @@ namespace ControleDeContatos.Tests.Tests.Repository
         [Fact]
         public void TestarBuscarPorEmail()
         {
+            // Arrange
             var result = _usuarioRepository.BuscarPorEmail(
                 fakeUsuario.UsuarioModel_Database().Email);
 
+            // Act
             Assert.NotNull(result);
         }
 
         [Fact]
         public void TestarBuscarPorEmail_DeveRetornarNulo()
         {
+            // Arrange
             var result = _usuarioRepository.BuscarPorEmail("");
 
+            // Act
             Assert.Null(result);
         }
 
         [Fact]
         public void TestarAdicionarException()
         {
+            // Assert
             var message = Assert.Throws<Exception>(
+                // Act
                 () => _usuarioRepository.Adicionar(It.IsAny<UsuarioModel>())
             );
 
             Assert.Equal("Erro ao adicionar o usuário do banco de dados", message.Message);
 
         }
-
+       
         [Fact]
         public void TestarApagar_Exception()
         {
+            // Assert
             var message = Assert.Throws<Exception>(
+                // Act
                 () => _usuarioRepository.Apagar(It.IsAny<UsuarioModel>())
             );
 
@@ -100,6 +108,7 @@ namespace ControleDeContatos.Tests.Tests.Repository
         [Fact]
         public void TestarAtualizar()
         {
+            // Arrange
             UsuarioModel usuarioDb = _usuarioRepository.ListarPorId(
                 fakeUsuario.UsuarioModel_Database().Id);
 
@@ -109,13 +118,16 @@ namespace ControleDeContatos.Tests.Tests.Repository
             usuarioDb.Perfil = Enums.PerfilEnums.Admin;
             usuarioDb.DataAtualizacao = DateTime.Now;
 
+            // Act
             _usuarioRepository.Atualizar(usuarioDb);
         }
-        
+
         [Fact]
         public void TestarAtualizar_Exception()
         {
+            // Assert
             var message = Assert.Throws<Exception>(
+                // Act
                 () => _usuarioRepository.Atualizar(It.IsAny<UsuarioModel>())
             );
 

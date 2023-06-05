@@ -37,7 +37,8 @@ namespace ControleDeContatos.Tests.Tests.Repository
         {
             // Act
             // Passa um id de usuarios, associado aos contatos
-            List<ContatoModel> result = _contatoRepository.BuscarTodos(fakeUsuario.UsuarioModelParaContatos_Database().Id);
+            List<ContatoModel> result = _contatoRepository.BuscarTodos(
+                fakeUsuario.UsuarioModelParaContatos_Database().Id);
 
             // Assert
             Assert.IsType<List<ContatoModel>>(result);
@@ -108,6 +109,16 @@ namespace ControleDeContatos.Tests.Tests.Repository
         }
 
         [Fact]
+        public void TestarApagar()
+        {
+            // Arrange
+            ContatoModel contatoDb = _contatoRepository.ListarPorId(3);
+
+            // Act
+            _contatoRepository.Apagar(contatoDb);
+        }
+
+        [Fact]
         public void TestarApagar_Exception()
         {
             // Assert
@@ -121,8 +132,8 @@ namespace ControleDeContatos.Tests.Tests.Repository
         private void OrganizarPreTeste()
         {
 
-            // Os contatos precisam de um usuario por conta da FOREING_KEY
-            _usuarioRepository.Adicionar(fakeUsuario.UsuarioModelParaContatos_Database());
+            // // Os contatos precisam de um usuario por conta da FOREING_KEY
+            // _usuarioRepository.Adicionar(fakeUsuario.UsuarioModelParaContatos_Database());
 
             // Adicionar os contatos no bd
             foreach (var contato in fakeContato.VariosContatoModel_Database())
@@ -135,8 +146,6 @@ namespace ControleDeContatos.Tests.Tests.Repository
         private void Setup_Reverter()
         {
             _contatoRepository.RollbackAsync();
-            _usuarioRepository.Apagar(_usuarioRepository.ListarPorId(
-                fakeUsuario.UsuarioModelParaContatos_Database().Id));
         }
     }
 
