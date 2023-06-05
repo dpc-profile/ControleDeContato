@@ -19,7 +19,6 @@ namespace ControleDeContatos.Tests.Tests.Controllers
                 Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",
                 Perfil = Enums.PerfilEnums.Padrao,
                 DataCadastro = DateTime.Now
-
             };
         }
         public static UsuarioModel UsuarioModelParaContatos_Database()
