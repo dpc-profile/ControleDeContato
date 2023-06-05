@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using ControleDeContatos.Models;
 
@@ -20,5 +21,8 @@ namespace ControleDeContatos.Repository
         void Atualizar(UsuarioModel usuario);
         
         void Apagar(UsuarioModel usuario);
+        
+        public Task CreateSavepointAsync();
+        public Task RollbackAsync();
     }
 }

@@ -20,14 +20,16 @@ namespace ControleDeContatos.Tests.Tests.Repository
         {
             _contatoRepository = new ContatoRepository();
             _usuarioRepository = new UsuarioRepository();
-            // Pra garantir que o db vai ficar limpo
-            LimparPosTeste();
+
+            _contatoRepository.CreateSavepointAsync();
+
             OrganizarPreTeste();
         }
 
         public void Dispose()
         {
-            LimparPosTeste();
+            Setup_Reverter();
+
         }
 
         [Fact]
@@ -130,26 +132,11 @@ namespace ControleDeContatos.Tests.Tests.Repository
 
         }
 
-        private void LimparPosTeste()
+        private void Setup_Reverter()
         {
-            try
-            {
-                int usuarioId = fakeUsuario.UsuarioModelParaContatos_Database().Id;
-
-                // Limpar os contatos do db
-                var contatos = _contatoRepository.BuscarTodos(usuarioId);
-
-                foreach (var contato in contatos)
-                {
-                    _contatoRepository.Apagar(contato);
-                }
-
-                // Remove o usuário criado no OrganizarPreTeste()
-                _usuarioRepository.Apagar(_usuarioRepository.ListarPorId(usuarioId));
-
-            }
-            catch (System.Exception e) { }
-
+            _contatoRepository.RollbackAsync();
+            _usuarioRepository.Apagar(_usuarioRepository.ListarPorId(
+                fakeUsuario.UsuarioModelParaContatos_Database().Id));
         }
     }
 

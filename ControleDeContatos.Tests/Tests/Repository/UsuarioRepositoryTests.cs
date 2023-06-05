@@ -21,13 +21,15 @@ namespace ControleDeContatos.Tests.Tests.Repository
         {
             _usuarioRepository = new UsuarioRepository();
 
-            OrganizarPreTeste();
+            _usuarioRepository.CreateSavepointAsync();
+
+            Setup_OrganizarPreTeste();
 
         }
 
         public void Dispose()
         {
-            LimparPosTeste();
+            Setup_Reverter();
         }
 
         [Fact]
@@ -85,22 +87,13 @@ namespace ControleDeContatos.Tests.Tests.Repository
 
         }
 
-        private void OrganizarPreTeste()
+        private void Setup_OrganizarPreTeste()
         {
             _usuarioRepository.Adicionar(fakeUsuario.UsuarioModel_Database());
         }
-
-        private void LimparPosTeste()
+        private void Setup_Reverter()
         {
-            // Limpar o db de teste
-            var usuarios = _usuarioRepository.BuscarTodos();
-
-            foreach (var usuario in usuarios)
-            {
-                if (usuario.Id != fakeUsuario.UsuarioModelParaContatos_Database().Id)
-                    _usuarioRepository.Apagar(usuario);
-            }
-
+            _usuarioRepository.RollbackAsync();
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using ControleDeContatos.Models;
 
@@ -18,6 +19,8 @@ namespace ControleDeContatos.Repository
 
         void Apagar(ContatoModel contatoModel);
 
+        public Task CreateSavepointAsync();
+        public Task RollbackAsync();
         
     }
 }
