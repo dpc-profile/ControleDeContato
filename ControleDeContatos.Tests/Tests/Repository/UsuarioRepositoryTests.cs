@@ -111,8 +111,9 @@ namespace ControleDeContatos.Tests.Tests.Repository
         [Fact]
         public void TestarApagar()
         {
-            
+            _usuarioRepository.Apagar(fakeUsuario.ModeloDadosUsuario());
         }
+        
         [Fact]
         public void TestarApagar_Exception()
         {
