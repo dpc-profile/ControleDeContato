@@ -228,7 +228,75 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         }
         
         [Fact]
-        public void TestarCriar_Exception()
+        public void TestarCriar_Exception_LoginJaCadastrado()
+        {
+            // Arrange
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
+
+            var mockRepo = new Mock<IUsuarioServices>();
+            mockRepo.Setup(repo => repo.AdicionarUsuario(It.IsAny<UsuarioModel>()))
+                    .Throws(new LoginJaCadastradoException("Login já cadastrado"));
+
+            // Instanciar o controller usando o obj do mockRepo
+            var controller = new UsuarioController(mockRepo.Object){ TempData = tempData };
+
+            // Act
+            // Faz a chamada do Apagar
+            var result = controller.Criar(It.IsAny<UsuarioModel>());
+
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de erro
+            Assert.Contains("Erro ao criar usuario: Login já cadastrado", controller.TempData["MensagemErro"].ToString());
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se a controller é nula
+            Assert.Null(redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Criar", redirectToActionResult.ActionName);
+            
+        }
+        
+        [Fact]
+        public void TestarCriar_Exception_EmailJaCadastrado()
+        {
+            // Arrange
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()); 
+
+            var mockRepo = new Mock<IUsuarioServices>();
+            mockRepo.Setup(repo => repo.AdicionarUsuario(It.IsAny<UsuarioModel>()))
+                    .Throws(new EmailJaCadastradoException("Email já cadastrado"));
+
+            // Instanciar o controller usando o obj do mockRepo
+            var controller = new UsuarioController(mockRepo.Object){ TempData = tempData };
+
+            // Act
+            // Faz a chamada do Apagar
+            var result = controller.Criar(It.IsAny<UsuarioModel>());
+
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de erro
+            Assert.Contains("Erro ao criar usuario: Email já cadastrado", controller.TempData["MensagemErro"].ToString());
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se a controller é nula
+            Assert.Null(redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("Criar", redirectToActionResult.ActionName);
+            
+        }
+
+        [Fact]
+        public void TestarCriar_Exception_Generica()
         {
             // Arrange
             // Cria a variavel tempData
