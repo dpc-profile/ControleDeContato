@@ -133,7 +133,10 @@ namespace ControleDeContatos.Tests.Tests.Repository
         {
 
             // // Os contatos precisam de um usuario por conta da FOREING_KEY
-            // _usuarioRepository.Adicionar(fakeUsuario.UsuarioModelParaContatos_Database());
+            UsuarioModel usuariosDb = _usuarioRepository.ListarPorId(
+                fakeUsuario.UsuarioModelParaContatos_Database().Id);
+            
+            if (usuariosDb == null) _usuarioRepository.Adicionar(fakeUsuario.UsuarioModelParaContatos_Database());
 
             // Adicionar os contatos no bd
             foreach (var contato in fakeContato.VariosContatoModel_Database())
