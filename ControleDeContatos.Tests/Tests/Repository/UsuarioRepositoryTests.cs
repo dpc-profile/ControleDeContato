@@ -81,7 +81,8 @@ namespace ControleDeContatos.Tests.Tests.Repository
         [Fact]
         public void TestarAdicionar()
         {
-            UsuarioModel usuario = new UsuarioModel(){
+            UsuarioModel usuario = new UsuarioModel()
+            {
                 Id = 3,
                 Nome = "Patricia Tester",
                 Login = "patricia",
@@ -106,7 +107,12 @@ namespace ControleDeContatos.Tests.Tests.Repository
             Assert.Equal("Erro ao adicionar o usuário do banco de dados", message.Message);
 
         }
-       
+
+        [Fact]
+        public void TestarApagar()
+        {
+            
+        }
         [Fact]
         public void TestarApagar_Exception()
         {
@@ -145,7 +151,7 @@ namespace ControleDeContatos.Tests.Tests.Repository
                 () => _usuarioRepository.Atualizar(It.IsAny<UsuarioModel>())
             );
 
-            Assert.Equal("Erro ao atualizar o usuário no banco de dados", message.Message)            ;
+            Assert.Equal("Erro ao atualizar o usuário no banco de dados", message.Message);
         }
 
         private void Setup_OrganizarPreTeste()
@@ -153,12 +159,12 @@ namespace ControleDeContatos.Tests.Tests.Repository
 
             UsuarioModel usuariosDb = _usuarioRepository.ListarPorId(
                 fakeUsuario.UsuarioModel_Database().Id);
-            
+
             // O usuario já deveria estar cadastrado, mas se não tiver faz
             if (usuariosDb == null) _usuarioRepository.Adicionar(fakeUsuario.UsuarioModel_Database());
 
             _usuarioRepository.CreateSavepointAsync();
-            
+
         }
 
         private void Setup_Reverter()
