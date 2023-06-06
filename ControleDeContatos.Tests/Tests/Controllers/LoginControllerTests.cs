@@ -199,7 +199,43 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Assert.True(controller.TempData.ContainsKey("MensagemErro"));
             // Verifica se a mensagem é de erro
             Assert.Contains("Erro ao criar usuario: Login já cadastrado", controller.TempData["MensagemErro"].ToString());
-            // Assert.Matches("Erro ao criar usuario: Login já cadastrado", controller.TempData["MensagemErro"].ToString()); 
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se a controller é nula
+            Assert.Null(redirectToActionResult.ControllerName);
+            // Verifica se foi redirecionado para Index do controller
+            Assert.Equal("NovoUsuario", redirectToActionResult.ActionName);
+        }
+
+        [Fact]
+        public void TestarNovoUsuario_Exception_EmailJaCadastradoException()
+        {
+            // Arrange
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioServices> mockUsuarioServices = new Mock<IUsuarioServices>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<ILoginServices> mockLoginServices = new Mock<ILoginServices>();
+
+            mockUsuarioServices.Setup(s => s.AdicionarUsuario(It.IsAny<UsuarioModel>()))
+                               .Throws(new EmailJaCadastradoException("Email já cadastrado"));
+
+            var controller = new LoginController(
+                mockUsuarioServices.Object,
+                mockSessao.Object,
+                mockLoginServices.Object)
+            { TempData = tempData };
+
+            // Act
+            var result = controller.NovoUsuario(It.IsAny<UsuarioModel>());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de erro
+            Assert.Contains("Erro ao criar usuario: Email já cadastrado", controller.TempData["MensagemErro"].ToString());
             // Verifica se o retorno é RedirectToAction
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             // Verifica se a controller é nula
