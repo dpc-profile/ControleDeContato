@@ -1,6 +1,13 @@
 /// <reference types="cypress" />
 
-describe("Acesso a página de usuários", () => {
+describe("Usando usuário Administrador", () => {
+  const nome = "Amanda";
+  const email = "amanda@gmail.com";
+  const login = "amanda";
+  const senha = "123456";
+
+  const novoNome = "Amanda Amaraldo";
+
   beforeEach(() => {
     cy.visit("Login/Sair");
 
@@ -17,11 +24,8 @@ describe("Acesso a página de usuários", () => {
     cy.get(".display-4").contains("Listagem de usuarios");
   });
 
-  it("Adicionar novo contato", () => {
-    const nome = "Amanda";
-    const email = "amanda@gmail.com";
-    const login = "amanda";
-    const senha = "123456";
+  it("Adicionar novo usuário", () => {
+    
 
     cy.get('[data-cy="criar"]').click();
 
@@ -41,8 +45,7 @@ describe("Acesso a página de usuários", () => {
   });
 
   it("Editar um usuário", () => {
-    const nome = "Amanda";
-    const novoNome = "Amanda Amaraldo";
+    
     cy.get("#table-usuarios tr:last").contains(nome);
     // Botão Editar
     cy.get("#table-usuarios tr:last .btn-group > .btn-primary").click();
@@ -57,9 +60,9 @@ describe("Acesso a página de usuários", () => {
     cy.get("#table-usuarios tr:last").contains(novoNome);
   });
 
-  it("Apagar um contato", () => {
-    const nome = "Amanda Amaraldo";
-    cy.get("#table-usuarios tr:last").contains(nome);
+  it("Apagar um usuário", () => {
+    
+    cy.get("#table-usuarios tr:last").contains(novoNome);
 
     // Botão apagar
     cy.get("#table-usuarios tr:last .btn-group > .btn-danger").click();
@@ -69,7 +72,7 @@ describe("Acesso a página de usuários", () => {
 
     cy.get(".alert").contains("Usuário apagado com sucesso");
 
-    cy.get("#table-usuarios tr:last").should("not.contain.text", nome);
+    cy.get("#table-usuarios tr:last").should("not.contain.text", novoNome);
   });
 
 });
