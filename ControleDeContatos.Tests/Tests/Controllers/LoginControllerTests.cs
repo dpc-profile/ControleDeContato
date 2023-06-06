@@ -87,6 +87,90 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         }
 
         [Fact]
+        public void TestarNovoUsuario_View()
+        {
+            // Arrange
+            Mock<IUsuarioServices> mockUsuarioServices = new Mock<IUsuarioServices>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<ILoginServices> mockLoginServices = new Mock<ILoginServices>();
+
+            var controller = new LoginController(
+                mockUsuarioServices.Object,
+                mockSessao.Object,
+                mockLoginServices.Object);
+
+            // Act
+            var result = controller.NovoUsuario();
+
+            // Assert
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public void TestarNovoUsuario_ValidModel()
+        {
+            // Arrange
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioServices> mockUsuarioServices = new Mock<IUsuarioServices>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<ILoginServices> mockLoginServices = new Mock<ILoginServices>();
+
+            mockUsuarioServices.Setup(s => s.AdicionarUsuario(It.IsAny<UsuarioModel>()));
+
+            var controller = new LoginController(
+                mockUsuarioServices.Object,
+                mockSessao.Object,
+                mockLoginServices.Object)
+            { TempData = tempData };
+
+            // Act
+            var result = controller.NovoUsuario(It.IsAny<UsuarioModel>());
+
+            // Assert
+            // Verifica se a tempData deu sucesso
+            Assert.True(controller.TempData.ContainsKey("MensagemSucesso"));
+            // Verifica se a mensagem é de senha invalida
+            Assert.True(controller.TempData.Values.Contains("Usuário cadastrado com sucesso"));
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se está redirecionando para a Index
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
+
+        [Fact]
+        public void TestarNovoUsuario_InvalidModel()
+        {
+            // Arrange
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioServices> mockUsuarioServices = new Mock<IUsuarioServices>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<ILoginServices> mockLoginServices = new Mock<ILoginServices>();
+
+            var controller = new LoginController(
+                mockUsuarioServices.Object,
+                mockSessao.Object,
+                mockLoginServices.Object)
+            { TempData = tempData };
+
+
+            // Act
+            controller.ModelState.AddModelError("fakeError", "fakeError");
+            var result = controller.NovoUsuario(It.IsAny<UsuarioModel>());
+
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            // Verifica se a view é para Index
+            Assert.Equal("Index", viewResult.ViewName);
+        }
+
+        [Fact]
         public void TestarEntrar_ValidModel()
         {
             // Arrange
@@ -375,7 +459,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Mock<IUsuarioServices> mockUsuarioServices = new Mock<IUsuarioServices>();
             Mock<ILoginServices> mockLoginServices = new Mock<ILoginServices>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
-            
+
             mockSessao.Setup(s => s.BuscarSessaoUsuario());
             mockLoginServices.Setup(s => s.ValidaUsuarioCadastrado(It.IsAny<string>(), It.IsAny<string>()))
                              .Throws(new LoginNaoEncontradoException("O login informado não foi encontrado"));
@@ -408,7 +492,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Mock<IUsuarioServices> mockUsuarioServices = new Mock<IUsuarioServices>();
             Mock<ILoginServices> mockLoginServices = new Mock<ILoginServices>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
-            
+
             mockSessao.Setup(s => s.BuscarSessaoUsuario());
             // Mock do validaUsuarioCadastrado retornando um UsuarioModel
             mockLoginServices.Setup(s => s.ValidaUsuarioCadastrado(It.IsAny<string>(), It.IsAny<string>()))
@@ -445,7 +529,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
             Mock<IUsuarioServices> mockUsuarioServices = new Mock<IUsuarioServices>();
             Mock<ILoginServices> mockLoginServices = new Mock<ILoginServices>();
             Mock<ISessao> mockSessao = new Mock<ISessao>();
-            
+
             mockSessao.Setup(s => s.BuscarSessaoUsuario());
             // Mock do validaUsuarioCadastrado estourando Exception
             mockLoginServices.Setup(s => s.ValidaUsuarioCadastrado(It.IsAny<string>(), It.IsAny<string>()))

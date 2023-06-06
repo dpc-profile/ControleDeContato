@@ -57,7 +57,7 @@ namespace ControleDeContatos.Controllers
                     return RedirectToAction("Index");
                 }
 
-                return View();
+                return View("Index");
             }
             catch (LoginJaCadastradoException erro)
             {
