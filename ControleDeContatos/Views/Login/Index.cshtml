@@ -39,8 +39,13 @@
   <p class="mb-4 text-sm mx-auto">
     Esqueceu sua senha?
     <a asp-controller="Login" asp-action="RedefinirSenha" class="text-primary text-gradient font-weight-bold"
-      data-cy="redefinirSenha">Redefinir
-      minha senha</a>
+      data-cy="redefinirSenha">Redefinir minha senha</a>
+  </p>
+  
+  <p class="mb-4 text-sm mx-auto">
+    Novo na plataforma?
+    <a asp-controller="Login" asp-action="NovoUsuario" class="text-primary text-gradient font-weight-bold"
+      data-cy="NovoUsuario">Cadastre-se</a>
   </p>
 
   <button type="submit" class="btn btn-primary btn-block" data-cy="submit">Entrar</button>

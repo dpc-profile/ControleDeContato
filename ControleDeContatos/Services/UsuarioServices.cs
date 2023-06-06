@@ -22,9 +22,9 @@ namespace ControleDeContatos.Services
         {
             try
             {
-                if (_usuarioRepository.BuscarPorLogin(usuario.Login) != null) throw new Exception("Login já cadastrado");
+                if (_usuarioRepository.BuscarPorLogin(usuario.Login) != null) throw new LoginJaCadastradoException("Login já cadastrado");
 
-                if (_usuarioRepository.BuscarPorEmail(usuario.Email) != null) throw new Exception("Email já cadastrado");
+                if (_usuarioRepository.BuscarPorEmail(usuario.Email) != null) throw new EmailJaCadastradoException("Email já cadastrado");
                 
                 usuario.DataCadastro = DateTime.Now;
                 usuario.SetSenhaHash();

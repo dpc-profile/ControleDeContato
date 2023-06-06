@@ -1,0 +1,65 @@
+@using ControleDeContatos.Enums
+@model UsuarioModel
+@{
+    ViewData["Title"] = "Cadastro";
+    Layout = "_LayoutDeslogado";
+}
+
+@if (TempData["MensagemSucesso"] != null)
+{
+  <div class="alert alert-success" role="alert">
+  <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+  @TempData["MensagemSucesso"]
+</div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+  <div class="alert alert-danger" role="alert">
+  <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="Close">X</button>
+  @TempData["MensagemErro"]
+</div>
+}
+
+<br />
+
+<div class="text-center">
+    <h1 class="display-4">Cadastre-se</h1>
+</div>
+
+<form asp-controller="Login" asp-action="NovoUsuario" method="post">
+    <div class="mb-3">
+        <label for="nome">Nome</label>
+        <input type="text" asp-for="Nome" class="form-control" data-cy="nome" placeholder="Digite o nome do usuário">
+        @Html.ValidationMessageFor(x => x.Nome)
+    </div>
+
+    <div class="mb-3">
+        <label for="email">E-mail</label>
+        <input type="text" asp-for="Email" class="form-control" data-cy="email" placeholder="Digite o E-mail do usuário">
+        @Html.ValidationMessageFor(x => x.Email)
+    </div>
+
+    <div class="mb-3">
+        <label for="login">Login</label>
+        <input type="text" asp-for="Login" class="form-control" data-cy="login" placeholder="Digite o login do usuário">
+        @Html.ValidationMessageFor(x => x.Login)
+    </div>
+    
+    <div class="mb-3">
+        <label for="perfil">Perfil</label>
+        <select asp-for="Perfil"  class="form-control" data-cy="perfil">
+            <option value="@PerfilEnums.Padrao">Padrão</option>
+        </select>
+        @Html.ValidationMessageFor(x => x.Perfil)
+    </div>
+    
+    <div class="mb-3">
+        <label for="nome">Senha</label>
+        <input type="password" asp-for="Senha" class="form-control" data-cy="senha"placeholder="Digite o senha do usuario">
+        @Html.ValidationMessageFor(x => x.Senha)
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block" data-cy="submit">Cadastrar</button>
+    <a class="btn btn-secondary btn-block" asp-controller="Usuario" asp-action="Index" role="button" data-cy="voltar">Voltar</a>
+</form>

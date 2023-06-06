@@ -72,14 +72,22 @@ namespace ControleDeContatos.Controllers
 
                 return View();
             }
+            catch (LoginJaCadastradoException erro)
+            {
+                TempData["MensagemErro"] = $"Erro ao criar usuario: {erro.Message}";
+                return RedirectToAction("Criar");
+            }
+            catch (EmailJaCadastradoException erro)
+            {
+                TempData["MensagemErro"] = $"Erro ao criar usuario: {erro.Message}";
+                return RedirectToAction("Criar");
+            }
             catch (System.Exception erro)
             {
                 //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
                 TempData["MensagemErro"] = $"Ops, não conseguimos cadastrar o usuario, tente novamente, detalhe do erro: {erro.Message}";
                 return RedirectToAction("Index");
             }
-
-
         }
 
         [HttpPost]

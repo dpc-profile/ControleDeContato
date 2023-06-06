@@ -38,6 +38,45 @@ namespace ControleDeContatos.Controllers
             return View();
         }
 
+        public IActionResult NovoUsuario()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult NovoUsuario(UsuarioModel usuario)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _usuarioServices.AdicionarUsuario(usuario);
+
+                    //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
+                    TempData["MensagemSucesso"] = "Usuário cadastrado com sucesso";
+                    return RedirectToAction("Index");
+                }
+
+                return View();
+            }
+            catch (LoginJaCadastradoException erro)
+            {
+                TempData["MensagemErro"] = $"Erro ao criar usuario: {erro.Message}";
+                return RedirectToAction("NovoUsuario");
+            }
+            catch (EmailJaCadastradoException erro)
+            {
+                TempData["MensagemErro"] = $"Erro ao criar usuario: {erro.Message}";
+                return RedirectToAction("NovoUsuario");
+            }
+            catch (System.Exception erro)
+            {
+                //Cria uma variavel temporaria, para armazenar a mensagem pro index.cshtml
+                TempData["MensagemErro"] = $"Ops, não conseguimos cadastrar o usuario, tente novamente, detalhe do erro: {erro.Message}";
+                return RedirectToAction("NovoUsuario");
+            }
+        }
+
         [HttpPost]
         public IActionResult Entrar(LoginModel loginModel)
         {
