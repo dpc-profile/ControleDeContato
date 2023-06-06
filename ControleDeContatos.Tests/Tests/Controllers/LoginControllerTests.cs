@@ -245,6 +245,42 @@ namespace ControleDeContatos.Tests.Tests.Controllers
         }
 
         [Fact]
+        public void TestarNovoUsuario_Exception_Generico()
+        {
+            // Arrange
+            // Cria a variavel tempData
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+
+            Mock<IUsuarioServices> mockUsuarioServices = new Mock<IUsuarioServices>();
+            Mock<ISessao> mockSessao = new Mock<ISessao>();
+            Mock<ILoginServices> mockLoginServices = new Mock<ILoginServices>();
+
+            mockUsuarioServices.Setup(s => s.AdicionarUsuario(It.IsAny<UsuarioModel>()))
+                               .Throws(new Exception());
+
+            var controller = new LoginController(
+                mockUsuarioServices.Object,
+                mockSessao.Object,
+                mockLoginServices.Object)
+            { TempData = tempData };
+
+            // Act
+            var result = controller.NovoUsuario(It.IsAny<UsuarioModel>());
+
+            // Assert
+            // Verifica se a tempData deu erro
+            Assert.True(controller.TempData.ContainsKey("MensagemErro"));
+            // Verifica se a mensagem é de falha ao enviar email
+            Assert.Matches("Ops, não conseguimos cadastrar o usuario", controller.TempData["MensagemErro"].ToString());
+            // Verifica se o retorno é RedirectToAction
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            // Verifica se está redirecionando para RedefinirSenha
+            Assert.Equal("NovoUsuario", redirectToActionResult.ActionName);
+        }
+
+
+        [Fact]
         public void TestarEntrar_ValidModel()
         {
             // Arrange
