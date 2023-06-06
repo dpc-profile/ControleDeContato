@@ -79,6 +79,22 @@ namespace ControleDeContatos.Tests.Tests.Repository
         }
 
         [Fact]
+        public void TestarAdicionar()
+        {
+            UsuarioModel usuario = new UsuarioModel(){
+                Id = 3,
+                Nome = "Patricia Tester",
+                Login = "patricia",
+                Email = "patricia@gmail.com",
+                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",
+                Perfil = Enums.PerfilEnums.Padrao,
+                DataCadastro = DateTime.Now
+            };
+
+            _usuarioRepository.Adicionar(usuario);
+        }
+
+        [Fact]
         public void TestarAdicionarException()
         {
             // Assert
