@@ -50,7 +50,6 @@ services:
 #To use volumes instead folder inside the project root
 volumes:
   mysql-data:
-  mysql_test-data:
 
 networks:
   webapp-bridge:

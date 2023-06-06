@@ -1,4 +1,5 @@
 [System.Serializable]
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public class EmailJaCadastradoException : System.Exception
 {
     public EmailJaCadastradoException() { }

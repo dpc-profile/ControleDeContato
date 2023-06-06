@@ -42,7 +42,7 @@ namespace ControleDeContatos.Tests.Tests.Services
 
 
             // Assert
-            var message = Assert.Throws<Exception>(
+            var message = Assert.Throws<LoginJaCadastradoException>(
                 // Act
                 () => services.AdicionarUsuario(fakeUsuario.ModeloDadosUsuario())
             );
@@ -63,7 +63,7 @@ namespace ControleDeContatos.Tests.Tests.Services
 
 
             // Assert
-            var message = Assert.Throws<Exception>(
+            var message = Assert.Throws<EmailJaCadastradoException>(
                 // Act
                 () => services.AdicionarUsuario(fakeUsuario.ModeloDadosUsuario())
             );

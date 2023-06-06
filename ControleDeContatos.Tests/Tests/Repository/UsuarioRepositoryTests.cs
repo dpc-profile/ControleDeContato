@@ -21,8 +21,6 @@ namespace ControleDeContatos.Tests.Tests.Repository
         {
             _usuarioRepository = new UsuarioRepository();
 
-            _usuarioRepository.CreateSavepointAsync();
-
             Setup_OrganizarPreTeste();
 
         }
@@ -131,14 +129,22 @@ namespace ControleDeContatos.Tests.Tests.Repository
                 () => _usuarioRepository.Atualizar(It.IsAny<UsuarioModel>())
             );
 
-            Assert.Equal("Erro ao atualizar o usuário no banco de dados", message.Message)
-            ;
+            Assert.Equal("Erro ao atualizar o usuário no banco de dados", message.Message)            ;
         }
 
         private void Setup_OrganizarPreTeste()
         {
-            _usuarioRepository.Adicionar(fakeUsuario.UsuarioModel_Database());
+
+            UsuarioModel usuariosDb = _usuarioRepository.ListarPorId(
+                fakeUsuario.UsuarioModel_Database().Id);
+            
+            // O usuario já deveria estar cadastrado, mas se não tiver faz
+            if (usuariosDb == null) _usuarioRepository.Adicionar(fakeUsuario.UsuarioModel_Database());
+
+            _usuarioRepository.CreateSavepointAsync();
+            
         }
+
         private void Setup_Reverter()
         {
             _usuarioRepository.RollbackAsync();
