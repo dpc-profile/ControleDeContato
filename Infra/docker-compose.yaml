@@ -2,11 +2,12 @@ version: '3.9'
 
 services:
   webapp:
+    container_name: controle_contatos-app
     build: .
     networks:
       - webapp-bridge
     volumes:
-      - .:/source
+      - ..:/source
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://localhost
@@ -25,7 +26,7 @@ services:
       - webapp-bridge
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./init-db_teste:/docker-entrypoint-initdb.d
+      - ../init-db_teste:/docker-entrypoint-initdb.d
     env_file:
       - mysql.env
     restart: on-failure:5
