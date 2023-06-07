@@ -14,3 +14,5 @@ services:
     volumes:
       # Update this to wherever you want VS Code to mount the folder of your project
       - ..:/source:cached
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
