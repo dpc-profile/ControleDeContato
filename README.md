@@ -10,7 +10,7 @@ Uma plataforma web, que tem com objetivo de cadastrar e organizar contatos dos u
 - Poder visualizar, criar, editar, apagar seus contatos. :heavy_check_mark:
 
 Dev features:
-- Testes de unidade. (90% Coverage) :heavy_check_mark:
+- Testes de unidade. :heavy_check_mark:
 - Analise de cobertura com SonarCloud. :heavy_check_mark:
 - Criptografia de senhas. :heavy_check_mark:
 - Uso do docker no desenvolvimento. :heavy_check_mark:
@@ -34,10 +34,10 @@ http://172.25.0.11
 ```
 ___
 ## Executando em Desenvolvimento
-É usado a extensão __Dev Containers__ do vscode, que utiliza do docker-compose.yaml para criar os containers do database, phpMyAdmin, e o dockerfile dentro de .devcontainer para criar um container dotnet 3.1.
+É usado a extensão __Dev Containers__ do vscode, que utiliza do docker-compose.yaml para criar os containers do database, phpMyAdmin, e um ambiente com .NET 3.1.
 
 ### Configurando o banco de dados:
-- Mudar o nome do arquivo __mysql_template.env__ para __mysql.env__ e preencer os espaços vazios.
+- Mude o nome do arquivo na pasta __mysql_template.env__ para __mysql.env__ na pasta __Infra__ e preencer os espaços vazios.
 
 ### Configurando ambiente
 Para ter o OmniSharp funcionando é preciso ter o mono instalado, o arquivo __mono-java-install.sh__ faz a instalação do mono e java, que no caso é necessário para usar o Sonar Scanner
