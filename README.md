@@ -1,4 +1,6 @@
 # Controle de Contatos
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dpc-profile_ControleDeContato&metric=coverage)](https://sonarcloud.io/summary/new_code?id=dpc-profile_ControleDeContato)[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=dpc-profile_ControleDeContato&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=dpc-profile_ControleDeContato)[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=dpc-profile_ControleDeContato&metric=bugs)](https://sonarcloud.io/summary/new_code?id=dpc-profile_ControleDeContato)
+
 ### Sobre o projeto
 Uma plataforma web, que tem com objetivo de cadastrar e organizar contatos dos usuários.
 É pretendido que o projeto tenha as features:
@@ -8,11 +10,11 @@ Uma plataforma web, que tem com objetivo de cadastrar e organizar contatos dos u
 - Poder visualizar, criar, editar, apagar seus contatos. :heavy_check_mark:
 
 Dev features:
-- Testes de unidade. (apenas na parte de contatos)
+- Testes de unidade. (90% Coverage) :heavy_check_mark:
 - Analise de cobertura com SonarCloud. :heavy_check_mark:
 - Criptografia de senhas. :heavy_check_mark:
 - Uso do docker no desenvolvimento. :heavy_check_mark:
-- Uso do docker para criar buid de produção.
+- Uso do docker para criar buid de produção. :heavy_check_mark:
 
 ### Intuito do projeto
 O objetivo é para consolidar meus conhecimento de programação, com o uso de MVC, Banco de dados MySQL, Docker, Testes de Unidade e Cobertura de Código, além de adquirir experiência no framework .NET, e como desafio pessoal, o uso da versão do __.NET Core SDK 3.1__.
