@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ControleDeContatos.Models;
 using ControleDeContatos.Services.Interfaces;
 
+using namesource.ControleDeContatos.Exceptions;
+
 namespace ControleDeContatos.Services
 {
     public class AlterarSenhaServices : IAlterarSenhaServices
@@ -18,26 +20,19 @@ namespace ControleDeContatos.Services
 
         public void AlterarSenha(AlterarSenhaModel alterarSenha)
         {
-            try
-            {
-                UsuarioModel usuarioDB = _usuarioServices.BuscarUsuario(alterarSenha.Id);
 
-                if (usuarioDB == null) throw new UsuarioInvalidoException("Usuário não encontrado!");
+            UsuarioModel usuarioDB = _usuarioServices.BuscarUsuario(alterarSenha.Id);
 
-                if (!usuarioDB.SenhaValida(alterarSenha.SenhaAtual)) throw new SenhaNaoConfereException("Senha atual não confere!");
+            if (usuarioDB == null) throw new UsuarioInvalidoException("Usuário não encontrado!");
 
-                if (usuarioDB.SenhaValida(alterarSenha.NovaSenha)) throw new NovaSenhaIgualAtualException("Nova senha deve ser diferente da senha atual!");
+            if (!usuarioDB.SenhaValida(alterarSenha.SenhaAtual)) throw new SenhaNaoConfereException("Senha atual não confere!");
 
-                usuarioDB.SetNovaSenha(alterarSenha.NovaSenha);
-                usuarioDB.DataAtualizacao = DateTime.Now;
+            if (usuarioDB.SenhaValida(alterarSenha.NovaSenha)) throw new NovaSenhaIgualAtualException("Nova senha deve ser diferente da senha atual!");
 
-                _usuarioServices.AtualizarUsuarioComSenha(usuarioDB);
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            usuarioDB.SetNovaSenha(alterarSenha.NovaSenha);
+            usuarioDB.DataAtualizacao = DateTime.Now;
 
+            _usuarioServices.AtualizarUsuarioComSenha(usuarioDB);
 
         }
     }

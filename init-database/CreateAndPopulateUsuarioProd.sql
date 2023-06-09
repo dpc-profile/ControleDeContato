@@ -31,8 +31,8 @@ CREATE TABLE `Usuarios` (
 --
 -- Despejando dados para a tabela `Usuarios`
 --
-INSERT INTO `Usuarios` (`Id`, `Nome`, `Login`, `Email`, `Perfil`, `Senha`, `DataCadastro`, `DataAtualizacao`) VALUES
-(1, 'Alvaro', 'admin', 'alvaro@admin', 1, 'd033e22ae348aeb5660fc2140aec35850c4da997', '2023-05-20 19:25:29.387079', '2023-05-20 19:25:29.387079');
+INSERT INTO `Usuarios` (`Id`, `Nome`, `Login`, `Email`, `Perfil`, `Senha`, `DataCadastro`, `DataAtualizacao`) VALUES (1, 'Alvaro', 'admin', 'alvaro@admin', 1, 'd033e22ae348aeb5660fc2140aec35850c4da997', '2023-05-20 19:25:29.387079', '2023-05-20 19:25:29.387079');
+INSERT INTO `Usuarios` (`Id`, `Nome`, `Login`, `Email`, `Perfil`, `Senha`, `DataCadastro`, `DataAtualizacao`) VALUES (2, 'Paula T', 'teste', 'paula@gmail.com', 2, '2e6f9b0d5885b6010f9167787445617f553a735f', '2023-06-09 17:40:17.307851', NULL)
 
 --
 -- Índices de tabela `Usuarios`
@@ -44,5 +44,5 @@ ALTER TABLE `Usuarios`
 -- AUTO_INCREMENT de tabela `Usuarios`
 --
 ALTER TABLE `Usuarios`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;

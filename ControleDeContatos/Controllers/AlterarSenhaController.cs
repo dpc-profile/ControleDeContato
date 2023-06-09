@@ -7,16 +7,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using ControleDeContatos.Models;
-using ControleDeContatos.Repository;
 using ControleDeContatos.Services.Interfaces;
 using ControleDeContatos.Filters;
 
 namespace ControleDeContatos.Controllers
 {
-    [PaginaUsuarioLogado]
+    [PaginaUsuarioLogadoAttribute]
     public class AlterarSenhaController : Controller
     {
-        private readonly IUsuarioServices _usuarioServices;
         private readonly IAlterarSenhaServices _alterarSenhaServices;
         private readonly ISessao _sessao;
 

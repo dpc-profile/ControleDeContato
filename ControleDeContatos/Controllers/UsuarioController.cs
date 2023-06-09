@@ -5,10 +5,11 @@ using ControleDeContatos.Repository;
 using ControleDeContatos.Models;
 using ControleDeContatos.Filters;
 using ControleDeContatos.Services.Interfaces;
+using namesource.ControleDeContatos.Exceptions;
 
 namespace ControleDeContatos.Controllers
 {
-    [PaginaRestritaSomenteAdmin]
+    [PaginaRestritaSomenteAdminAttribute]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioServices _usuarioServices;

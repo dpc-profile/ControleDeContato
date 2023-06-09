@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ControleDeContatos.Controllers
 {
     [ExcludeFromCodeCoverage]
-    [PaginaUsuarioLogado]
+    [PaginaUsuarioLogadoAttribute]
     public class RestritoController : Controller
     {
         public IActionResult Index()
