@@ -6,7 +6,6 @@
 #Envs
 *.env
 !*template.env
-!dev.env
 
 
 # User-specific files
