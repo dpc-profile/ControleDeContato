@@ -5,7 +5,7 @@ describe("Acesso a página de contatos", () => {
     cy.visit("Login/Sair");
 
     cy.get('[data-cy="login"]').type("teste");
-    cy.get('[data-cy="senha"]').type("admin");
+    cy.get('[data-cy="senha"]').type("teste");
 
     cy.get('[data-cy="submit"]').click();
     cy.get('[data-cy="sair"]').should("be.visible");

@@ -5,6 +5,7 @@ using ControleDeContatos.Repository;
 using ControleDeContatos.Models;
 using ControleDeContatos.Filters;
 using ControleDeContatos.Services.Interfaces;
+using namesource.ControleDeContatos.Exceptions;
 
 namespace ControleDeContatos.Controllers
 {

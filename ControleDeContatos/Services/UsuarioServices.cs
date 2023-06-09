@@ -7,6 +7,8 @@ using ControleDeContatos.Models;
 using ControleDeContatos.Repository;
 using ControleDeContatos.Services.Interfaces;
 
+using namesource.ControleDeContatos.Exceptions;
+
 namespace ControleDeContatos.Services
 {
     public class UsuarioServices : IUsuarioServices
@@ -20,87 +22,60 @@ namespace ControleDeContatos.Services
 
         public void AdicionarUsuario(UsuarioModel usuario)
         {
-            try
-            {
-                if (_usuarioRepository.BuscarPorLogin(usuario.Login) != null) throw new LoginJaCadastradoException("Login já cadastrado");
+            if (_usuarioRepository.BuscarPorLogin(usuario.Login) != null) throw new LoginJaCadastradoException("Login já cadastrado");
 
-                if (_usuarioRepository.BuscarPorEmail(usuario.Email) != null) throw new EmailJaCadastradoException("Email já cadastrado");
-                
-                usuario.DataCadastro = DateTime.Now;
-                usuario.SetSenhaHash();
+            if (_usuarioRepository.BuscarPorEmail(usuario.Email) != null) throw new EmailJaCadastradoException("Email já cadastrado");
 
-                _usuarioRepository.Adicionar(usuario);
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            usuario.DataCadastro = DateTime.Now;
+            usuario.SetSenhaHash();
+
+            _usuarioRepository.Adicionar(usuario);
+
         }
 
         public void ApagarUsuario(int id)
         {
-            try
-            {
-                UsuarioModel usuarioDb = _usuarioRepository.ListarPorId(id);
+            UsuarioModel usuarioDb = _usuarioRepository.ListarPorId(id);
 
-                if (usuarioDb == null) throw new Exception("Usuário não existe");
+            if (usuarioDb == null) throw new Exception("Usuário não existe");
 
-                _usuarioRepository.Apagar(usuarioDb);
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            _usuarioRepository.Apagar(usuarioDb);
+
         }
 
         public void AtualizarUsuario(UsuarioSemSenhaModel usuarioSemSenha)
         {
-            try
+            UsuarioModel usuario = new UsuarioModel()
             {
-                UsuarioModel usuario = new UsuarioModel()
-                {
-                    Id = usuarioSemSenha.Id,
-                    Nome = usuarioSemSenha.Nome,
-                    Email = usuarioSemSenha.Email,
-                    Login = usuarioSemSenha.Login,
-                    Perfil = usuarioSemSenha.Perfil
-                };
+                Id = usuarioSemSenha.Id,
+                Nome = usuarioSemSenha.Nome,
+                Email = usuarioSemSenha.Email,
+                Login = usuarioSemSenha.Login,
+                Perfil = usuarioSemSenha.Perfil
+            };
 
-                UsuarioModel usuarioDb = _usuarioRepository.ListarPorId(usuario.Id);
+            UsuarioModel usuarioDb = _usuarioRepository.ListarPorId(usuario.Id);
 
-                if (usuarioDb == null) throw new Exception("Usuário não existe");
+            if (usuarioDb == null) throw new Exception("Usuário não existe");
 
-                usuarioDb.Nome = usuario.Nome;
-                usuarioDb.Email = usuario.Email;
-                usuarioDb.Login = usuario.Login;
-                usuarioDb.Perfil = usuario.Perfil;
-                usuarioDb.DataAtualizacao = DateTime.Now;
+            usuarioDb.Nome = usuario.Nome;
+            usuarioDb.Email = usuario.Email;
+            usuarioDb.Login = usuario.Login;
+            usuarioDb.Perfil = usuario.Perfil;
+            usuarioDb.DataAtualizacao = DateTime.Now;
 
-                _usuarioRepository.Atualizar(usuarioDb);
-                
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            _usuarioRepository.Atualizar(usuarioDb);
 
         }
 
         public void AtualizarUsuarioComSenha(UsuarioModel usuarioModel)
         {
-            try
-            {
-                UsuarioModel usuarioDb = _usuarioRepository.ListarPorId(usuarioModel.Id);
+            UsuarioModel usuarioDb = _usuarioRepository.ListarPorId(usuarioModel.Id);
 
-                if (usuarioDb == null) throw new UsuarioInvalidoException("Usuário não existe");
+            if (usuarioDb == null) throw new UsuarioInvalidoException("Usuário não existe");
 
-                _usuarioRepository.Atualizar(usuarioModel);
-            }
-            catch (System.Exception)
-            {
-                
-                throw;
-            }
+            _usuarioRepository.Atualizar(usuarioModel);
+            
         }
 
         public UsuarioModel BuscarUsuario(int id)

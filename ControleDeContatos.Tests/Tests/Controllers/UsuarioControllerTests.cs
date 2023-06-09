@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 using Moq;
 
+using namesource.ControleDeContatos.Exceptions;
+
 using Xunit;
 
 namespace ControleDeContatos.Tests.Tests.Controllers
