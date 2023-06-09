@@ -31,13 +31,13 @@
 		"vscode": {
 			"extensions": [
 				"ms-dotnettools.csharp",
-				"humao.rest-client",
-				"formulahendry.dotnet-test-explorer",
-				"EditorConfig.EditorConfig",
 				"kevin-chatham.aspnetcorerazor-html-css-class-completion",
+				"adrianwilczynski.asp-net-core-switcher",
 				"adrianwilczynski.add-reference",
+				"formulahendry.dotnet-test-explorer",
 				"redhat.vscode-xml",
-				"adrianwilczynski.asp-net-core-switcher"
+				"EditorConfig.EditorConfig",
+				"johnpapa.vscode-peacock"
 			]
 		}
 	}

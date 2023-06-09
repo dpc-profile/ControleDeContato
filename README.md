@@ -12,9 +12,8 @@ Uma plataforma web, que tem com objetivo de cadastrar e organizar contatos dos u
 Dev features:
 - Testes de unidade. :heavy_check_mark:
 - Analise de cobertura com SonarCloud. :heavy_check_mark:
-- Criptografia de senhas. :heavy_check_mark:
 - Uso do docker no desenvolvimento. :heavy_check_mark:
-- Uso do docker para criar buid de produção. :heavy_check_mark:
+- Uso do docker para criação de  buid. :heavy_check_mark:
 
 ### Intuito do projeto
 O objetivo é para consolidar meus conhecimento de programação, com o uso de MVC, Banco de dados MySQL, Docker, Testes de Unidade e Cobertura de Código, além de adquirir experiência no framework .NET, e como desafio pessoal, o uso da versão do __.NET Core SDK 3.1__.
@@ -26,15 +25,17 @@ O projeto usa o docker compose para criar os container do database e do app.
 #Na raiz do projeto
 $ docker compose up
 
-#Acesso a aplicação
+#Acessar a aplicação
 http://172.25.0.10
 
-#Acesso ao phpMyAdmin
+#Acessar phpMyAdmin
 http://172.25.0.11
 ```
+
+Para entrar no phpMyAdmin, use as credenciais usadas em __Infra/mysql.env__. No campo __Servidor:__ pode usar o ip do container mysql, ou o próprio nome do container que é __mysql_db__.
 ___
 ## Executando em Desenvolvimento
-É usado a extensão __Dev Containers__ do vscode, que utiliza do docker-compose.yaml para criar os containers do database, phpMyAdmin, e um ambiente com .NET 3.1.
+É usado a extensão __Dev Containers__ do vscode, com ela, é criado os container do database, phpMyAdmin e de um ambiente com .NET 3.1, além de instalar algumas extensões apenas no vscode dentro do container.
 
 ### Configurando o banco de dados:
 - Mude o nome do arquivo na pasta __mysql_template.env__ para __mysql.env__ na pasta __Infra__ e preencer os espaços vazios.
