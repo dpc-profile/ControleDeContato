@@ -14,7 +14,6 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     env_file:
       - Infra/mysql.env
-      - Infra/dev.env
     depends_on:
       - mysql_db
 
