@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 
 using ControleDeContatos.Models;
+using ControleDeContatos.Services;
 
 namespace ControleDeContatos.Tests.Tests.Controllers
 {
@@ -16,7 +17,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
                 Nome = "Amanda Tester",
                 Login = "amanda",
                 Email = "amanda@gmail.com",
-                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",
+                Senha = "teste".GerarHash(),
                 Perfil = Enums.PerfilEnums.Padrao,
                 DataCadastro = DateTime.Now
             };
@@ -30,7 +31,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
                 Nome = "Padronos Tester",
                 Login = "padronos",
                 Email = "padronos@gmail.com",
-                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",
+                Senha = "teste".GerarHash(),
                 Perfil = Enums.PerfilEnums.Padrao,
                 DataCadastro = DateTime.Now
 
@@ -44,7 +45,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
                 Nome = "Padronos Tester",
                 Login = "padronos",
                 Email = "padronos@gmail.com",
-                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",
+                Senha = "teste".GerarHash(),
                 Perfil = Enums.PerfilEnums.Padrao,
                 DataCadastro = DateTime.Now
 
@@ -60,7 +61,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
                 Nome = "Paula Tester",
                 Login = "paulaT",
                 Email = "paula@gmail.com",
-                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",
+                Senha = "teste".GerarHash(),
                 Perfil = Enums.PerfilEnums.Padrao,
                 DataCadastro = DateTime.Now
             });
@@ -71,7 +72,7 @@ namespace ControleDeContatos.Tests.Tests.Controllers
                 Nome = "Thomas Tester",
                 Login = "thomasT",
                 Email = "thoma@gmail.com",
-                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",
+                Senha = "teste".GerarHash(),
                 Perfil = Enums.PerfilEnums.Padrao,
                 DataCadastro = DateTime.Now
             });

@@ -7,7 +7,7 @@ namespace ControleDeContatos.Services
     {
         public static string GerarHash(this string valor)
         {
-            SHA1 hash = SHA1.Create();
+            SHA512 hash = SHA512.Create();
             ASCIIEncoding encoding = new ASCIIEncoding();
             byte[] array = encoding.GetBytes(valor);
 

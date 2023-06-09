@@ -83,14 +83,16 @@ namespace ControleDeContatos.Tests.Tests.Repository
         {
             UsuarioModel usuario = new UsuarioModel()
             {
-                Id = 3,
+                Id = 30,
                 Nome = "Patricia Tester",
                 Login = "patricia",
                 Email = "patricia@gmail.com",
-                Senha = "2e6f9b0d5885b6010f9167787445617f553a735f",
+                Senha = "teste",
                 Perfil = Enums.PerfilEnums.Padrao,
                 DataCadastro = DateTime.Now
             };
+
+            usuario.SetSenhaHash();
 
             _usuarioRepository.Adicionar(usuario);
         }
