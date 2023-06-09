@@ -18,8 +18,14 @@ Dev features:
 ### Intuito do projeto
 O objetivo é para consolidar meus conhecimento de programação, com o uso de MVC, Banco de dados MySQL, Docker, Testes de Unidade e Cobertura de Código, além de adquirir experiência no framework .NET, e como desafio pessoal, o uso da versão do __.NET Core SDK 3.1__.
 ___
-## Executando em Produção
+## Executando Projeto
 O projeto usa o docker compose para criar os container do database e do app.
+
+### Configurando o banco de dados:
+- Mude o nome do arquivo __mysql_template.env__ para __mysql.env__ na pasta __Infra__ e preencer os espaços vazios.
+
+
+### Rodando tudo
 
 ```bash
 #Na raiz do projeto
@@ -37,8 +43,6 @@ ___
 ## Executando em Desenvolvimento
 É usado a extensão __Dev Containers__ do vscode, com ela, é criado os container do database, phpMyAdmin e de um ambiente com .NET 3.1, além de instalar algumas extensões apenas no vscode dentro do container.
 
-### Configurando o banco de dados:
-- Mude o nome do arquivo na pasta __mysql_template.env__ para __mysql.env__ na pasta __Infra__ e preencer os espaços vazios.
 
 ### Configurando ambiente
 Para ter o OmniSharp funcionando é preciso ter o mono instalado, o arquivo __mono-java-install.sh__ faz a instalação do mono e java, que no caso é necessário para usar o Sonar Scanner
