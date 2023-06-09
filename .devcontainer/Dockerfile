@@ -3,6 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:3.1
  
 WORKDIR /source
 
+# -------------------------------------------------------------
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -17,19 +18,16 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
-# ********************************************************
-# * Anything else you want to do like clean up goes here *
-# ********************************************************
-
 # [Optional] Set the default user. Omit if you want to keep the default as root.
 USER $USERNAME
+# -------------------------------------------------------------
 
 # Adiciona o tools para poder usar o comando dotnet-ef
 ENV PATH=$PATH:/home/vscode/.dotnet/tools
 
 # Nesse ponto, como os arquivos ainda não estão no container,
 # é preciso copiar para dentro
-COPY dotnet_tools-install.sh /tmp/dotnet_tools-install.sh 
+COPY .devcontainer/dotnet_tools-install.sh /tmp/dotnet_tools-install.sh 
 
 # Instala as ferramentas do dotnet
 RUN /tmp/dotnet_tools-install.sh

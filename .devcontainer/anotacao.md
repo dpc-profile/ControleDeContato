@@ -1,7 +1,6 @@
 ## Comandos para o  Desenvolvimento
 Aqui ficam listados os comando úteis apenas durante o desenvolvimento
 
-
 ```bash
 # Cria as migrations
 $ dotnet-ef migrations add MyMigration
@@ -19,18 +18,21 @@ $ reportgenerator \
 -targetdir:"coveragereport" \
 -reporttypes:Html
 
-#Arquivo index.html estará em 'coveragereport'
+#Arquivo index.html estará na pasta 'coveragereport'
 
 #Adiciona todos os csproj a solução ControleDeContatos.sln
 $ dotnet sln ControleDeContatos.sln add **/*.csproj --in-root
+
+# Rodar o teste de mutação
+$ dotnet Stryker
 ```
 
 ## Gerando Relatorios para o SonarCloud
 
 ```bash
 $ dotnet sonarscanner begin \
-/o:USER-SONARCLOUD \
-/k:PROJECT-KEY \
+/o:dpc-profile \
+/k:dpc-profile_ControleDeContato \
 /d:sonar.host.url=https://sonarcloud.io \
 /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
 
@@ -40,7 +42,4 @@ $ dotnet build --no-incremental
 $ dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
 
 $ dotnet sonarscanner end
-
-# Rodar o teste de mutação
-$ dotnet Stryker
 ```

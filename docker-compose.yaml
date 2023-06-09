@@ -5,15 +5,15 @@ services:
     container_name: controle_contatos-app
     build: .
     networks:
-      - webapp-bridge
+      webapp-bridge:
+        ipv4_address: 172.25.0.10
     volumes:
-      - ..:/source
+      - .:/source
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://localhost
+      - ASPNETCORE_URLS=http://localhost;http://172.25.0.10
+      - ASPNETCORE_ENVIRONMENT=Production
     env_file:
-      - mysql.env
-      - dev.env
+      - Infra/mysql.env
     depends_on:
       - mysql_db
 
@@ -23,21 +23,23 @@ services:
     ports:
       - '3306:3306'
     networks:
-      - webapp-bridge
+      webapp-bridge:
+        ipv4_address: 172.25.0.12
     volumes:
       - mysql-data:/var/lib/mysql
-      - ../init-db_teste:/docker-entrypoint-initdb.d
+      - ./init-database:/docker-entrypoint-initdb.d
     env_file:
-      - mysql.env
+      - Infra/mysql.env
     restart: on-failure:5
 
   myAdmin:
     container_name: controle_contatos-php_my_admin
     image: phpmyadmin:5.2.1
     ports:
-      - 8081:80
+      - 8081:8081
     networks:
-      - webapp-bridge
+      webapp-bridge:
+        ipv4_address: 172.25.0.11
     links:
       - mysql_db
     environment:
@@ -52,6 +54,12 @@ services:
 volumes:
   mysql-data:
 
+
 networks:
   webapp-bridge:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/16
+          gateway: 172.25.0.1
