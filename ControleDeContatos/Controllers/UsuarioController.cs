@@ -8,7 +8,7 @@ using ControleDeContatos.Services.Interfaces;
 
 namespace ControleDeContatos.Controllers
 {
-    [PaginaRestritaSomenteAdmin]
+    [PaginaRestritaSomenteAdminAttribute]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioServices _usuarioServices;
