@@ -54,7 +54,7 @@ TestResult.xml
 coveragereport/
 .sonarqube/
 coverage.xml
-!*/TestResults/
+!ControleDeContatos.Tests/TestResults
 
 # Build Results of an ATL Project
 [Dd]ebugPS/
