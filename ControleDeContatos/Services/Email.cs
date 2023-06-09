@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
 using ControleDeContatos.Services.Interfaces;
+using namesource.ControleDeContatos.Exceptions;
 
 namespace ControleDeContatos.Services
 {

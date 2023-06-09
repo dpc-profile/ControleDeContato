@@ -20,86 +20,50 @@ namespace ControleDeContatos.Services
 
         public void ApagarContato(int id)
         {
-            try
-            {
-                ContatoModel contatoDb = _contatoRepository.ListarPorId(id);
+            ContatoModel contatoDb = _contatoRepository.ListarPorId(id);
 
-                if (contatoDb == null) throw new Exception("Contato não existe");
+            if (contatoDb == null) throw new Exception("Contato não existe");
 
-                _contatoRepository.Apagar(contatoDb);
+            _contatoRepository.Apagar(contatoDb);
 
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
         }
 
         public void AtualizarContato(ContatoModel contato)
         {
-            try
-            {
-                ContatoModel contatoDb = _contatoRepository.ListarPorId(contato.Id);
+            ContatoModel contatoDb = _contatoRepository.ListarPorId(contato.Id);
 
-                if (contatoDb == null) throw new Exception("Contato não existe");
-                
-                contatoDb.Nome = contato.Nome;
-                contatoDb.Email = contato.Email;
-                contatoDb.Celular = contato.Celular;
+            if (contatoDb == null) throw new Exception("Contato não existe");
 
-                _contatoRepository.Atualizar(contatoDb);
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            contatoDb.Nome = contato.Nome;
+            contatoDb.Email = contato.Email;
+            contatoDb.Celular = contato.Celular;
 
+            _contatoRepository.Atualizar(contatoDb);
         }
 
         public List<ContatoModel> BuscarContatos(int id)
         {
-            try
-            {
-                var contatosDb = _contatoRepository.BuscarTodos(id);
+            var contatosDb = _contatoRepository.BuscarTodos(id);
 
-                if (contatosDb == null) throw new Exception("Não existe contatos");
+            if (contatosDb == null) throw new Exception("Não existe contatos");
 
-                return contatosDb;
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            return contatosDb;
+
         }
 
         public ContatoModel BuscarContato(int id)
         {
-            try
-            {
-                ContatoModel contatoDb = _contatoRepository.ListarPorId(id);
+            ContatoModel contatoDb = _contatoRepository.ListarPorId(id);
 
-                if (contatoDb == null) throw new Exception("Contato não existe");
+            if (contatoDb == null) throw new Exception("Contato não existe");
 
-                return contatoDb;
-            }
-            catch (System.Exception)
-            {
+            return contatoDb;
 
-                throw;
-            }
         }
         public void CriarContato(ContatoModel contato)
         {
-            try
-            {
-                _contatoRepository.Adicionar(contato);
+            _contatoRepository.Adicionar(contato);
 
-            }
-            catch (System.Exception)
-            {
-
-                throw;
-            }
         }
     }
 }

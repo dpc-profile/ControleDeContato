@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using ControleDeContatos.Models;
 using ControleDeContatos.Services.Interfaces;
+using namesource.ControleDeContatos.Exceptions;
 
 namespace ControleDeContatos.Controllers
 {

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using ControleDeContatos.Models;
-using ControleDeContatos.Repository;
 using ControleDeContatos.Services;
 using ControleDeContatos.Services.Interfaces;
 using ControleDeContatos.Tests.Tests.Controllers;
 
 using Moq;
 
+using namesource.ControleDeContatos.Exceptions;
+
 using Xunit;
 
-namespace Services
+namespace ControleDeContatos.Tests.Tests.Services
 {
     public class AlterarSenhaServicesTests
     {

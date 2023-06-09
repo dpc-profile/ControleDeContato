@@ -13,7 +13,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace ControleDeContatos.Controllers
 {
     [ExcludeFromCodeCoverage]
-    [PaginaUsuarioLogado]
+    [PaginaUsuarioLogadoAttribute]
     public class HomeController : Controller
     {
         public IActionResult Index()

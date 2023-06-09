@@ -12,7 +12,7 @@ using ControleDeContatos.Services.Interfaces;
 
 namespace ControleDeContatos.Controllers
 {
-    [PaginaUsuarioLogado]
+    [PaginaUsuarioLogadoAttribute]
     public class ContatoController : Controller
     {
         private readonly IContatoServices _contatoServices;
@@ -30,11 +30,6 @@ namespace ControleDeContatos.Controllers
             List<ContatoModel> allContatos = _contatoServices.BuscarContatos(usuarioLogado.Id);
 
             return View(allContatos);
-        }
-
-        public IActionResult Criar()
-        {
-            return View();
         }
 
         public IActionResult Editar(int id)
@@ -65,6 +60,11 @@ namespace ControleDeContatos.Controllers
                 return RedirectToAction("Index");
             }
 
+        }
+
+        public IActionResult Criar()
+        {
+            return View();
         }
 
         [HttpPost]

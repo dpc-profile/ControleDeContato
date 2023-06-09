@@ -17,8 +17,8 @@ namespace ControleDeContatos.Data
 
         // Detecta se está rodando pelo comando dotnet test
         public static readonly bool IsRunningFromXUnit = AppDomain
-                .CurrentDomain.GetAssemblies()
-                .Any(a => a.FullName.ToLowerInvariant().StartsWith("xunit"));
+                .CurrentDomain.GetAssemblies().ToList()
+                .Exists(a => a.FullName.ToLowerInvariant().StartsWith("xunit"));
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
